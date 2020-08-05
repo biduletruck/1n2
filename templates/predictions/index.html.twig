@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Predictions index{% endblock %}
+
+{% block body %}
+    <h1>Predictions index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreatedAt</th>
+                <th>Predict</th>
+                <th>HomeResult</th>
+                <th>VisitorResult</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prediction in predictions %}
+            <tr>
+                <td>{{ prediction.id }}</td>
+                <td>{{ prediction.CreatedAt ? prediction.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ prediction.Predict }}</td>
+                <td>{{ prediction.HomeResult }}</td>
+                <td>{{ prediction.VisitorResult }}</td>
+                <td>
+                    <a href="{{ path('predictions_show', {'id': prediction.id}) }}">show</a>
+                    <a href="{{ path('predictions_edit', {'id': prediction.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('predictions_new') }}">Create new</a>
+{% endblock %}

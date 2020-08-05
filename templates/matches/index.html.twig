@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Matches index{% endblock %}
+
+{% block body %}
+    <h1>Matches index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StartTime</th>
+                <th>HomeResult</th>
+                <th>VisitorResult</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for match in matches %}
+            {% if "now"|date('Y-m-d H:i:s') < match.StartTime|date('Y-m-d H:i:s') %}
+                <tr>
+                    <td>{{ match.id }}</td>
+                    <td>{{ match.StartTime ? match.StartTime|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ match.HomeResult }}</td>
+                    <td>{{ match.VisitorResult }}</td>
+                    <td>
+                        <a href="{{ path('matches_show', {'id': match.id}) }}">show</a>
+                        <a href="{{ path('matches_edit', {'id': match.id}) }}">edit</a>
+                        <a href="{{ path('predictions_new', {'id': match.id}) }}">play</a>
+                    </td>
+                </tr>
+            {% endif %}
+
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('matches_new') }}">Create new</a>
+{% endblock %}

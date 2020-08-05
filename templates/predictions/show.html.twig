@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Predictions{% endblock %}
+
+{% block body %}
+    <h1>Predictions</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ prediction.id }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ prediction.CreatedAt ? prediction.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Predict</th>
+                <td>{{ prediction.Predict }}</td>
+            </tr>
+            <tr>
+                <th>HomeResult</th>
+                <td>{{ prediction.HomeResult }}</td>
+            </tr>
+            <tr>
+                <th>VisitorResult</th>
+                <td>{{ prediction.VisitorResult }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('predictions_index') }}">back to list</a>
+
+    <a href="{{ path('predictions_edit', {'id': prediction.id}) }}">edit</a>
+
+    {{ include('predictions/_delete_form.html.twig') }}
+{% endblock %}
