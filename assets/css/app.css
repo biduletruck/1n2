@@ -1,0 +1,8 @@
+body {
+    /*background-color: lightgray;*/
+    background-image: url("../images/ucl-bg-header.jpg");
+    color: white;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
