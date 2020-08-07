@@ -5,7 +5,9 @@
 {% block body %}
 <form method="post">
     {% if error %}
+    <div class="row">
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    </div>
     {% endif %}
 
     {% if app.user %}
@@ -14,29 +16,30 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+    <div class="container login-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 login-form-1">
+                <h3>Champion  league CeSitel3</h3>
+                <div class="col-12 text-center">
+                    <img src="/build/images/logo_max.png" alt="" class="img-fluid">
+                </div>
+                    <div class="form-group">
+                        <input type="text" id="inputUsername" placeholder="Votre Nom d'utilisateur" name="username" class="form-control form-control-lg" value="{{ last_username }}" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="inputPassword" placeholder="Votre Mot de passe" name="password" class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btnSubmit btn btn-block btn-lg btn-primary"><span class="fa fa-sign-in-alt" aria-hidden="true"></span> se connecter</button>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+            </div>
         </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+    </div>
 </form>
 {% endblock %}

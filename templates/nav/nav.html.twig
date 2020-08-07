@@ -1,0 +1,46 @@
+{% block nav %}
+    <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: #646678;">
+
+
+        <a class="navbar-brand" href="{{ path('matches_day') }}"><img src='/build/images/logo.png' height="40px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+{#                {%  if app.user %}#}
+{#                    <li {% if app.request.attributes.get('_route') == 'orders_index' %}class="nav-item active"{% endif %}><a class="nav-link" href="{{ path('orders_index') }}">Etat du parc</a></li>#}
+{#                    <li {% if app.request.attributes.get('_route') == 'orders_new' %}class="nav-item active"{% endif %}><a class="nav-link" href="{{ path('orders_new') }}">Nouvelle Entrée</a></li>#}
+{#                    <li {% if app.request.attributes.get('_route') == 'labels_add' %}class="nav-item active"{% endif %}><a class="nav-link" href="{{ path('labels_add') }}">Stockage</a></li>#}
+{#                    <li {% if app.request.attributes.get('_route') == 'labels_out_of_stock' %}class="nav-item active"{% endif %}><a class="nav-link" href="{{ path('labels_out_of_stock') }}">Sortie</a></li>#}
+{#                {% endif %}#}
+            </ul>
+            {% if is_granted("ROLE_ADMIN") %}
+                <ul class="navbar-nav align-items-end">
+{#                    <li {% if app.request.attributes.get('_route') == 'locations_index' %}class="nav-item active"{% endif %}>#}
+{#                        <a class="nav-link" href="{{ path('locations_index') }}">Gestion des emplacements</a>#}
+{#                    </li>#}
+{#                    <li {% if app.request.attributes.get('_route') == 'users_index' %}class="nav-item active"{% endif %}>#}
+{#                        <a class="nav-link" href="{{ path('users_index') }}">Gestion des utilisateurs</a>#}
+{#                    </li>#}
+{#                    <li {% if app.request.attributes.get('_route') == 'easyadmin' %}class="nav-item active"{% endif %}>#}
+{#                        <a class="nav-link" href="{{ path('easyadmin') }}">Gestion Appli</a>#}
+{#                    </li>#}
+                </ul>
+            {% endif %}
+
+            <ul class="navbar-nav align-items-md-end">
+                <li class="nav-item">
+                    {%  if app.user %}
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    {%  else %}
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
