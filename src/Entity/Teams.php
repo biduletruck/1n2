@@ -52,7 +52,6 @@ class Teams
      */
     private $thumbnailFile;
 
-
     public function __construct()
     {
         $this->HomeMatch = new ArrayCollection();
@@ -193,5 +192,6 @@ class Teams
 
         return $this;
     }
+
 
 }

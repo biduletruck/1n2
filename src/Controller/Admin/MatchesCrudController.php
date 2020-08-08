@@ -23,6 +23,7 @@ class MatchesCrudController extends AbstractCrudController
             AssociationField::new('Home', 'Home'),
             AssociationField::new('Visitor', 'Visitor'),
             DateTimeField::new('StartTime', 'Date et heure du match'),
+            AssociationField::new('Victory', 'Victoire')
 
 
 

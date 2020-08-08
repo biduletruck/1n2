@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Companies;
 use App\Entity\Matches;
 use App\Entity\Predictions;
+use App\Entity\Victories;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -32,16 +33,13 @@ class PredictionsType extends AbstractType
         $builder
             ->remove('CreatedAt')
             ->remove('Game')
-            ->add('Predict', ChoiceType::class, array(
+            ->add('Predict', EntityType::class, array(
                 'mapped' => true,
+                'class'   => Victories::class,
                 'choice_label' => false,
                 'label' => false,
                 'attr'      => array('class' => 'form-control'),
-                'choices' => array(
-                    1     => 1,
-                    0       => 0,
-                    2  => 2,
-                ),
+
                 'expanded' => true,
             ))
             ->add('HomeResult', NumberType::class, array(

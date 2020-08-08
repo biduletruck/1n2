@@ -6,6 +6,7 @@ use App\Entity\Matches;
 use App\Entity\Predictions;
 use App\Entity\Teams;
 use App\Entity\Users;
+use App\Entity\Victories;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -42,6 +43,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'far fa-id-card', Users::class);
         yield MenuItem::section('Gestion des équipes');
         yield MenuItem::linkToCrud('Les équipes', 'fas fa-users', Teams::class);
+        yield MenuItem::linkToCrud('Choix victoires', null, Victories::class);
         yield MenuItem::section('Gestion des matchs');
         yield MenuItem::linkToCrud('Les matchs', null, Matches::class);
         yield MenuItem::linkToCrud('Les pronostiques', null, Predictions::class);

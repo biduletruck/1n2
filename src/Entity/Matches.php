@@ -51,6 +51,11 @@ class Matches
      */
     private $Visitor;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Victories::class, inversedBy="matches")
+     */
+    private $Victory;
+
     public function __construct()
     {
         $this->predictions = new ArrayCollection();
@@ -156,5 +161,17 @@ class Matches
     public function __toString()
     {
         return $this->Home . " vs " . $this->Visitor;
+    }
+
+    public function getVictory(): ?Victories
+    {
+        return $this->Victory;
+    }
+
+    public function setVictory(?Victories $Victory): self
+    {
+        $this->Victory = $Victory;
+
+        return $this;
     }
 }

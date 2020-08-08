@@ -34,10 +34,7 @@ class Predictions
      */
     private $CreatedAt;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Predict;
+
 
     /**
      * @ORM\Column(type="string")
@@ -48,6 +45,11 @@ class Predictions
      * @ORM\Column(type="string")
      */
     private $VisitorResult;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Victories::class, inversedBy="predictions")
+     */
+    private $Predict;
 
     public function __construct()
     {
@@ -95,17 +97,7 @@ class Predictions
         return $this;
     }
 
-    public function getPredict(): ?int
-    {
-        return $this->Predict;
-    }
-
-    public function setPredict(string $Predict): self
-    {
-        $this->Predict = $Predict;
-
-        return $this;
-    }
+    
 
     public function getHomeResult(): ?int
     {
@@ -127,6 +119,18 @@ class Predictions
     public function setVisitorResult(int $VisitorResult): self
     {
         $this->VisitorResult = $VisitorResult;
+
+        return $this;
+    }
+
+    public function getPredict(): ?Victories
+    {
+        return $this->Predict;
+    }
+
+    public function setPredict(?Victories $Predict): self
+    {
+        $this->Predict = $Predict;
 
         return $this;
     }
