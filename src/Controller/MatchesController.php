@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MatchesController extends AbstractController
 {
     /**
-     * @Route("/", name="matches_index", methods={"GET"})
+     * @Route("/rencontres", name="matches_day", methods={"GET"})
      * @param MatchesRepository $matchesRepository
      * @return Response
      */
@@ -28,7 +28,8 @@ class MatchesController extends AbstractController
     }
 
     /**
-     * @Route("/rencontres", name="matches_day", methods={"GET"})
+
+     * @Route("/", name="matches_index", methods={"GET"})
      * @param MatchesRepository $matchesRepository
      * @return Response
      */
