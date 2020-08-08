@@ -107,7 +107,7 @@ body {
 }
 
 .predict{
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 .score
@@ -119,13 +119,23 @@ body {
     text-align: center;
 }
 
+.titre{
+    background-color: white;
+}
 
 .login-container{
     margin-top: 5%;
-    margin-bottom: 5%;
+
 }
 .login-form-1{
     padding: 5%;
+    margin-bottom: 5%;
+    background-color: white;
+    background-image: url("../images/finale-2020-light.png");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 40%;
+    border-radius: 1rem;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 .login-form-1 h3{
@@ -155,5 +165,9 @@ body {
 .login-form-1 .ForgetPwd{
     color: #0062cc;
     font-weight: 600;
+    text-decoration: none;
+}
+
+a{
     text-decoration: none;
 }

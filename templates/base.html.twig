@@ -12,11 +12,11 @@
 
     <body>
     {% block nav %}
-        {% if is_granted('ROLE_ADMIN') %}
-
+        {% if is_granted('ROLE_USER') %}
+            {% include "nav/nav.html.twig" %}
         {% endif %}
     {% endblock %}
-    {% include "nav/nav.html.twig" %}
+
     <div class="container-fluid h-100">
         {% if app.session is not null and app.session.started %}
             {% for label, messages in app.session.flashbag.all %}

@@ -34,7 +34,7 @@ class MatchesController extends AbstractController
      */
     public function indexByBay(MatchesRepository $matchesRepository): Response
     {
-        return $this->render('matches/index.html.twig', [
+        return $this->render('matches/dayMatch.html.twig', [
             'matches' => $matchesRepository->findByDay(new \DateTime()),
         ]);
     }

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Matches index{% endblock %}
+
+{% block body %}
+<div class="row row justify-content-center align-self-center">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded col-sm col-md-10 col align-self-center text-center">
+        <H1>Match(s) du jour</H1>
+    </div>
+</div>
+
+    {% for match in matches %}
+        <div class="row justify-content-center align-self-center predict">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded col-sm col-md-10 col align-self-center ">
+                <div class="row">
+
+                    <div class="justify-content-center align-self-center text-center col-2 col-md-2 col-lg-3">
+                        <span class="align-middle">{{ match.home }}</span>
+                    </div>
+                    <div class="justify-content-center align-self-center col-2">
+                        <img class="img-fluid " src="{{ asset('/images/thumbnails/' ~ match.home.thumbnail) }}" alt="{{ match.home }}">
+                    </div>
+                    <div class="text-center justify-content-center align-self-center col-4 col-md-4 col-lg-2">
+                        <span>{{ match.StartTime|format_datetime('full', 'short', locale='fr') }}</span>
+                    </div>
+
+                    <div class="justify-content-center align-self-center col-2">
+                        <img class="img-fluid" src="{{ asset('/images/thumbnails/' ~ match.visitor.thumbnail) }}" alt="{{ match.visitor }}">
+                    </div>
+                    <div class="justify-content-center align-self-center text-center col-2 col-md-2 col-lg-3">
+                        <span class="align-middle">{{ match.visitor }}</span>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="justify-content-center align-self-center text-center col-12">
+                        {% if "now"|date('Y-m-d H:i:s') < match.StartTime|date_modify("-1 hour") |date('Y-m-d H:i:s') %}
+{#                            {% if not is_granted("ROLE_ADMIN") %}#}
+                                <a class="btn btn-lg btn-outline-secondary" href="{{ path('predictions_new', {'id': match.id}) }}">Faite votre pronostic</a>
+{#                                {% endif %}#}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+           <span>Pas de match aujourd'hui</span>
+    {% endfor %}
+
+{% endblock %}
