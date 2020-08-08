@@ -9,11 +9,13 @@
             <img class="img-fluid" src="{{ asset('images/thumbnails/' ~ prediction.game.home.thumbnail) }}" alt="{{ prediction.game.home.name }}">
         </div>
         <div class="justify-content-center align-self-center col-3 col-md-2 col-lg-1">
+            {{ form_errors(form.HomeResult) }}
             {{ form_widget(form.HomeResult, { 'attr': {'class': 'score'}}) }}
         </div>
 
 
        <div class="justify-content-center align-self-center col-3 col-md-2 col-lg-1">
+           {{ form_errors(form.VisitorResult) }}
            {{ form_widget(form.VisitorResult, { 'attr': {'class': 'score'}}) }}
        </div>
        <div class="justify-content-center align-self-center col-3 col-md-2">
