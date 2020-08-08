@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Predictions{% endblock %}
+
+{% block body %}
+
+
+    <div class="row justify-content-center align-self-center predict">
+        <div class="shadow-lg p-3 mb-5 bg-white rounded col-sm col-md-10 col align-self-center ">
+            {{ include('predictions/_formPlay.html.twig') }}
+        </div>
+    </div>
+
+
+{{ dump(form) }}
+
+
+
+    <a href="{{ path('predictions_index') }}">back to list</a>
+{% endblock %}

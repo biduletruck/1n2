@@ -48,7 +48,7 @@ class PredictionsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+dump($prediction);
             $entityManager = $this->getDoctrine()->getManager();
 
             $predict = new Predictions();
@@ -57,8 +57,7 @@ class PredictionsController extends AbstractController
                 ->setCreatedAt(new \DateTime())
                 ->setUser($prediction->getUser())
                 ->setHomeResult($prediction->getHomeResult())
-                ->setHomeResult($prediction->getHomeResult());
-
+                ->setHomeResult($prediction->getVisitorResult());
 
             $entityManager->persist($prediction);
             $entityManager->flush();
@@ -66,7 +65,7 @@ class PredictionsController extends AbstractController
             return $this->redirectToRoute('predictions_index');
         }
 
-        return $this->render('predictions/new.html.twig', [
+        return $this->render('predictions/play.html.twig', [
             'prediction' => $prediction,
             'form' => $form->createView(),
         ]);

@@ -1,25 +1,25 @@
 {% block nav %}
-    <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: #646678;">
+{#    <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: #646678;">#}
 
 
-        <a class="navbar-brand" href="{{ path('matches_day') }}"><img src='/build/images/logo.png' height="40px"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+{#        <a class="navbar-brand" href="{{ path('matches_day') }}"><img src='/images/Bandeau-SITEL-2.png' height="40px"></a>#}
+{#        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
 
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+{#        <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
 
-            <ul class="navbar-nav mr-auto">
+{#            <ul class="navbar-nav mr-auto">#}
 {#                {%  if app.user %}#}
 {#                    <li {% if app.request.attributes.get('_route') == 'orders_index' %}class="nav-item active"{% endif %}><a class="nav-link" href="{{ path('orders_index') }}">Etat du parc</a></li>#}
 {#                    <li {% if app.request.attributes.get('_route') == 'orders_new' %}class="nav-item active"{% endif %}><a class="nav-link" href="{{ path('orders_new') }}">Nouvelle Entrée</a></li>#}
 {#                    <li {% if app.request.attributes.get('_route') == 'labels_add' %}class="nav-item active"{% endif %}><a class="nav-link" href="{{ path('labels_add') }}">Stockage</a></li>#}
 {#                    <li {% if app.request.attributes.get('_route') == 'labels_out_of_stock' %}class="nav-item active"{% endif %}><a class="nav-link" href="{{ path('labels_out_of_stock') }}">Sortie</a></li>#}
 {#                {% endif %}#}
-            </ul>
-            {% if is_granted("ROLE_ADMIN") %}
-                <ul class="navbar-nav align-items-end">
+{#            </ul>#}
+{#            {% if is_granted("ROLE_ADMIN") %}#}
+{#                <ul class="navbar-nav align-items-end">#}
 {#                    <li {% if app.request.attributes.get('_route') == 'locations_index' %}class="nav-item active"{% endif %}>#}
 {#                        <a class="nav-link" href="{{ path('locations_index') }}">Gestion des emplacements</a>#}
 {#                    </li>#}
@@ -29,18 +29,46 @@
 {#                    <li {% if app.request.attributes.get('_route') == 'easyadmin' %}class="nav-item active"{% endif %}>#}
 {#                        <a class="nav-link" href="{{ path('easyadmin') }}">Gestion Appli</a>#}
 {#                    </li>#}
-                </ul>
-            {% endif %}
+{#                </ul>#}
+{#            {% endif %}#}
 
-            <ul class="navbar-nav align-items-md-end">
-                <li class="nav-item">
-                    {%  if app.user %}
-                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                    {%  else %}
-                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-                    {% endif %}
-                </li>
-            </ul>
-        </div>
-    </nav>
+{#            <ul class="navbar-nav align-items-md-end">#}
+{#                <li class="nav-item">#}
+{#                    {%  if app.user %}#}
+{#                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>#}
+{#                    {%  else %}#}
+{#                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>#}
+{#                    {% endif %}#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
+{#    </nav>#}
+
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top py-3">
+            <div class="container"><a class="navbar-brand" href="{{ path('matches_day') }}"><img src="{{ asset('/build/cesitel.png') }}" height="40px"></a>
+{#            <div class="container"><a href="{{ path('matches_day') }}" class="navbar-brand text-uppercase font-weight-bold">Transparent Nav</a>#}
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a href="#" class="nav-link text-uppercase font-weight-bold">Home <span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a href="{{ path('matches_day') }}" class="nav-link text-uppercase font-weight-bold">Matchs du jour</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Règlement</a></li>
+{#                        <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Portfolio</a></li>#}
+{#                        <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Contact</a></li>#}
+                    </ul>
+                    <ul class="navbar-nav align-items-md-end">
+                        <li class="nav-item">
+                            {%  if app.user %}
+                                <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link text-uppercase font-weight-bold">Déconnexion</a></li>
+                            {%  else %}
+                                <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link text-uppercase font-weight-bold">Connexion</a></li>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 {% endblock %}

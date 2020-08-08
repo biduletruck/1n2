@@ -8,6 +8,8 @@ use App\Entity\Predictions;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,24 +34,28 @@ class PredictionsType extends AbstractType
             ->remove('Game')
             ->add('Predict', ChoiceType::class, array(
                 'mapped' => true,
-                'required' => true,
-                'label' => 'Qui selon vous gagnera le match ?',
-                'choice_label' => function ($choice, $key, $value) {
-                    if (true === $choice) {
-                        return 'Definitely!';
-                    }
-                    return $key;
-                },
+                'choice_label' => false,
+                'label' => false,
+                'attr'      => array('class' => 'form-control'),
                 'choices' => array(
-                    'Victoire Home'     => 1,
-                    'Match null'        => 0,
-                    'Victoire Visitor'  => 2,
+                    1     => 1,
+                    0       => 0,
+                    2  => 2,
                 ),
                 'expanded' => true,
-                'multiple' => false,
             ))
-            ->add('HomeResult')
-            ->add('VisitorResult')
+            ->add('HomeResult', NumberType::class, array(
+                'required' => true,
+                'label' => 'Nombre de supports',
+                'attr'      => array('class' => 'form-control')
+
+            ))
+            ->add('VisitorResult', NumberType::class, array(
+                'required' => true,
+                'label' => 'Nombre de supports',
+                'attr'      => array('class' => 'form-control')
+
+            ))
 
             ->remove('User')
         ;

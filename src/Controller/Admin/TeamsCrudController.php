@@ -25,7 +25,7 @@ class TeamsCrudController extends AbstractCrudController
             TextField::new('Name', 'Nom de l\'équipe'),
         ];
 
-        if($pageName == Crud::PAGE_EDIT || $pageName == Crud::PAGE_DETAIL){
+        if($pageName == Crud::PAGE_EDIT || $pageName == Crud::PAGE_NEW || $pageName == Crud::PAGE_DETAIL){
             $fields[] = $image;
         }else{
             $fields[] = $imageFile;

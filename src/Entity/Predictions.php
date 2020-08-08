@@ -40,12 +40,12 @@ class Predictions
     private $Predict;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $HomeResult;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $VisitorResult;
 
@@ -100,7 +100,7 @@ class Predictions
         return $this->Predict;
     }
 
-    public function setPredict(int $Predict): self
+    public function setPredict(string $Predict): self
     {
         $this->Predict = $Predict;
 

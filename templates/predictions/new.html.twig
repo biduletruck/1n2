@@ -3,7 +3,12 @@
 {% block title %}New Predictions{% endblock %}
 
 {% block body %}
-    <h1>Create new Predictions</h1>
+
+    <div class="jumbotron">
+        Matchs du jour
+    </div>
+
+
 {{ dump() }}
     {{ include('predictions/_form.html.twig') }}
 
