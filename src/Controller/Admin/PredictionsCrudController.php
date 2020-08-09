@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Predictions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -13,6 +16,16 @@ class PredictionsCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Predictions::class;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->setPermission(Action::DELETE, 'ROLE_SUPERADMIN')
+            ->setPermission(Action::NEW, 'ROLE_SUPERADMIN')
+            ->setPermission(Action::EDIT, 'ROLE_SUPERADMIN')
+            ;
+
     }
 
 

@@ -25,7 +25,7 @@ class DashboardController extends AbstractDashboardController
 //        return parent::index();
         $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
 
-        return $this->redirect($routeBuilder->setController(MatchesCrudController::class)->generateUrl());
+        return $this->redirect($routeBuilder->setController(PredictionsCrudController::class)->generateUrl());
 
     }
 
@@ -43,7 +43,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'far fa-id-card', Users::class);
         yield MenuItem::section('Gestion des équipes');
         yield MenuItem::linkToCrud('Les équipes', 'fas fa-users', Teams::class);
-        yield MenuItem::linkToCrud('Choix victoires', null, Victories::class);
+        yield MenuItem::linkToCrud('Choix victoires', null, Victories::class)->setPermission('ROLE_SUPERADMIN');
         yield MenuItem::section('Gestion des matchs');
         yield MenuItem::linkToCrud('Les matchs', null, Matches::class);
         yield MenuItem::linkToCrud('Les pronostiques', null, Predictions::class);
