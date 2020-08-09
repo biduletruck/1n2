@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/matches")
@@ -41,6 +43,7 @@ class MatchesController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/new", name="matches_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
@@ -66,6 +69,7 @@ class MatchesController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="matches_show", methods={"GET"})
      * @param Matches $match
      * @return Response
@@ -78,6 +82,7 @@ class MatchesController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}/edit", name="matches_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Matches $match
@@ -101,6 +106,7 @@ class MatchesController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="matches_delete", methods={"DELETE"})
      * @param Request $request
      * @param Matches $match

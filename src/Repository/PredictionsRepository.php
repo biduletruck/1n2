@@ -41,6 +41,18 @@ class PredictionsRepository extends ServiceEntityRepository
     }
 
 
+    public function findUserAsProntosic($game)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.Game = :gameVal')
+            ->setParameter('gameVal', $game)
+            ->getQuery()
+            ->getResult();
+
+    }
+
+
+
 
     // /**
     //  * @return Predictions[] Returns an array of Predictions objects

@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/pronostic")
@@ -46,14 +48,53 @@ class PredictionsController extends AbstractController
         $form = $this->createForm(PredictionsType::class, $prediction);
         $preventAnotherPlay = count($predictionsRepository->findIsProntosic($this->getUser(), $request->get('id')));
 
+
+        $resulMatch = $matchesRepository->findResultMatch($Matches);
+        $resulUsers = $predictionsRepository->findUserAsProntosic($Matches);
+        foreach ($resulUsers as $result)
+        {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $points = 0;
+            if ( $result->getPredict() == $resulMatch->getVictory())
+            {
+                $points +=1;
+                if(intval($result->getHomeResult()) === intval($resulMatch->getHomeResult()))
+                {
+                    $points +=1;
+
+                }
+
+                if ((intval($result->getVisitorResult())) === (intval($resulMatch->getVisitorResult())))
+                {
+                    $points +=1;
+
+                }
+            }
+            $test = $predictionsRepository->find($result->getId());
+            $test->setPoints($points);
+            $entityManager->persist($test);
+            $entityManager->flush();
+        }
+
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $alreadyPlay = $predictionsRepository->findIsProntosic($prediction->getUser(), $prediction->getGame());
-            if (count($alreadyPlay) > 0){
+            $isValidHour = $matchesRepository->isValidHour(new \DateTime());
+            dump(count($isValidHour));
+            if (count($alreadyPlay) > 0) {
                 $this->addFlash('danger', 'Vous avez déjà fait votre pronostic !!!');
                 $this->redirect('matches_index');
-            }else{$entityManager = $this->getDoctrine()->getManager();
+            }
+            elseif (count($isValidHour) == 0)
+            {
+                $this->addFlash('danger', 'Trop tard les pronostic sont clos !!!');
+                $this->redirect('matches_index');
+            }
+            else{$entityManager = $this->getDoctrine()->getManager();
 
                 $predict = new Predictions();
                 $predict->setGame($prediction->getGame())
@@ -79,6 +120,7 @@ class PredictionsController extends AbstractController
 
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="predictions_show", methods={"GET"})
      * @param Predictions $prediction
      * @return Response
@@ -91,6 +133,7 @@ class PredictionsController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}/edit", name="predictions_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Predictions $prediction
@@ -137,6 +180,7 @@ class PredictionsController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="predictions_delete", methods={"DELETE"})
      * @param Request $request
      * @param Predictions $prediction

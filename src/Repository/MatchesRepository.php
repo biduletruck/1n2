@@ -35,6 +35,25 @@ class MatchesRepository extends ServiceEntityRepository
 
     }
 
+    public function isValidHour(\DateTime $date)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.StartTime < :val')
+            ->setParameter('val', $date)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findResultMatch($id)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.id = :val')
+            ->andHaving('m.Victory is not null')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
 
     // /**
     //  * @return Matches[] Returns an array of Matches objects

@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class PredictionsCrudController extends AbstractCrudController
 {
@@ -38,6 +39,7 @@ class PredictionsCrudController extends AbstractCrudController
             IntegerField::new('HomeResult', 'Résultat Home'),
             IntegerField::new('VisitorResult', 'Résultat visitor'),
             AssociationField::new('Predict', 'Victoire'),
+            IntegerField::new('Points', 'Points pour le match'),
 
         ];
     }

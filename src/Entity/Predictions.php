@@ -48,8 +48,14 @@ class Predictions
 
     /**
      * @ORM\ManyToOne(targetEntity=Victories::class, inversedBy="predictions")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $Predict;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $points = 0;
 
     public function __construct()
     {
@@ -131,6 +137,18 @@ class Predictions
     public function setPredict(?Victories $Predict): self
     {
         $this->Predict = $Predict;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): self
+    {
+        $this->points = $points;
 
         return $this;
     }
