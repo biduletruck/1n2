@@ -28,13 +28,15 @@ class PredictionsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findIsProntosic()
+    public function findIsProntosic($user, $game)
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.User = :userVal')
             ->andWhere('p.Game = :gameVal')
+            ->setParameter('userVal', $user)
+            ->setParameter('gameVal', $game)
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
 
     }
 

@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/predictions")
+ * @Route("/pronostic")
  */
 class PredictionsController extends AbstractController
 {
@@ -25,7 +25,6 @@ class PredictionsController extends AbstractController
      */
     public function index(PredictionsRepository $predictionsRepository): Response
     {
-        dump(new \DateTime());
         return $this->render('predictions/index.html.twig', [
             'predictions' => $predictionsRepository->findByDay(new \DateTime('now')),
         ]);
@@ -35,38 +34,44 @@ class PredictionsController extends AbstractController
      * @Route("/new", name="predictions_new", methods={"GET","POST"})
      * @param Request $request
      * @param MatchesRepository $matchesRepository
+     * @param PredictionsRepository $predictionsRepository
      * @return Response
      */
-    public function new(Request $request, MatchesRepository $matchesRepository): Response
+    public function new(Request $request, MatchesRepository $matchesRepository, PredictionsRepository $predictionsRepository): Response
     {
         $prediction = new Predictions();
         $Matches = $matchesRepository->find($request->get('id'));
                 $prediction->setGame($Matches);
                 $prediction->setUser($this->getUser());
         $form = $this->createForm(PredictionsType::class, $prediction);
+        $preventAnotherPlay = count($predictionsRepository->findIsProntosic($this->getUser(), $request->get('id')));
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-dump($prediction);
-            $entityManager = $this->getDoctrine()->getManager();
+            $alreadyPlay = $predictionsRepository->findIsProntosic($prediction->getUser(), $prediction->getGame());
+            if (count($alreadyPlay) > 0){
+                $this->addFlash('danger', 'Vous avez déjà fait votre pronostic !!!');
+                $this->redirect('matches_index');
+            }else{$entityManager = $this->getDoctrine()->getManager();
 
-            $predict = new Predictions();
-            $predict->setGame($prediction->getGame())
-                ->setPredict($prediction->getPredict())
-                ->setCreatedAt(new \DateTime())
-                ->setUser($prediction->getUser())
-                ->setHomeResult($prediction->getHomeResult())
-                ->setHomeResult($prediction->getVisitorResult());
+                $predict = new Predictions();
+                $predict->setGame($prediction->getGame())
+                    ->setPredict($prediction->getPredict())
+                    ->setCreatedAt(new \DateTime())
+                    ->setUser($prediction->getUser())
+                    ->setHomeResult($prediction->getHomeResult())
+                    ->setHomeResult($prediction->getVisitorResult());
 
-            $entityManager->persist($prediction);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('predictions_index');
+                $entityManager->persist($prediction);
+                $entityManager->flush();
+                $this->addFlash('success', 'Merci de votre pronostic');
+                return $this->redirectToRoute('matches_index');
+            }
         }
-
         return $this->render('predictions/play.html.twig', [
             'prediction' => $prediction,
+            'Prevent' => $preventAnotherPlay,
             'form' => $form->createView(),
         ]);
     }
