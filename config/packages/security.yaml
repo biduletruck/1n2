@@ -38,11 +38,10 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/register, roles: ROLE_ADMIN }
+         - { path: ^/register, roles: ROLE_SUPERADMIN }
+         - { path: ^/players, roles: ROLE_SUPERADMIN }
          - { path: ^/users, roles: ROLE_ADMIN }
          - { path: ^/matches/new, roles: ROLE_ADMIN }
-#         - { path: ^/matches/, roles: ROLE_USER }
-#         - { path: ^/pronostic/new, roles: ROLE_USER }
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
          - { path: /, roles: ROLE_USER }
          - { path: /edit, roles: ROLE_ADMIN }
