@@ -59,11 +59,11 @@ class PredictionsController extends AbstractController
                 $this->addFlash('danger', 'Vous avez déjà fait votre pronostic !!!');
                 $this->redirect('matches_index');
             }
-            elseif (count($isValidHour) == 0)
-            {
-                $this->addFlash('danger', 'Trop tard les pronostic sont clos !!!');
-                $this->redirect('matches_index');
-            }
+           // elseif (count($isValidHour) == 0)
+           // {
+           //     $this->addFlash('danger', 'Trop tard les pronostic sont clos !!!');
+           //     $this->redirect('matches_index');
+           // }
             else{$entityManager = $this->getDoctrine()->getManager();
 
                 $predict = new Predictions();
