@@ -3,9 +3,11 @@
 {% block title %}Users index{% endblock %}
 
 {% block body %}
+<div class="row justify-content-center align-self-center predict">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded col-sm col-md-10 col align-self-center ">
     <h1>Users index</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,8 +25,8 @@
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.password }}</td>
                 <td>
-                    <a href="{{ path('users_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-info btn-sm" href="{{ path('users_show', {'id': user.id}) }}">show</a>
+                    <a class="btn btn-primary btn-sm" href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +37,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('users_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('users_new') }}">Create new</a>
+    </div>
+</div>
 {% endblock %}

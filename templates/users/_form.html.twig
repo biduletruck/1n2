@@ -1,5 +1,9 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+<div class="row justify-content-center align-self-center predict">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded col-sm col-md-10 col align-self-center ">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
 
-<button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+        <button class="btn ">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+    </div>
+</div>
