@@ -55,15 +55,16 @@ class PredictionsController extends AbstractController
             $alreadyPlay = $predictionsRepository->findIsProntosic($prediction->getUser(), $prediction->getGame());
             $isValidHour = $matchesRepository->isValidHour(new \DateTime());
             dump(count($isValidHour));
+
             if (count($alreadyPlay) > 0) {
                 $this->addFlash('danger', 'Vous avez déjà fait votre pronostic !!!');
                 $this->redirect('matches_index');
             }
-           // elseif (count($isValidHour) == 0)
-           // {
-           //     $this->addFlash('danger', 'Trop tard les pronostic sont clos !!!');
-           //     $this->redirect('matches_index');
-           // }
+            elseif (count($isValidHour) > 0)
+            {
+                $this->addFlash('danger', 'Trop tard les pronostic sont clos !!!');
+                $this->redirect('matches_index');
+            }
             else{$entityManager = $this->getDoctrine()->getManager();
 
                 $predict = new Predictions();
@@ -108,14 +109,18 @@ class PredictionsController extends AbstractController
                 $points = 0;
                 if ( $result->getPredict() == $resultMatch->getVictory())
                 {
-                    $points +=1;
+                    $points +=2;
                     if(intval($result->getHomeResult()) === intval($resultMatch->getHomeResult()))
                     {
-                        $points +=1;
+                        $points +=2;
                     }
-                    if ((intval($result->getVisitorResult())) === (intval($resultMatch->getVisitorResult())))
+                    if (intval($result->getVisitorResult()) === intval($resultMatch->getVisitorResult()))
                     {
-                        $points +=1;
+                        $points +=2;
+                    }
+                    if((intval($result->getHomeResult()) === intval($resultMatch->getHomeResult())) && (intval($result->getVisitorResult()) === intval($resultMatch->getVisitorResult())))
+                    {
+                        $points +=3;
                     }
                 }
                 $test = $predictionsRepository->find($result->getId());
