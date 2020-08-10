@@ -41,8 +41,8 @@ security:
          - { path: ^/register, roles: ROLE_ADMIN }
          - { path: ^/users, roles: ROLE_ADMIN }
          - { path: ^/matches/new, roles: ROLE_ADMIN }
-         - { path: ^/matches/, roles: ROLE_USER }
-         - { path: ^/pronostic/new, roles: ROLE_USER }
+#         - { path: ^/matches/, roles: ROLE_USER }
+#         - { path: ^/pronostic/new, roles: ROLE_USER }
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
          - { path: /, roles: ROLE_USER }
          - { path: /edit, roles: ROLE_ADMIN }

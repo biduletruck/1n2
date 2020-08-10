@@ -54,6 +54,14 @@ class MatchesRepository extends ServiceEntityRepository
             ->getSingleResult();
     }
 
+    public function findAllResultMatch()
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.Victory is not null')
+            ->getQuery()
+            ->getResult();
+    }
+
 
     // /**
     //  * @return Matches[] Returns an array of Matches objects

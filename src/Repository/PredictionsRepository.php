@@ -28,6 +28,24 @@ class PredictionsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllByPoints()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.points', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findGameByPoints($game)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.Game = :val')
+            ->setParameter('val', $game)
+            ->orderBy('p.points', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findIsProntosic($user, $game)
     {
         return $this->createQueryBuilder('p')
@@ -48,7 +66,6 @@ class PredictionsRepository extends ServiceEntityRepository
             ->setParameter('gameVal', $game)
             ->getQuery()
             ->getResult();
-
     }
 
 

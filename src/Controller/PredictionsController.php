@@ -46,38 +46,8 @@ class PredictionsController extends AbstractController
                 $prediction->setGame($Matches);
                 $prediction->setUser($this->getUser());
         $form = $this->createForm(PredictionsType::class, $prediction);
+
         $preventAnotherPlay = count($predictionsRepository->findIsProntosic($this->getUser(), $request->get('id')));
-
-
-        $resulMatch = $matchesRepository->findResultMatch($Matches);
-        $resulUsers = $predictionsRepository->findUserAsProntosic($Matches);
-        foreach ($resulUsers as $result)
-        {
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $points = 0;
-            if ( $result->getPredict() == $resulMatch->getVictory())
-            {
-                $points +=1;
-                if(intval($result->getHomeResult()) === intval($resulMatch->getHomeResult()))
-                {
-                    $points +=1;
-
-                }
-
-                if ((intval($result->getVisitorResult())) === (intval($resulMatch->getVisitorResult())))
-                {
-                    $points +=1;
-
-                }
-            }
-            $test = $predictionsRepository->find($result->getId());
-            $test->setPoints($points);
-            $entityManager->persist($test);
-            $entityManager->flush();
-        }
-
-
 
         $form->handleRequest($request);
 
@@ -117,6 +87,69 @@ class PredictionsController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/classement", name="predictions_classement", methods={"GET","POST"})
+     * @param Request $request
+     * @param MatchesRepository $matchesRepository
+     * @param PredictionsRepository $predictionsRepository
+     * @return Response
+     */
+    public function classement(Request $request, MatchesRepository $matchesRepository, PredictionsRepository $predictionsRepository): Response
+    {
+        $allFinishMatches = $matchesRepository->findAllResultMatch() ;
+        $pointByUsers = $predictionsRepository->findAllByPoints();
+        foreach ($allFinishMatches as $resultMatch)
+        {
+            $resulUsers = $predictionsRepository->findUserAsProntosic($resultMatch);
+            foreach ($resulUsers as $result)
+            {
+                $entityManager = $this->getDoctrine()->getManager();
+                $points = 0;
+                if ( $result->getPredict() == $resultMatch->getVictory())
+                {
+                    $points +=1;
+                    if(intval($result->getHomeResult()) === intval($resultMatch->getHomeResult()))
+                    {
+                        $points +=1;
+                    }
+                    if ((intval($result->getVisitorResult())) === (intval($resultMatch->getVisitorResult())))
+                    {
+                        $points +=1;
+                    }
+                }
+                $test = $predictionsRepository->find($result->getId());
+                $test->setPoints($points);
+                $entityManager->persist($test);
+            }
+            $entityManager->flush();
+            }
+
+        $clasementByMatch = [];
+        $userResult = [];
+        $i = 0;
+        foreach ($allFinishMatches as $match)
+        {
+            $resultByMatch = $predictionsRepository->findGameByPoints($match);
+            $clasementByMatch[] = $match->getId();
+            foreach ($resultByMatch as $result)
+            {
+                $userResult[] = $result->getUser();
+                $userResult[] = $result->getPOints();
+                dump($result);
+                $clasementByMatch[$i] = $userResult;
+            }
+            $i++;
+        }
+
+        return $this->render('predictions/classement.html.twig', [
+            'classement' => $allFinishMatches,
+            'points' => $pointByUsers,
+            'matchs' => $clasementByMatch,
+
+        ]);
+//        return $this->render('predictions/classement.html.twig');
+    }
 
 
     /**
