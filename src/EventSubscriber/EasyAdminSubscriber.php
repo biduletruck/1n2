@@ -57,6 +57,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                 {
                     $points +=2;
                 }
+                if(intval($result->getVisitorResult()) === intval($entity->getVisitorResult()))
                 {
                     $points +=2;
                 }
