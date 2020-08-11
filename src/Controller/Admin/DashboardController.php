@@ -40,7 +40,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linktoRoute('Retour au site', 'fas fa-futbol', 'matches_index');
         yield MenuItem::section('Gestion des utilisateurs');
-        yield MenuItem::linkToCrud('Utilisateurs', 'far fa-id-card', Users::class)->setPermission('ROLE_SUPERADMIN');
+        yield MenuItem::linkToCrud('Utilisateurs', 'far fa-id-card', Users::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::section('Gestion des équipes');
         yield MenuItem::linkToCrud('Les équipes', 'fas fa-users', Teams::class);
         yield MenuItem::linkToCrud('Choix victoires', null, Victories::class)->setPermission('ROLE_SUPERADMIN');

@@ -3,28 +3,38 @@
 namespace App\EventSubscriber;
 
 use App\Entity\Matches;
+use App\Entity\Users;
 use App\Repository\PredictionsRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 class EasyAdminSubscriber implements EventSubscriberInterface
 {
-    private $match;
+
     private $predictionsRepository;
     private $entityManager;
+    private $passwordEncoder;
 
-    public function __construct(EntityManager $entityManager, PredictionsRepository $predictionsRepository)
+    public function __construct(EntityManager $entityManager, PredictionsRepository $predictionsRepository, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->predictionsRepository = $predictionsRepository;
         $this->entityManager = $entityManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public static function getSubscribedEvents()
     {
         return [
             AfterEntityUpdatedEvent::class => ['updateScoring'],
+            BeforeEntityPersistedEvent::class => ['addUser'],
+            BeforeEntityUpdatedEvent::class => ['updateUser'],
         ];
     }
 
@@ -35,8 +45,6 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!($entity instanceof Matches)) {
             return;
         }
-
-        $em = $this->predictionsRepository;
         $resulUsers = $this->predictionsRepository->findUserAsProntosic($entity);
 
         foreach ($resulUsers as $result)
@@ -62,7 +70,45 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             $this->entityManager->persist($test);
         }
         $this->entityManager->flush();
-        }
+    }
 
+    public function updateUser(BeforeEntityUpdatedEvent $event)
+    {
+        $entity = $event->getEntityInstance();
+
+        if (!($entity instanceof Users)) {
+            return;
+        }
+        $this->setPassword($entity);
+    }
+
+    public function addUser(BeforeEntityPersistedEvent $event)
+    {
+        $entity = $event->getEntityInstance();
+
+        if (!($entity instanceof Users)) {
+            return;
+        }
+        $this->setPassword($entity);
+    }
+
+    /**
+     * @param Users $entity
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function setPassword(Users $entity): void
+    {
+        $pass = $entity->getPassword();
+
+        $entity->setPassword(
+            $this->passwordEncoder->encodePassword(
+                $entity,
+                $pass
+            )
+        );
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+    }
 
 }

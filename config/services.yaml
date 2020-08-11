@@ -36,4 +36,4 @@ services:
 #            - {name: doctrine.event_subscriber}
 
     App\EventSubscriber\EasyAdminSubscriber:
-        arguments: [ "@doctrine.orm.entity_manager" ]
+        arguments: [ "@doctrine.orm.entity_manager"]

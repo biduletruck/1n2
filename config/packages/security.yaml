@@ -40,8 +40,8 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/register, roles: ROLE_SUPERADMIN }
          - { path: ^/players, roles: ROLE_SUPERADMIN }
-         - { path: ^/users, roles: ROLE_ADMIN }
-         - { path: ^/matches/new, roles: ROLE_ADMIN }
+         - { path: ^/users, roles: ROLE_SUPERADMIN }
+         - { path: ^/matches/new, roles: ROLE_SUPERADMIN }
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
          - { path: /, roles: ROLE_USER }
-         - { path: /edit, roles: ROLE_ADMIN }
+         - { path: /edit, roles: ROLE_SUPERADMIN }
