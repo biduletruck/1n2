@@ -34,3 +34,6 @@ services:
 #        class: App\EventListener\DoctrineSubscriber
 #        tags:
 #            - {name: doctrine.event_subscriber}
+
+    App\EventSubscriber\EasyAdminSubscriber:
+        arguments: [ "@doctrine.orm.entity_manager" ]

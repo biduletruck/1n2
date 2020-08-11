@@ -96,8 +96,11 @@ class PredictionsController extends AbstractController
      * @param PredictionsRepository $predictionsRepository
      * @return Response
      */
-    public function classement(Request $request, MatchesRepository $matchesRepository, PredictionsRepository $predictionsRepository): Response
+    public function classement(Request $request, MatchesRepository $matchesRepository, PredictionsRepository $predictionsRepository)
     {
+        $scoring = $matchesRepository->find();
+
+
 //        $allFinishMatches = $matchesRepository->findAllResultMatch() ;
 //        $pointByUsers = $predictionsRepository->findAllByPoints();
 //        foreach ($allFinishMatches as $resultMatch)
@@ -114,7 +117,6 @@ class PredictionsController extends AbstractController
 //                    {
 //                        $points +=2;
 //                    }
-//                    if (intval($result->getVisitorResult()) === intval($resultMatch->getVisitorResult()))
 //                    {
 //                        $points +=2;
 //                    }
@@ -132,27 +134,27 @@ class PredictionsController extends AbstractController
 
         $clasementByMatch = [];
         $userResult = [];
-        $i = 0;
-        foreach ($allFinishMatches as $match)
-        {
-            $resultByMatch = $predictionsRepository->findGameByPoints($match);
-            $clasementByMatch[] = $match->getId();
-            foreach ($resultByMatch as $result)
-            {
-                $userResult[] = $result->getUser();
-                $userResult[] = $result->getPOints();
-                dump($result);
-                $clasementByMatch[$i] = $userResult;
-            }
-            $i++;
-        }
+//        $i = 0;
+//        foreach ($allFinishMatches as $match)
+//        {
+//            $resultByMatch = $predictionsRepository->findGameByPoints($match);
+//            $clasementByMatch[] = $match->getId();
+//            foreach ($resultByMatch as $result)
+//            {
+//                $userResult[] = $result->getUser();
+//                $userResult[] = $result->getPOints();
+//                dump($result);
+//                $clasementByMatch[$i] = $userResult;
+//            }
+//            $i++;
+//        }
 
-        return $this->render('predictions/classement.html.twig', [
-            'classement' => $allFinishMatches,
-            'points' => $pointByUsers,
-            'matchs' => $clasementByMatch,
-
-        ]);
+//        return $this->render('predictions/classement.html.twig', [
+//            'classement' => $allFinishMatches,
+//            'points' => $pointByUsers,
+//            'matchs' => $clasementByMatch,
+//
+//        ]);
 //        return $this->render('predictions/classement.html.twig');
     }
 

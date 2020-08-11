@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Matches;
 use App\Form\MatchesType;
 use App\Repository\MatchesRepository;
+use App\Repository\PredictionsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -122,4 +123,7 @@ class MatchesController extends AbstractController
 
         return $this->redirectToRoute('matches_index');
     }
+
+
+
 }
