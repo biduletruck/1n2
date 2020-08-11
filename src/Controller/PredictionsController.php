@@ -54,7 +54,6 @@ class PredictionsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $alreadyPlay = $predictionsRepository->findIsProntosic($prediction->getUser(), $prediction->getGame());
             $isValidHour = $matchesRepository->isValidHour(new \DateTime());
-            dump(count($isValidHour));
 
             if (count($alreadyPlay) > 0) {
                 $this->addFlash('danger', 'Vous avez déjà fait votre pronostic !!!');
@@ -98,64 +97,7 @@ class PredictionsController extends AbstractController
      */
     public function classement(Request $request, MatchesRepository $matchesRepository, PredictionsRepository $predictionsRepository)
     {
-        $scoring = $matchesRepository->find();
-
-
-//        $allFinishMatches = $matchesRepository->findAllResultMatch() ;
-//        $pointByUsers = $predictionsRepository->findAllByPoints();
-//        foreach ($allFinishMatches as $resultMatch)
-//        {
-//            $resulUsers = $predictionsRepository->findUserAsProntosic($resultMatch);
-//            foreach ($resulUsers as $result)
-//            {
-//                $entityManager = $this->getDoctrine()->getManager();
-//                $points = 0;
-//                if ( $result->getPredict() == $resultMatch->getVictory())
-//                {
-//                    $points +=2;
-//                    if(intval($result->getHomeResult()) === intval($resultMatch->getHomeResult()))
-//                    {
-//                        $points +=2;
-//                    }
-//                    {
-//                        $points +=2;
-//                    }
-//                    if((intval($result->getHomeResult()) === intval($resultMatch->getHomeResult())) && (intval($result->getVisitorResult()) === intval($resultMatch->getVisitorResult())))
-//                    {
-//                        $points +=3;
-//                    }
-//                }
-//                $test = $predictionsRepository->find($result->getId());
-//                $test->setPoints($points);
-//                $entityManager->persist($test);
-//            }
-//            $entityManager->flush();
-//            }
-
-        $clasementByMatch = [];
-        $userResult = [];
-//        $i = 0;
-//        foreach ($allFinishMatches as $match)
-//        {
-//            $resultByMatch = $predictionsRepository->findGameByPoints($match);
-//            $clasementByMatch[] = $match->getId();
-//            foreach ($resultByMatch as $result)
-//            {
-//                $userResult[] = $result->getUser();
-//                $userResult[] = $result->getPOints();
-//                dump($result);
-//                $clasementByMatch[$i] = $userResult;
-//            }
-//            $i++;
-//        }
-
-//        return $this->render('predictions/classement.html.twig', [
-//            'classement' => $allFinishMatches,
-//            'points' => $pointByUsers,
-//            'matchs' => $clasementByMatch,
-//
-//        ]);
-//        return $this->render('predictions/classement.html.twig');
+        return $this->render('predictions/classement.html.twig');
     }
 
 
