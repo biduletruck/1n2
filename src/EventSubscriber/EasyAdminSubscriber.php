@@ -35,16 +35,12 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!($entity instanceof Matches)) {
             return;
         }
-        dump($entity);
-        $em = $this->predictionsRepository;
-        $game = $em->findGameByPoints($entity);
-//
 
+        $em = $this->predictionsRepository;
         $resulUsers = $this->predictionsRepository->findUserAsProntosic($entity);
-//        dd($resulUsers);
+
         foreach ($resulUsers as $result)
         {
-
             $points = 0;
             if ( $result->getPredict() == $entity->getVictory())
             {
@@ -63,10 +59,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             }
             $test = $this->predictionsRepository->find($result->getId());
             $test->setPoints($points);
-//            dump($test);
             $this->entityManager->persist($test);
         }
-//        dd($test);
         $this->entityManager->flush();
         }
 
