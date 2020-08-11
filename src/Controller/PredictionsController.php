@@ -98,37 +98,37 @@ class PredictionsController extends AbstractController
      */
     public function classement(Request $request, MatchesRepository $matchesRepository, PredictionsRepository $predictionsRepository): Response
     {
-        $allFinishMatches = $matchesRepository->findAllResultMatch() ;
-        $pointByUsers = $predictionsRepository->findAllByPoints();
-        foreach ($allFinishMatches as $resultMatch)
-        {
-            $resulUsers = $predictionsRepository->findUserAsProntosic($resultMatch);
-            foreach ($resulUsers as $result)
-            {
-                $entityManager = $this->getDoctrine()->getManager();
-                $points = 0;
-                if ( $result->getPredict() == $resultMatch->getVictory())
-                {
-                    $points +=2;
-                    if(intval($result->getHomeResult()) === intval($resultMatch->getHomeResult()))
-                    {
-                        $points +=2;
-                    }
-                    if (intval($result->getVisitorResult()) === intval($resultMatch->getVisitorResult()))
-                    {
-                        $points +=2;
-                    }
-                    if((intval($result->getHomeResult()) === intval($resultMatch->getHomeResult())) && (intval($result->getVisitorResult()) === intval($resultMatch->getVisitorResult())))
-                    {
-                        $points +=3;
-                    }
-                }
-                $test = $predictionsRepository->find($result->getId());
-                $test->setPoints($points);
-                $entityManager->persist($test);
-            }
-            $entityManager->flush();
-            }
+//        $allFinishMatches = $matchesRepository->findAllResultMatch() ;
+//        $pointByUsers = $predictionsRepository->findAllByPoints();
+//        foreach ($allFinishMatches as $resultMatch)
+//        {
+//            $resulUsers = $predictionsRepository->findUserAsProntosic($resultMatch);
+//            foreach ($resulUsers as $result)
+//            {
+//                $entityManager = $this->getDoctrine()->getManager();
+//                $points = 0;
+//                if ( $result->getPredict() == $resultMatch->getVictory())
+//                {
+//                    $points +=2;
+//                    if(intval($result->getHomeResult()) === intval($resultMatch->getHomeResult()))
+//                    {
+//                        $points +=2;
+//                    }
+//                    if (intval($result->getVisitorResult()) === intval($resultMatch->getVisitorResult()))
+//                    {
+//                        $points +=2;
+//                    }
+//                    if((intval($result->getHomeResult()) === intval($resultMatch->getHomeResult())) && (intval($result->getVisitorResult()) === intval($resultMatch->getVisitorResult())))
+//                    {
+//                        $points +=3;
+//                    }
+//                }
+//                $test = $predictionsRepository->find($result->getId());
+//                $test->setPoints($points);
+//                $entityManager->persist($test);
+//            }
+//            $entityManager->flush();
+//            }
 
         $clasementByMatch = [];
         $userResult = [];
