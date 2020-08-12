@@ -5,20 +5,20 @@
         <div class="justify-content-center align-self-center text-center d-none d-md-block col-md-0 col-lg-3">
             <span class="align-middle d-none d-lg-block">{{ prediction.game.home.name }}</span>
         </div>
-        <div class="justify-content-cented-none d-lg-blockr align-self-center col-3 col-md-4 col-lg-2">
+        <div class="justify-content-cented-none d-lg-blockr align-self-center col-2 col-md-4 col-lg-2">
             <img class="img-fluid" src="{{ asset('images/thumbnails/' ~ prediction.game.home.thumbnail) }}" alt="{{ prediction.game.home.name }}">
         </div>
-        <div class="justify-content-center align-self-center col-3 col-md-2 col-lg-1">
+        <div class="justify-content-center align-self-center col-4 col-md-2 col-lg-1">
                 {{ form_errors(form.HomeResult) }}
                 {{ form_widget(form.HomeResult, { 'attr': {'class': 'score'}}) }}
         </div>
 
 
-       <div class="justify-content-center align-self-center col-3 col-md-2 col-lg-1">
+       <div class="justify-content-center align-self-center col-4 col-md-2 col-lg-1">
                {{ form_errors(form.VisitorResult) }}
                {{ form_widget(form.VisitorResult, { 'attr': {'class': 'score'}}) }}
        </div>
-       <div class="justify-content-center align-self-center col-3 col-md-4 col-lg-2">
+       <div class="justify-content-center align-self-center col-2 col-md-4 col-lg-2">
            <img class="img-fluid" src="{{ asset('images/thumbnails/' ~ prediction.game.visitor.thumbnail) }}" alt="{{ prediction.game.visitor.name }}">
        </div>
        <div class="justify-content-center align-self-center text-center d-none d-md-block col-md-0 col-lg-3">
