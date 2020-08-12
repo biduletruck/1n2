@@ -33,11 +33,11 @@
                 </div>
                 <div class="row">
                     <div class="justify-content-center align-self-center text-center col-12">
-{#                        {% if "now"|date('Y-m-d H:i:s') < match.StartTime|date_modify("-1 hour") |date('Y-m-d H:i:s') %}#}
-{#                            {% if not is_granted("ROLE_ADMIN") %}#}
-                                <a class="btn btn-lg btn-outline-secondary" href="{{ path('predictions_new', {'id': match.id}) }}">Faite votre pronostic</a>
-{#                                {% endif %}#}
-{#                        {% endif %}#}
+                        {% if "now"|date('Y-m-d H:i:s') < match.StartTime|date_modify("-1 hour") |date('Y-m-d H:i:s') %}
+                            {% if not is_granted("ROLE_ADMIN") %}
+                                <a class="btn btn-lg btn-outline-secondary" href="{{ path('predictions_new', {'id': match.id}) }}">Faites votre pronostic</a>
+                                {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
