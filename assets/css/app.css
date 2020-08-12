@@ -69,9 +69,9 @@
     {
         align-content: center;
         height: 50%;
-        width: 100%;
-        font-size: 3.5em;
-        text-align: center;
+        width: 50%;
+        font-size: 1em;
+        /*text-align: center;*/
     }
 
     .navbar .navbar-brand, .navbar .nav-link {
