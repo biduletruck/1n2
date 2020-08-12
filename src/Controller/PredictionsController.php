@@ -53,8 +53,8 @@ class PredictionsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $alreadyPlay = $predictionsRepository->findIsProntosic($prediction->getUser(), $prediction->getGame());
-            $isValidHour = $matchesRepository->isValidHour(new \DateTime());
-
+            $isValidHour = $matchesRepository->isValidHour((new \DateTime())->modify('+1 hours'), $prediction->getGame()->getId());
+    
             if (count($alreadyPlay) > 0) {
                 $this->addFlash('danger', 'Vous avez déjà fait votre pronostic !!!');
                 $this->redirect('matches_index');

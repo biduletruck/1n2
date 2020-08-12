@@ -35,11 +35,13 @@ class MatchesRepository extends ServiceEntityRepository
 
     }
 
-    public function isValidHour(\DateTime $date)
+    public function isValidHour(\DateTime $date, $match)
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.StartTime < :val')
+            ->andWhere('m.id = :val2')
             ->setParameter('val', $date)
+            ->setParameter('val2', $match)
             ->getQuery()
             ->getResult();
     }
