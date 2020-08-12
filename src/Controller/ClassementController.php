@@ -19,16 +19,19 @@ class ClassementController extends AbstractController
     {
 //        $matches = $matchesRepository->findAllResultMatch();
 //        dd($matches);
-
+        $tempClass = [];
         foreach ($matchesRepository->findAllResultMatch() as $match)
         {
             $classement = $predictionsRepository->findGameByPoints($match);
-            dd($classement);
+//            dump($classement);
+
+            $tempClass[] = [$match, $classement];
+
 
         }
-
+//        dd($tempClass);
         return $this->render('classement/index.html.twig', [
-            'controller_name' => 'ClassementController',
+            'classement' => $tempClass
         ]);
     }
 }

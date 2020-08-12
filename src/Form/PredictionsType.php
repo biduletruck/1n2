@@ -48,7 +48,7 @@ class PredictionsType extends AbstractType
                 'attr'      => array('class' => 'form-control')
 
             ))
-            ->add('VisitorResult', NumberType::class, array(
+            ->add('VisitorResult', TextType::class, array(
                 'required' => true,
                 'label' => 'Nombre de supports',
                 'attr'      => array('class' => 'form-control')
