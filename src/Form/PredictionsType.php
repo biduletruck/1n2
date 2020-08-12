@@ -42,18 +42,52 @@ class PredictionsType extends AbstractType
 
                 'expanded' => true,
             ))
-            ->add('HomeResult', NumberType::class, array(
+            ->add('HomeResult', ChoiceType::class, [
+                'choices'  => [
+                    '' => '',
+                    '0' => 0,
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                    '6' => 6,
+                    '7' => 7,
+                    '8' => 8,
+                    '9' => 9,
+                    '10' => 10,
+                    '11' => 11,
+                    '12' => 12,
+                    '13' => 13,
+
+                ],
                 'required' => true,
-                'label' => 'Nombre de supports',
                 'attr'      => array('class' => 'form-control')
 
-            ))
-            ->add('VisitorResult', TextType::class, array(
+            ])
+            ->add('VisitorResult', ChoiceType::class, [
+                    'choices'  => [
+                        '' => '',
+                        '0' => 0,
+                        '1' => 1,
+                        '2' => 2,
+                        '3' => 3,
+                        '4' => 4,
+                        '5' => 5,
+                        '6' => 6,
+                        '7' => 7,
+                        '8' => 8,
+                        '9' => 9,
+                        '10' => 10,
+                        '11' => 11,
+                        '12' => 12,
+                        '13' => 13,
+
+                    ],
                 'required' => true,
-                'label' => 'Nombre de supports',
                 'attr'      => array('class' => 'form-control')
 
-            ))
+            ])
 
             ->remove('User')
         ;
