@@ -5,13 +5,37 @@
 {% block body %}
 
 
-<div class="example-wrapper">
-   {{ dump(classement) }}
-{{ dump(points) }}
 
-{#    {% for match in classement %}#}
-{#        {{ match.home }}#}
-{#    {% endfor %}#}
 
-</div>
+    {% for match in classement %}
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <h5 class="card-header">{{ match[0].Home.Name}} vs {{ match[0].Visitor.Name }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Résultats du match</h5>
+                    <ul class="card-text">
+                        {% for user in match[1] %}
+                            <li>{{ user.User.username }} - {{ user.points }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
 {% endblock %}
+
+
+{#<div class="col-12">#}
+{#    <div class="card">#}
+{#        <h5 class="card-header">Article 6 : Acceptation - Responsabilité</h5>#}
+{#        <div class="card-body">#}
+{#            <h5 class="card-title">La participation à ce Jeu Concours implique l’acceptation pleine et entière des participants aux clauses du présent règlement. </h5>#}
+{#            <h5 class="card-text">Le CSE de Sitel Troyes se réserve le droit, pour le bon déroulement de l’opération, de modifier, compléter, différer, annuler, interrompre ou prolonger la présente opération sans que sa responsabilité soit engagée.</h5>#}
+{#            <p class="card-text">En aucun cas, la responsabilité du CSE de Sitel Troyes ne pourra être recherchée si un quelconque dommage matériel et/ou physique survenait à un participant ou à un tiers du fait de l'un des lots.</p>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}

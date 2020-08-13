@@ -41,6 +41,7 @@ class PredictionsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.Game = :val')
             ->setParameter('val', $game)
+            ->andHaving('p.points > 0')
             ->orderBy('p.points', 'DESC')
             ->getQuery()
             ->getResult();
