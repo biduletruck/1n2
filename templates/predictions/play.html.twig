@@ -4,16 +4,19 @@
 
 {% block body %}
 
+<div class="row">
+    <div class="col-12 col-lg-10">
+        <div class="row justify-content-center align-self-center predict">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded col-12 col-md-10 col-lg-10 col-xl-8 col align-self-center ">
+                {{ include('predictions/_formPlay.html.twig') }}
+            </div>
+        </div>
 
-    <div class="row justify-content-center align-self-center predict">
-        <div class="shadow-lg p-3 mb-5 bg-white rounded col-12 col-md-10 col-lg-10 col-xl-8 col align-self-center ">
-            {{ include('predictions/_formPlay.html.twig') }}
+        <div class="row">
+            <div class="col-12">
+                <a class="btn-lg btn-danger" href="{{ path('matches_index') }}">Retour à la liste des match(s)</a>
+            </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-12">
-            <a class="btn-lg btn-danger" href="{{ path('matches_index') }}">Retour à la liste des match(s)</a>
-        </div>
-    </div>
+</div>
 {% endblock %}
