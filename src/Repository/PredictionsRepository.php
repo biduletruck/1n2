@@ -77,6 +77,7 @@ class PredictionsRepository extends ServiceEntityRepository
             ->groupBy('user')
             ->addOrderBy('pts', 'DESC')
             ->addOrderBy('user', 'ASC')
+            ->andHaving('pts > 0')
             ->getQuery()
             ->getScalarResult();
     }
