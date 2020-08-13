@@ -171,3 +171,9 @@ body {
 a{
     text-decoration: none;
 }
+
+
+.score-img {
+    max-width: 150px;
+    height: auto;
+}
