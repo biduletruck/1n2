@@ -68,6 +68,17 @@ class PredictionsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findClassementPoints()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('SUM(p.points) as pts','u.username as user')
+            ->leftJoin('p.User', 'u')
+            ->groupBy('user')
+            ->addOrderBy('pts', 'DESC')
+            ->addOrderBy('user', 'ASC')
+            ->getQuery()
+            ->getScalarResult();
+    }
 
 
 

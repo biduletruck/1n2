@@ -23,6 +23,7 @@ class ClassementController extends AbstractController
         foreach ($matchesRepository->findAllResultMatch() as $match)
         {
             $classement = $predictionsRepository->findGameByPoints($match);
+            $point = $predictionsRepository->findClassementPoints();
 //            dump($classement);
 
             $tempClass[] = [$match, $classement];
@@ -31,7 +32,8 @@ class ClassementController extends AbstractController
         }
 //        dd($tempClass);
         return $this->render('classement/index.html.twig', [
-            'classement' => $tempClass
+            'classement' => $tempClass,
+            'points' => $point,
         ]);
     }
 }
