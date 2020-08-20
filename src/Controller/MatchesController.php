@@ -31,15 +31,23 @@ class MatchesController extends AbstractController
     }
 
     /**
-
      * @Route("/", name="matches_index", methods={"GET"})
      * @param MatchesRepository $matchesRepository
+     * @param PredictionsRepository $predictionsRepository
      * @return Response
      */
-    public function indexByBay(MatchesRepository $matchesRepository): Response
+    public function indexByBay(MatchesRepository $matchesRepository, PredictionsRepository $predictionsRepository): Response
     {
+        $matchsOfTheDay = $matchesRepository->findByDay(new \DateTime());
+        $asPredicts = [];
+        foreach ($matchsOfTheDay as $match)
+        {
+            $asPredict[] = $predictionsRepository->findUserAsProntosic($match);
+        }
+
         return $this->render('matches/dayMatch.html.twig', [
-            'matches' => $matchesRepository->findByDay(new \DateTime()),
+            'matches' => $matchsOfTheDay,
+            'predicts' => $asPredict[0],
         ]);
     }
 
