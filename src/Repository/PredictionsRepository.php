@@ -69,6 +69,17 @@ class PredictionsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findUserAsProntosicSec($game, $user)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.Game = :gameVal')
+            ->setParameter('gameVal', $game)
+            ->andWhere('p.User = :userVal')
+            ->setParameter('userVal', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findClassementPoints()
     {
         return $this->createQueryBuilder('p')

@@ -42,12 +42,14 @@ class MatchesController extends AbstractController
         $asPredicts = [];
         foreach ($matchsOfTheDay as $match)
         {
-            $asPredict[] = $predictionsRepository->findUserAsProntosic($match);
+            $asPredicts[] = $predictionsRepository->findUserAsProntosicSec($match, $this->getUser());
         }
+
+        $returnPredict = count($asPredicts) >0 ? $asPredicts[0] : [];
 
         return $this->render('matches/dayMatch.html.twig', [
             'matches' => $matchsOfTheDay,
-            'predicts' => $asPredict[0],
+            'predicts' => $returnPredict,
         ]);
     }
 
