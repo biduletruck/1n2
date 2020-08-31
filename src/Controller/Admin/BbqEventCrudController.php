@@ -23,7 +23,7 @@ class BbqEventCrudController extends AbstractCrudController
             BooleanField::new('present'),
             BooleanField::new('conjoint'),
             IntegerField::new('nombreEnfants'),
-            AssociationField::new('newBbq')
+            BooleanField::new('reglement')
         ];
     }
 

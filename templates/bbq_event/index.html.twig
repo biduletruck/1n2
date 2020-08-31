@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BbqEvent index{% endblock %}
+
+{% block body %}
+    <h1>BbqEvent index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Conjoint</th>
+                <th>NombreEnfants</th>
+                <th>Present</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bbq_event in bbq_events %}
+            <tr>
+                <td>{{ bbq_event.id }}</td>
+                <td>{{ bbq_event.conjoint ? 'Yes' : 'No' }}</td>
+                <td>{{ bbq_event.nombreEnfants }}</td>
+                <td>{{ bbq_event.present ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('bbq_event_show', {'id': bbq_event.id}) }}">show</a>
+                    <a href="{{ path('bbq_event_edit', {'id': bbq_event.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bbq_event_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+
+
+{{ form_row(form.present) }}
+
+
+{{ form_row(form.conjoint) }}
+
+
+{{ form_row(form.nombreEnfants) }}
+
+   <button class="btn btn-success">{{ button_label|default('Je finalise mon inscription') }}</button>
+{{ form_end(form) }}

@@ -28,30 +28,35 @@ class BbqEvent
     /**
      * @ORM\Column(type="boolean")
      */
-    private $conjoint;
+    private $conjoint = 0;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $nombreEnfants;
+    private $nombreEnfants = 0;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Bbq::class, inversedBy="bbqEvents")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $newBbq;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $present;
+    private $present = 0;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $CreatedAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $reglement = 0;
 
 
 
     public function __construct()
     {
-        $this->bbqEvents = new ArrayCollection();
+
+        $this->CreatedAt = new \Datetime();
     }
 
     public function getId(): ?int
@@ -95,35 +100,7 @@ class BbqEvent
         return $this;
     }
 
-    public function getNewBbq(): ?self
-    {
-        return $this->newBbq;
-    }
 
-
-
-    public function addBbqEvent(self $bbqEvent): self
-    {
-        if (!$this->bbqEvents->contains($bbqEvent)) {
-            $this->bbqEvents[] = $bbqEvent;
-            $bbqEvent->setNewBbq($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBbqEvent(self $bbqEvent): self
-    {
-        if ($this->bbqEvents->contains($bbqEvent)) {
-            $this->bbqEvents->removeElement($bbqEvent);
-            // set the owning side to null (unless already changed)
-            if ($bbqEvent->getNewBbq() === $this) {
-                $bbqEvent->setNewBbq(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getPresent(): ?bool
     {
@@ -133,6 +110,30 @@ class BbqEvent
     public function setPresent(bool $present): self
     {
         $this->present = $present;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->CreatedAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $CreatedAt): self
+    {
+        $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+
+    public function getReglement(): ?bool
+    {
+        return $this->reglement;
+    }
+
+    public function setReglement(bool $reglement): self
+    {
+        $this->reglement = $reglement;
 
         return $this;
     }

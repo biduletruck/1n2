@@ -51,7 +51,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Les pronostiques', null, Predictions::class);
         // yield MenuItem::linkToCrud('The Label', 'icon class', EntityClass::class);
         yield MenuItem::section('Evenement BBQ CeSitel3');
-        yield MenuItem::linkToCrud('Création du BBQ', null, Bbq::class);
         yield MenuItem::linkToCrud('Suivi des inscriptions BBQ', null, BbqEvent::class);
     }
 }

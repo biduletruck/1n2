@@ -43,10 +43,6 @@ class Users implements UserInterface
      */
     private $predictions;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Bbq::class, mappedBy="Createdby")
-     */
-    private $bbqs;
 
     /**
      * @ORM\OneToMany(targetEntity=BbqEvent::class, mappedBy="salarie")
@@ -56,7 +52,6 @@ class Users implements UserInterface
     public function __construct()
     {
         $this->predictions = new ArrayCollection();
-        $this->bbqs = new ArrayCollection();
         $this->bbqEvents = new ArrayCollection();
     }
 
@@ -169,36 +164,6 @@ class Users implements UserInterface
         return $this->username;
     }
 
-    /**
-     * @return Collection|Bbq[]
-     */
-    public function getBbqs(): Collection
-    {
-        return $this->bbqs;
-    }
-
-    public function addBbq(Bbq $bbq): self
-    {
-        if (!$this->bbqs->contains($bbq)) {
-            $this->bbqs[] = $bbq;
-            $bbq->setCreatedby($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBbq(Bbq $bbq): self
-    {
-        if ($this->bbqs->contains($bbq)) {
-            $this->bbqs->removeElement($bbq);
-            // set the owning side to null (unless already changed)
-            if ($bbq->getCreatedby() === $this) {
-                $bbq->setCreatedby(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|BbqEvent[]

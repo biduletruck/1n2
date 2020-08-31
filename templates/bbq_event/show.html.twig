@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BbqEvent{% endblock %}
+
+{% block body %}
+    <h1>BbqEvent</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bbq_event.id }}</td>
+            </tr>
+            <tr>
+                <th>Conjoint</th>
+                <td>{{ bbq_event.conjoint ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>NombreEnfants</th>
+                <td>{{ bbq_event.nombreEnfants }}</td>
+            </tr>
+            <tr>
+                <th>Present</th>
+                <td>{{ bbq_event.present ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bbq_event_index') }}">back to list</a>
+
+    <a href="{{ path('bbq_event_edit', {'id': bbq_event.id}) }}">edit</a>
+
+    {{ include('bbq_event/_delete_form.html.twig') }}
+{% endblock %}
