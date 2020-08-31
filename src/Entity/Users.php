@@ -43,9 +43,21 @@ class Users implements UserInterface
      */
     private $predictions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Bbq::class, mappedBy="Createdby")
+     */
+    private $bbqs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=BbqEvent::class, mappedBy="salarie")
+     */
+    private $bbqEvents;
+
     public function __construct()
     {
         $this->predictions = new ArrayCollection();
+        $this->bbqs = new ArrayCollection();
+        $this->bbqEvents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,5 +167,67 @@ class Users implements UserInterface
     public function __toString()
     {
         return $this->username;
+    }
+
+    /**
+     * @return Collection|Bbq[]
+     */
+    public function getBbqs(): Collection
+    {
+        return $this->bbqs;
+    }
+
+    public function addBbq(Bbq $bbq): self
+    {
+        if (!$this->bbqs->contains($bbq)) {
+            $this->bbqs[] = $bbq;
+            $bbq->setCreatedby($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBbq(Bbq $bbq): self
+    {
+        if ($this->bbqs->contains($bbq)) {
+            $this->bbqs->removeElement($bbq);
+            // set the owning side to null (unless already changed)
+            if ($bbq->getCreatedby() === $this) {
+                $bbq->setCreatedby(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BbqEvent[]
+     */
+    public function getBbqEvents(): Collection
+    {
+        return $this->bbqEvents;
+    }
+
+    public function addBbqEvent(BbqEvent $bbqEvent): self
+    {
+        if (!$this->bbqEvents->contains($bbqEvent)) {
+            $this->bbqEvents[] = $bbqEvent;
+            $bbqEvent->setSalarie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBbqEvent(BbqEvent $bbqEvent): self
+    {
+        if ($this->bbqEvents->contains($bbqEvent)) {
+            $this->bbqEvents->removeElement($bbqEvent);
+            // set the owning side to null (unless already changed)
+            if ($bbqEvent->getSalarie() === $this) {
+                $bbqEvent->setSalarie(null);
+            }
+        }
+
+        return $this;
     }
 }

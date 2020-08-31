@@ -1,0 +1,16 @@
+{% extends 'base_bbq.twig' %}
+
+{% block title %}
+    {% if title is defined %} {{title}}{% else %}BBQ Sitel Troyes{% endif %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-12 align-self-center">
+
+        <a href="#">
+            <img src="{{ asset('build/BBQ@2x.png') }}" alt="" class="img-fluid mx-auto" width="100%">
+        </a>
+    </div>
+
+{% endblock %}

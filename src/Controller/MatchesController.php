@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class MatchesController extends AbstractController
 {
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/rencontres", name="matches_day", methods={"GET"})
      * @param MatchesRepository $matchesRepository
      * @return Response

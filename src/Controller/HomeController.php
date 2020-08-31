@@ -16,4 +16,14 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    /**
+     * @Route("/bbq", name="bbq")
+     */
+    public function bbq()
+    {
+        return $this->render('bbq/index.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }
