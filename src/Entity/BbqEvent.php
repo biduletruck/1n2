@@ -51,6 +51,21 @@ class BbqEvent
      */
     private $reglement = 0;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $roller = 0;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $foot = 0;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $tennis = 0;
+
 
 
     public function __construct()
@@ -134,6 +149,42 @@ class BbqEvent
     public function setReglement(bool $reglement): self
     {
         $this->reglement = $reglement;
+
+        return $this;
+    }
+
+    public function getRoller(): ?bool
+    {
+        return $this->roller;
+    }
+
+    public function setRoller(bool $roller): self
+    {
+        $this->roller = $roller;
+
+        return $this;
+    }
+
+    public function getFoot(): ?bool
+    {
+        return $this->foot;
+    }
+
+    public function setFoot(bool $foot): self
+    {
+        $this->foot = $foot;
+
+        return $this;
+    }
+
+    public function getTennis(): ?bool
+    {
+        return $this->tennis;
+    }
+
+    public function setTennis(bool $tennis): self
+    {
+        $this->tennis = $tennis;
 
         return $this;
     }

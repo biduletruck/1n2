@@ -1,13 +1,62 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'form-horizontal', 'role' : 'form'}}) }}
+<div class="form">
+   <div class="form-group" >
+      <div class="input-group" id="present">
+         <div>
+            {{ form_label(form.present) }}
+            {{ form_errors(form.present) }}
+            {{ form_widget(form.present) }}
+         </div>
+      </div>
+   </div>
 
+   <div class="form-group" >
+      <div class="input-group" id="conjoint">
+         <div>
+            {{ form_label(form.conjoint) }}
+            {{ form_errors(form.conjoint) }}
+            {{ form_widget(form.conjoint) }}
+         </div>
+      </div>
+   </div>
+   <div class="form-group" >
+      <div class="input-group" id="nombreEnfants">
+         <div>
+            {{ form_label(form.nombreEnfants) }}
+            {{ form_errors(form.nombreEnfants) }}
+            {{ form_widget(form.nombreEnfants) }}
+         </div>
+      </div>
+   </div>
+   <div class="form-group" >
+      <div class="input-group" id="roller">
+         <div>
+            {{ form_label(form.roller) }}
+            {{ form_errors(form.roller) }}
+            {{ form_widget(form.roller) }}
+         </div>
+      </div>
+   </div>
+   <div class="form-group" >
+      <div class="input-group" id="foot">
+         <div>
+            {{ form_label(form.foot) }}
+            {{ form_errors(form.foot) }}
+            {{ form_widget(form.foot) }}
+         </div>
+      </div>
+   </div>
 
-{{ form_row(form.present) }}
-
-
-{{ form_row(form.conjoint) }}
-
-
-{{ form_row(form.nombreEnfants) }}
+   <div class="form-group" >
+      <div class="input-group" id="tennis">
+         <div>
+            {{ form_label(form.tennis) }}
+            {{ form_errors(form.tennis) }}
+            {{ form_widget(form.tennis) }}
+         </div>
+      </div>
+   </div>
+</div>
 
    <button class="btn btn-success">{{ button_label|default('Je finalise mon inscription') }}</button>
 {{ form_end(form) }}

@@ -46,6 +46,42 @@ class BbqEvent1Type extends AbstractType
                     'class' => 'form-control'
                 )
             ])
+
+            ->add('roller', ChoiceType::class, [
+                'required' => true,
+                'label'  => 'Je participe à l\'atelier Roller' ,
+                'expanded'  => false,
+                'multiple'  => false,
+                'attr'      => array('class' => 'form-control'),
+                'choices'  => [
+                    'Oui' => 1,
+                    'Non' => 0,
+                ]
+            ])
+
+            ->add('foot', ChoiceType::class, [
+                'required' => true,
+                'label'  => 'Je participe à l\'atelier Foot' ,
+                'expanded'  => false,
+                'multiple'  => false,
+                'attr'      => array('class' => 'form-control'),
+                'choices'  => [
+                    'Oui' => 1,
+                    'Non' => 0,
+                ]
+            ])
+
+            ->add('tennis', ChoiceType::class, [
+                'required' => true,
+                'label'  => 'Je participe à l\'atelier Tennis' ,
+                'expanded'  => false,
+                'multiple'  => false,
+                'attr'      => array('class' => 'form-control'),
+                'choices'  => [
+                    'Oui' => 1,
+                    'Non' => 0,
+                ]
+            ])
             ->remove('salarie')
             ->remove('reglement')
 
