@@ -39,13 +39,15 @@ class BbqEventController extends AbstractController
         $form = $this->createForm(BbqEvent1Type::class, $bbqEvent);
         $form->handleRequest($request);
         $bbqEvent->setSalarie($this->getUser()) ;
+        $bbqEvent->setReglement(0);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($bbqEvent);
             $entityManager->flush();
-
-            return $this->redirectToRoute('bbq_event_index');
+            $this->addFlash('success', 'Votre inscription est prise en compte, n\'oubliez pas la participation de 5€');
+            return $this->redirectToRoute('bbq');
         }
 
         return $this->render('bbq_event/new.html.twig', [
