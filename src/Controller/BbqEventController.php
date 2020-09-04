@@ -20,6 +20,8 @@ class BbqEventController extends AbstractController
 {
     /**
      * @Route("/", name="bbq_event_index", methods={"GET"})
+     * @param BbqEventRepository $bbqEventRepository
+     * @return Response
      */
     public function index(BbqEventRepository $bbqEventRepository): Response
     {
@@ -58,6 +60,8 @@ class BbqEventController extends AbstractController
 
     /**
      * @Route("/{id}", name="bbq_event_show", methods={"GET"})
+     * @param BbqEvent $bbqEvent
+     * @return Response
      */
     public function show(BbqEvent $bbqEvent): Response
     {
@@ -68,6 +72,9 @@ class BbqEventController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="bbq_event_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param BbqEvent $bbqEvent
+     * @return Response
      */
     public function edit(Request $request, BbqEvent $bbqEvent): Response
     {
