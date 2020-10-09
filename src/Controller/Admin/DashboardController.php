@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Bbq;
 use App\Entity\BbqEvent;
+use App\Entity\Cheques;
+use App\Entity\Colis;
 use App\Entity\Matches;
 use App\Entity\Predictions;
 use App\Entity\Teams;
@@ -52,5 +54,8 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToCrud('The Label', 'icon class', EntityClass::class);
         yield MenuItem::section('Evenement BBQ CeSitel3');
         yield MenuItem::linkToCrud('Suivi des inscriptions BBQ', null, BbqEvent::class);
+        yield MenuItem::section('Noel 2020');
+        yield MenuItem::linkToCrud('Colis de noel', null, Colis::class);
+        yield MenuItem::linkToCrud('Cheque de noel', null, Cheques::class);
     }
 }

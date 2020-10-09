@@ -1,0 +1,97 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\NoelRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=NoelRepository::class)
+ */
+class Noel
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="noels")
+     */
+    private $User;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Colis::class, inversedBy="noels")
+     */
+    private $choixColis;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Cheques::class, inversedBy="noels")
+     */
+    private $choixCheque;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $CreatedAt;
+
+    public function __construct()
+    {
+        $this->CreatedAt = new \DateTime();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->User;
+    }
+
+    public function setUser(?Users $User): self
+    {
+        $this->User = $User;
+
+        return $this;
+    }
+
+    public function getChoixColis(): ?Colis
+    {
+        return $this->choixColis;
+    }
+
+    public function setChoixColis(?Colis $choixColis): self
+    {
+        $this->choixColis = $choixColis;
+
+        return $this;
+    }
+
+    public function getChoixCheque(): ?Cheques
+    {
+        return $this->choixCheque;
+    }
+
+    public function setChoixCheque(?Cheques $choixCheque): self
+    {
+        $this->choixCheque = $choixCheque;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->CreatedAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $CreatedAt): self
+    {
+        $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+}

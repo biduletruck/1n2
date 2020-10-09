@@ -1,0 +1,39 @@
+{% extends 'base_ancv.twig' %}
+
+{% block title %}Ancv index{% endblock %}
+
+{% block body %}
+    <h1>Ancv index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Answers</th>
+                <th>Answer</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ancv in ancvs %}
+            <tr>
+                <td>{{ ancv.id }}</td>
+                <td>{{ ancv.Answers ? 'Yes' : 'No' }}</td>
+                <td>{{ ancv.Answer ? 'Yes' : 'No' }}</td>
+                <td>{{ ancv.CreatedAt ? ancv.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('ancv_show', {'id': ancv.id}) }}">show</a>
+                    <a href="{{ path('ancv_edit', {'id': ancv.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ancv_new') }}">Create new</a>
+{% endblock %}

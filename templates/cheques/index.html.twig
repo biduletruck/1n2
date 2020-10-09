@@ -1,0 +1,35 @@
+{% extends 'base_noel.html.twig' %}
+
+{% block title %}Cheques index{% endblock %}
+
+{% block body %}
+    <h1>Cheques index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomCheque</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cheque in cheques %}
+            <tr>
+                <td>{{ cheque.id }}</td>
+                <td>{{ cheque.nomCheque }}</td>
+                <td>
+                    <a href="{{ path('cheques_show', {'id': cheque.id}) }}">show</a>
+                    <a href="{{ path('cheques_edit', {'id': cheque.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('cheques_new') }}">Create new</a>
+{% endblock %}

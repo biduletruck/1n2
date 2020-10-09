@@ -210,3 +210,22 @@ a{
     background-size: cover;
     height: auto;
 }
+
+.body_ancv{
+    background-color: #4ca1af;
+    /*color: white;*/
+    /*background-image: url("../images/482.jpg");*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.body_noel{
+    background-color: white;
+    background-image: url("../images/llignes.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}

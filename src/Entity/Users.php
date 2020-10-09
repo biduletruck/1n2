@@ -49,10 +49,22 @@ class Users implements UserInterface
      */
     private $bbqEvents;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Ancv::class, mappedBy="User")
+     */
+    private $ancvs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Noel::class, mappedBy="User")
+     */
+    private $noels;
+
     public function __construct()
     {
         $this->predictions = new ArrayCollection();
         $this->bbqEvents = new ArrayCollection();
+        $this->ancvs = new ArrayCollection();
+        $this->noels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -190,6 +202,68 @@ class Users implements UserInterface
             // set the owning side to null (unless already changed)
             if ($bbqEvent->getSalarie() === $this) {
                 $bbqEvent->setSalarie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ancv[]
+     */
+    public function getAncvs(): Collection
+    {
+        return $this->ancvs;
+    }
+
+    public function addAncv(Ancv $ancv): self
+    {
+        if (!$this->ancvs->contains($ancv)) {
+            $this->ancvs[] = $ancv;
+            $ancv->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAncv(Ancv $ancv): self
+    {
+        if ($this->ancvs->contains($ancv)) {
+            $this->ancvs->removeElement($ancv);
+            // set the owning side to null (unless already changed)
+            if ($ancv->getUser() === $this) {
+                $ancv->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Noel[]
+     */
+    public function getNoels(): Collection
+    {
+        return $this->noels;
+    }
+
+    public function addNoel(Noel $noel): self
+    {
+        if (!$this->noels->contains($noel)) {
+            $this->noels[] = $noel;
+            $noel->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNoel(Noel $noel): self
+    {
+        if ($this->noels->contains($noel)) {
+            $this->noels->removeElement($noel);
+            // set the owning side to null (unless already changed)
+            if ($noel->getUser() === $this) {
+                $noel->setUser(null);
             }
         }
 

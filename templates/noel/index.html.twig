@@ -1,0 +1,35 @@
+{% extends 'base_noel.html.twig' %}
+
+{% block title %}Noel index{% endblock %}
+
+{% block body %}
+    <h1>Noel index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for noel in noels %}
+            <tr>
+                <td>{{ noel.id }}</td>
+                <td>{{ noel.CreatedAt ? noel.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('noel_show', {'id': noel.id}) }}">show</a>
+                    <a href="{{ path('noel_edit', {'id': noel.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('noel_new') }}">Create new</a>
+{% endblock %}

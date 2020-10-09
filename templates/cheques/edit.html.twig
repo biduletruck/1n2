@@ -1,0 +1,13 @@
+{% extends 'base_noel.html.twig' %}
+
+{% block title %}Edit Cheques{% endblock %}
+
+{% block body %}
+    <h1>Edit Cheques</h1>
+
+    {{ include('cheques/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('cheques_index') }}">back to list</a>
+
+    {{ include('cheques/_delete_form.html.twig') }}
+{% endblock %}

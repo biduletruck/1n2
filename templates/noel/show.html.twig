@@ -1,0 +1,26 @@
+{% extends 'base_noel.html.twig' %}
+
+{% block title %}Noel{% endblock %}
+
+{% block body %}
+    <h1>Noel</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ noel.id }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ noel.CreatedAt ? noel.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('noel_index') }}">back to list</a>
+
+    <a href="{{ path('noel_edit', {'id': noel.id}) }}">edit</a>
+
+    {{ include('noel/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base_ancv.twig' %}
+
+{% block title %}Edit Ancv{% endblock %}
+
+{% block body %}
+    <h1>Edit Ancv</h1>
+
+    {{ include('ancv/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ancv_index') }}">back to list</a>
+
+    {{ include('ancv/_delete_form.html.twig') }}
+{% endblock %}
