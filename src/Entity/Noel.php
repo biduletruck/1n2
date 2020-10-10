@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\NoelRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=NoelRepository::class)
@@ -36,6 +37,19 @@ class Noel
      * @ORM\Column(type="datetime")
      */
     private $CreatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email(
+     *     message = "L'émail '{{ value }}' n'est pas une adresse valide."
+     * )
+     */
+    private $adresseMail;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $optin;
 
     public function __construct()
     {
@@ -91,6 +105,30 @@ class Noel
     public function setCreatedAt(\DateTimeInterface $CreatedAt): self
     {
         $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+
+    public function getAdresseMail(): ?string
+    {
+        return $this->adresseMail;
+    }
+
+    public function setAdresseMail(?string $adresseMail): self
+    {
+        $this->adresseMail = $adresseMail;
+
+        return $this;
+    }
+
+    public function getOptin(): ?bool
+    {
+        return $this->optin;
+    }
+
+    public function setOptin(?bool $optin): self
+    {
+        $this->optin = $optin;
 
         return $this;
     }

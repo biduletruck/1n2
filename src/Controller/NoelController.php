@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Noel;
 use App\Form\NoelType;
 use App\Repository\ChequesRepository;
 use App\Repository\ColisRepository;
 use App\Repository\NoelRepository;
+use phpDocumentor\Reflection\Types\This;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class NoelController extends AbstractController
 {
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/list", name="noel_index", methods={"GET"})
      * @param NoelRepository $noelRepository
      * @return Response
@@ -36,12 +40,14 @@ class NoelController extends AbstractController
      * @param ChequesRepository $chequesRepository
      * @return Response
      */
-    public function new(Request $request, ColisRepository $colisRepository, ChequesRepository $chequesRepository): Response
+    public function new(Request $request, NoelRepository $noelRepository, ColisRepository $colisRepository, ChequesRepository $chequesRepository): Response
     {
         $noel = new Noel();
-        $noel->setUser($this->getUser());
+        $control = count($noelRepository->findBy(['User' => $this->getUser()]));
+        dump($control);
         $colis = $colisRepository->findAll();
         $cheques = $chequesRepository->findAll();
+        $noel->setUser($this->getUser());
         $form = $this->createForm(NoelType::class, $noel);
         $form->handleRequest($request);
 
@@ -49,19 +55,22 @@ class NoelController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($noel);
             $entityManager->flush();
-
-            return $this->redirectToRoute('noel_index');
+            $this->addFlash('success', 'Merci, votre demande est prise en compte');
+            return $this->redirectToRoute('noel_new');
         }
+
 
         return $this->render('noel/new.html.twig', [
             'noel' => $noel,
             'colis' => $colis,
+            'control' =>$control,
             'cheques' => $cheques,
             'form' => $form->createView(),
         ]);
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="noel_show", methods={"GET"})
      * @param Noel $noel
      * @return Response
@@ -74,6 +83,7 @@ class NoelController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}/edit", name="noel_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Noel $noel
@@ -97,6 +107,7 @@ class NoelController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="noel_delete", methods={"DELETE"})
      * @param Request $request
      * @param Noel $noel

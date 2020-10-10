@@ -7,6 +7,7 @@ use App\Entity\BbqEvent;
 use App\Entity\Cheques;
 use App\Entity\Colis;
 use App\Entity\Matches;
+use App\Entity\Noel;
 use App\Entity\Predictions;
 use App\Entity\Teams;
 use App\Entity\Users;
@@ -57,5 +58,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Noel 2020');
         yield MenuItem::linkToCrud('Colis de noel', null, Colis::class);
         yield MenuItem::linkToCrud('Cheque de noel', null, Cheques::class);
+        yield MenuItem::linkToCrud('Listing de Noel', null, Noel::class);
     }
 }

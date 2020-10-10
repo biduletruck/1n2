@@ -1,4 +1,46 @@
 {{ form_start(form) }}
+
+<div class="row justify-content-center">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Je valide mon choix</h3>
+                </div>
+                <div class="card-body">
+                    {#                        <h5 class="card-title">{{ coli.titre }}</h5>#}
+                    <p class="card-text"></p>
+                    <form>
+                        <div class="form-row">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                {{ form_errors(form.choixColis) }}
+                                {{ form_row(form.choixColis) }}
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                {{ form_errors(form.choixCheque) }}
+                                {{ form_row(form.choixCheque) }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    {{ form_row(form.adresseMail) }}
+                                </div>
+                                <div class="form-group form-check">
+                                    {{ form_widget(form.optin) }}
+                                    <label class="form-check-label" for="exampleCheck1">{{ form_label(form.optin) }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary">{{ button_label|default('Valider mes choix') }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Valider mes choix') }}</button>
+</div>
+
+
+
+</div>
 {{ form_end(form) }}

@@ -4,10 +4,10 @@
 
 {% block body %}
     <div class="jumbotron">
-        <h3>Votre CSE Sitel Troyes en cette fin d'année, a choisi de vous offrir un Colis gourmand et festif !!!.</h3>
-        <p>Nous avons séléctionné plusieurs type de colis afin que puissiez choisir celui qui vous correspond le mieux.</p>
-        <p>Enfin comme chaque année votre CSE Sitel Troyes vous offrira des chèques cadeaux et là encore vous pourrez choisir entre un format papier ou numérique</p>
-        <H4>Attention nous attendons votre réponse au plus tard pour le <strong>25 Octobre 2019</strong> sous quoi nous vous attriburons le colis par défaut.</H4>
+        <h3>Votre CSE Sitel Troyes en cette fin d'année, a choisi de vous offrir un Colis gourmand et festif !!!</h3>
+        <p>Nous avons séléctionné plusieurs types de colis afin que puissiez choisir celui qui vous correspond le mieux.</p>
+        <p>Enfin comme chaque année votre CSE Sitel Troyes vous offrira des chèques cadeaux et là encore vous pourrez choisir entre un format papier ou numérique.</p>
+        <H4>Attention nous attendons votre réponse au plus tard pour le <strong>23 Octobre 2020</strong> sans quoi nous vous attriburons le colis par défaut.</H4>
         <H4>Votre CSE Sitel Troyes et tous ses membres vous souhaitent de bonnes fêtes de fin d'année.</H4>
         <p>Protegez-vous!!! Respectez les gestes barrières.</p>
 
@@ -27,14 +27,34 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="col-4"></div>
     </div>
+    <br>
+    <div class="row justify-content-center">
+        {% for cheque in cheques %}
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>{{ cheque.nomCheque }}</h3>
+                    </div>
+                    <img src="{{ asset('images/thumbnails/' ~ cheque.thumbnail) }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        {#                        <h5 class="card-title">{{ coli.titre }}</h5>#}
+                        <p class="card-text">{{ cheque.description |nl2br  }}</p>
+                        <a href=""></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <br>
 
+    {% if control == 0  %}
+        {{ include('noel/_form.html.twig') }}
+    {% else %}
+        <div class="row justify-content-center alert alert-info">
+            <h2 class="text-center">Votre commande a déjà été prise en compte <br> En cas de problème merci de contacter le CSE directement</h2>
+        </div>
+    {% endif %}
 
-    {{ include('noel/_form.html.twig') }}
 
 {% endblock %}
-
-
-
-{#{{ asset('images/thumbnails/' ~ prediction.game.home.thumbnail) }}" alt="{{ prediction.game.home.name }}#}

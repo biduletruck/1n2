@@ -47,6 +47,11 @@ class Cheques
      */
     private $thumbnailFile;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $Description;
+
     public function __construct()
     {
         $this->noels = new ArrayCollection();
@@ -158,5 +163,17 @@ class Cheques
     public function __toString()
     {
         return $this->nomCheque;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->Description;
+    }
+
+    public function setDescription(string $Description): self
+    {
+        $this->Description = $Description;
+
+        return $this;
     }
 }
