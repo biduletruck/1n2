@@ -44,7 +44,6 @@ class NoelController extends AbstractController
     {
         $noel = new Noel();
         $control = count($noelRepository->findBy(['User' => $this->getUser()]));
-        dump($control);
         $colis = $colisRepository->findAll();
         $cheques = $chequesRepository->findAll();
         $noel->setUser($this->getUser());
