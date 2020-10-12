@@ -52,6 +52,11 @@ class Cheques
      */
     private $Description;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $Lien;
+
     public function __construct()
     {
         $this->noels = new ArrayCollection();
@@ -173,6 +178,18 @@ class Cheques
     public function setDescription(string $Description): self
     {
         $this->Description = $Description;
+
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->Lien;
+    }
+
+    public function setLien(?string $Lien): self
+    {
+        $this->Lien = $Lien;
 
         return $this;
     }

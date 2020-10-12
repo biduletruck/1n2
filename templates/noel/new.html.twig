@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="jumbotron">
-        <h3>Votre CSE Sitel Troyes a décidé de vous offrir* en cette fin d’année un colis gourmand et festif !!!</h3>
+        <h3>Votre CSE Sitel Troyes a le plaisir de vous offrir* en cette fin d’année un colis gourmand et festif !!!</h3>
         <p>Nous avons présélectionné pour vous plusieurs thèmes de colis afin que vous puissiez choisir celui qui vous fera plaisir.</p>
         <p>Et comme chaque année, des chèques cadeaux vous serons offerts avec cette fois la possibilité pour vous de choisir entre le format papier ou le numérique.</p>
         <H4>Attention, nous attendons votre réponse au plus tard pour le <strong>18 octobre 2020</strong></H4> <h6>(sans choix de votre part nous vous attribuerons un colis par défaut ainsi que le format papier pour vos chèques cadeaux).</H6>
@@ -42,7 +42,7 @@
                     <div class="card-body">
                         {#                        <h5 class="card-title">{{ coli.titre }}</h5>#}
                         <p class="card-text">{{ cheque.description |nl2br  }}</p>
-                        <a href=""></a>
+                        <a href="{{ cheque.lien }}" class="btn btn-info" target="_blank">PLus d'infos ...</a>
                     </div>
                 </div>
             </div>

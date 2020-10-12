@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ChequesCrudController extends AbstractCrudController
@@ -25,6 +26,7 @@ class ChequesCrudController extends AbstractCrudController
         $fields = [
             TextField::new('nomCheque', 'Nom du cheque'),
             TextareaField::new('Description', 'Description du chèque'),
+            UrlField::new('Lien', 'lien du cheque'),
 
         ];
 
