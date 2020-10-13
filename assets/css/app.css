@@ -221,11 +221,12 @@ a{
     background-size: cover;
 }
 
-.body_noel{
+.body_noel {
     background-color: white;
     background-image: url("../images/banniere_noel.jpg");
     /*background-repeat: no-repeat;*/
     /*background-attachment: fixed;*/
     /*background-position: center;*/
     /*background-size: cover;*/
+    font-family: "GROBOLD";
 }
