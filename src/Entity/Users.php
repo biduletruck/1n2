@@ -59,12 +59,15 @@ class Users implements UserInterface
      */
     private $noels;
 
+
+
     public function __construct()
     {
         $this->predictions = new ArrayCollection();
         $this->bbqEvents = new ArrayCollection();
         $this->ancvs = new ArrayCollection();
         $this->noels = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -269,4 +272,5 @@ class Users implements UserInterface
 
         return $this;
     }
+
 }
