@@ -12,6 +12,10 @@
                 <td>{{ noel.id }}</td>
             </tr>
             <tr>
+                <th>Conseiller</th>
+                <td>{{ noel.user.username }}</td>
+            </tr>
+            <tr>
                 <th>CreatedAt</th>
                 <td>{{ noel.CreatedAt ? noel.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

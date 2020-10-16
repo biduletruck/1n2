@@ -8,7 +8,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Conseiller</th>
+                <th>colis</th>
+                <th>Cheque cadeaux</th>
                 <th>CreatedAt</th>
                 <th>actions</th>
             </tr>
@@ -16,7 +18,9 @@
         <tbody>
         {% for noel in noels %}
             <tr>
-                <td>{{ noel.id }}</td>
+                <td>{{ noel.user.username }}</td>
+                <td>{{ noel.choixColis.nomColis }}</td>
+                <td>{{ noel.choixCheque.nomCheque }}</td>
                 <td>{{ noel.CreatedAt ? noel.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('noel_show', {'id': noel.id}) }}">show</a>

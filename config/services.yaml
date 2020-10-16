@@ -37,3 +37,9 @@ services:
 
     App\EventSubscriber\EasyAdminSubscriber:
         arguments: [ "@doctrine.orm.entity_manager"]
+
+    app.excel_service:
+        public: true
+        class: AppBundle\Service\ExcelService
+        arguments:
+            - [ newExcel ]

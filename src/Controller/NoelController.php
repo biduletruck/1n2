@@ -8,6 +8,7 @@ use App\Form\NoelType;
 use App\Repository\ChequesRepository;
 use App\Repository\ColisRepository;
 use App\Repository\NoelRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,7 @@ class NoelController extends AbstractController
     /**
      * @Route("/", name="noel_new", methods={"GET","POST"})
      * @param Request $request
+     * @param NoelRepository $noelRepository
      * @param ColisRepository $colisRepository
      * @param ChequesRepository $chequesRepository
      * @return Response
@@ -120,5 +122,37 @@ class NoelController extends AbstractController
         }
 
         return $this->redirectToRoute('noel_index');
+    }
+
+    /**
+     * Export du voyage au format Excel
+     *
+     * @Route("/export/xls", name="voyage_export_xls_package")
+     * @return void
+     */
+    public function exportExcelVoyageAction()
+    {
+
+
+        list($excel, $classeur, $titre) = $this->formatingExtract();
+        return $excel->exportExcel($classeur, $titre);
+    }
+
+
+    /**
+     */
+    public function formatingExtract()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $listing = $em->getRepository('App:Noel')->findAll();
+
+        $excel = $this->container->get('app.excel_service');
+        $classeur = $excel->newExcelFromModel();
+        $feuille = $classeur->getActiveSheet();
+        $titre = "Liste des commandes de noel";
+
+
+        dump($listing);
+
     }
 }
