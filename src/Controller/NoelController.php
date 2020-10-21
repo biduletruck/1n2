@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class NoelController extends AbstractController
 {
     /**
-     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
+     * @Security("is_granted('ROLE_ADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/list", name="noel_index", methods={"GET"})
      * @param NoelRepository $noelRepository
      * @return Response
@@ -83,7 +83,7 @@ class NoelController extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
+     * @Security("is_granted('ROLE_ADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}/edit", name="noel_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Noel $noel

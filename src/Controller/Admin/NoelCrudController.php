@@ -25,8 +25,8 @@ class NoelCrudController extends AbstractCrudController
             DateTimeField::new('CreatedAt', 'Date'),
             AssociationField::new('choixColis', 'Colis choisi'),
             AssociationField::new('choixCheque', 'Type de cheque'),
-            TextField::new('adresseMail', 'Adresse Email'),
-            BooleanField::new('optin', 'Autorisation de contact')
+//            TextField::new('adresseMail', 'Adresse Email'),
+//            BooleanField::new('optin', 'Autorisation de contact')
         ];
     }
 

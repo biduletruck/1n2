@@ -59,6 +59,11 @@ class Users implements UserInterface
      */
     private $noels;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Participations::class, mappedBy="User")
+     */
+    private $participations;
+
 
 
     public function __construct()
@@ -267,6 +272,37 @@ class Users implements UserInterface
             // set the owning side to null (unless already changed)
             if ($noel->getUser() === $this) {
                 $noel->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participations[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participations $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participations $participation): self
+    {
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getUser() === $this) {
+                $participation->setUser(null);
             }
         }
 
