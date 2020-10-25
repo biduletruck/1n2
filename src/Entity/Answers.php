@@ -34,6 +34,16 @@ class Answers
      */
     private $choices;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $AnswerNumber;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $AnswerValue;
+
     public function __construct()
     {
         $this->choices = new ArrayCollection();
@@ -92,6 +102,35 @@ class Answers
             $this->choices->removeElement($choice);
             $choice->removeAnswer($this);
         }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->Wording;
+    }
+
+    public function getAnswerNumber(): ?int
+    {
+        return $this->AnswerNumber;
+    }
+
+    public function setAnswerNumber(int $AnswerNumber): self
+    {
+        $this->AnswerNumber = $AnswerNumber;
+
+        return $this;
+    }
+
+    public function getAnswerValue(): ?int
+    {
+        return $this->AnswerValue;
+    }
+
+    public function setAnswerValue(int $AnswerValue): self
+    {
+        $this->AnswerValue = $AnswerValue;
 
         return $this;
     }

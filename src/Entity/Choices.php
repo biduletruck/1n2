@@ -34,9 +34,15 @@ class Choices
      */
     private $Answer;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $CreatedAt;
+
     public function __construct()
     {
         $this->Answer = new ArrayCollection();
+        $this->CreatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -90,6 +96,18 @@ class Choices
         if ($this->Answer->contains($answer)) {
             $this->Answer->removeElement($answer);
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->CreatedAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $CreatedAt): self
+    {
+        $this->CreatedAt = $CreatedAt;
 
         return $this;
     }

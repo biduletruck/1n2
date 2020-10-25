@@ -39,6 +39,11 @@ class Questions
      */
     private $choices;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $QuestionNumber;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
@@ -132,6 +137,23 @@ class Questions
                 $choice->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->Poll . " - Question N° " . $this->Wording;
+    }
+
+    public function getQuestionNumber(): ?int
+    {
+        return $this->QuestionNumber;
+    }
+
+    public function setQuestionNumber(int $QuestionNumber): self
+    {
+        $this->QuestionNumber = $QuestionNumber;
 
         return $this;
     }

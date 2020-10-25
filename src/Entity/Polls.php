@@ -39,10 +39,17 @@ class Polls
      */
     private $questions;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $duration;
+
+
     public function __construct()
     {
         $this->participations = new ArrayCollection();
         $this->questions = new ArrayCollection();
+        $this->CreatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -132,6 +139,23 @@ class Polls
                 $question->setPoll(null);
             }
         }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->Title;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?int $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }

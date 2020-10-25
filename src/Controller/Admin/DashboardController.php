@@ -2,13 +2,17 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Answers;
 use App\Entity\Bbq;
 use App\Entity\BbqEvent;
 use App\Entity\Cheques;
+use App\Entity\Choices;
 use App\Entity\Colis;
 use App\Entity\Matches;
 use App\Entity\Noel;
+use App\Entity\Polls;
 use App\Entity\Predictions;
+use App\Entity\Questions;
 use App\Entity\Teams;
 use App\Entity\Users;
 use App\Entity\Victories;
@@ -59,5 +63,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Colis de noel', null, Colis::class);
         yield MenuItem::linkToCrud('Cheque de noel', null, Cheques::class);
         yield MenuItem::linkToCrud('Listing de Noel', null, Noel::class);
+        // muenu questionnaire
+        yield MenuItem::section('Questionnaires');
+        yield MenuItem::linkToCrud('Création questionnaire', null, Polls::class);
+        yield MenuItem::linkToCrud('Questions', null, Questions::class);
+        yield MenuItem::linkToCrud('Reponses', null, Answers::class);
+        yield MenuItem::linkToCrud('Liste des réponses', null, Choices::class);
     }
 }

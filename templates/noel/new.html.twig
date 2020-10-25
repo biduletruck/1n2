@@ -5,6 +5,9 @@
 {% block body %}
 
     <div class="jumbotron">
+        <div class=" alert alert-danger">
+            Les commandes sont maintenant fermées.
+        </div>
         <img src="{{ asset('build/cse_logo.png') }}" alt="">
         <h3>Votre CSE Sitel Troyes a le plaisir de vous offrir* en cette fin d’année un colis gourmand et festif !!!</h3>
         <p>Nous avons présélectionné pour vous plusieurs thèmes de colis afin que vous puissiez choisir celui qui vous fera plaisir.</p>
@@ -52,13 +55,16 @@
     </div>
     <br>
 
-    {% if control == 0  %}
-        {{ include('noel/_form.html.twig') }}
-    {% else %}
-        <div class="row justify-content-center alert alert-info">
-            <h2 class="text-center">Votre commande a déjà été prise en compte. <br> En cas de problème merci de contacter le CSE directement.</h2>
-        </div>
-    {% endif %}
+{#    {% if control == 0  %}#}
+{#        {{ include('noel/_form.html.twig') }}#}
+{#    {% else %}#}
+{#        <div class="row justify-content-center alert alert-info">#}
+{#            <h2 class="text-center">Votre commande a déjà été prise en compte. <br> En cas de problème merci de contacter le CSE directement.</h2>#}
+{#        </div>#}
+{#    {% endif %}#}
 
+    <div class=" alert alert-danger">
+        Les commandes sont maintenant fermées.
+    </div>
 
 {% endblock %}
