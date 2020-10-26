@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Halloween index{% endblock %}
+
+{% block body %}
+    <h1>Halloween index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreatedAt</th>
+                <th>FinishedAt</th>
+                <th>User</th>
+                <th>Quest1</th>
+                <th>Quest2</th>
+                <th>Quest3</th>
+                <th>Quest4</th>
+                <th>Quest5</th>
+                <th>Quest6</th>
+                <th>Quest7</th>
+                <th>Quest8</th>
+                <th>Quest9</th>
+                <th>Quest10</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for halloween in halloweens %}
+            <tr>
+                <td>{{ halloween.id }}</td>
+                <td>{{ halloween.createdAt ? halloween.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ halloween.finishedAt ? halloween.finishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ halloween.User }}</td>
+                <td>{{ halloween.Quest1 }}</td>
+                <td>{{ halloween.Quest2 }}</td>
+                <td>{{ halloween.Quest3 }}</td>
+                <td>{{ halloween.Quest4 }}</td>
+                <td>{{ halloween.Quest5 }}</td>
+                <td>{{ halloween.Quest6 }}</td>
+                <td>{{ halloween.Quest7 }}</td>
+                <td>{{ halloween.Quest8 }}</td>
+                <td>{{ halloween.Quest9 }}</td>
+                <td>{{ halloween.Quest10 }}</td>
+                <td>
+                    <a href="{{ path('halloween_show', {'id': halloween.id}) }}">show</a>
+                    <a href="{{ path('halloween_edit', {'id': halloween.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('halloween_new') }}">Create new</a>
+{% endblock %}

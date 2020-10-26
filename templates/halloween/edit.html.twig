@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Halloween{% endblock %}
+
+{% block body %}
+    <h1>Edit Halloween</h1>
+
+    {{ include('halloween/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('halloween_index') }}">back to list</a>
+
+    {{ include('halloween/_delete_form.html.twig') }}
+{% endblock %}

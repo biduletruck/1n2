@@ -235,3 +235,41 @@ table{
     background-color: white;
 
 }
+
+.header_halloween {
+    /*background-image: url("../images/halloween_head.png");*/
+    background-repeat: no-repeat;
+    /*background-attachment: fixed;*/
+    background-size: cover;
+    background-position: center;
+    /*background-size: cover;*/
+}
+
+.footer_halloween {
+
+}
+
+.body_halloween {
+    background: rgb(2,0,36);
+    background: linear-gradient(87deg, rgba(2,0,36,1) 0%, rgba(204,155,16,1) 31%, rgba(204,155,16,1) 57%, rgba(2,0,36,1) 100%);
+}
+@font-face {
+    font-family: "Scary";
+    src: url('../images/Scary Halloween Font.ttf');
+}
+
+@font-face {
+    font-family: "halloweek";
+    src: url('../images/halloweek.ttf');
+}
+
+
+
+
+.scary{
+    font-family: "Scary";
+}
+
+.halloweek{
+    font-family: "halloweek";
+}

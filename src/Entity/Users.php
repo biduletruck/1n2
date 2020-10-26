@@ -64,6 +64,16 @@ class Users implements UserInterface
      */
     private $participations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Halloween::class, mappedBy="User")
+     */
+    private $halloweens;
+
+    /**
+     * @ORM\OneToMany(targetEntity=HalloweenCheck::class, mappedBy="User")
+     */
+    private $halloweenChecks;
+
 
 
     public function __construct()
@@ -73,6 +83,8 @@ class Users implements UserInterface
         $this->ancvs = new ArrayCollection();
         $this->noels = new ArrayCollection();
         $this->participations = new ArrayCollection();
+        $this->halloweens = new ArrayCollection();
+        $this->halloweenChecks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -303,6 +315,68 @@ class Users implements UserInterface
             // set the owning side to null (unless already changed)
             if ($participation->getUser() === $this) {
                 $participation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Halloween[]
+     */
+    public function getHalloweens(): Collection
+    {
+        return $this->halloweens;
+    }
+
+    public function addHalloween(Halloween $halloween): self
+    {
+        if (!$this->halloweens->contains($halloween)) {
+            $this->halloweens[] = $halloween;
+            $halloween->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHalloween(Halloween $halloween): self
+    {
+        if ($this->halloweens->contains($halloween)) {
+            $this->halloweens->removeElement($halloween);
+            // set the owning side to null (unless already changed)
+            if ($halloween->getUser() === $this) {
+                $halloween->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HalloweenCheck[]
+     */
+    public function getHalloweenChecks(): Collection
+    {
+        return $this->halloweenChecks;
+    }
+
+    public function addHalloweenCheck(HalloweenCheck $halloweenCheck): self
+    {
+        if (!$this->halloweenChecks->contains($halloweenCheck)) {
+            $this->halloweenChecks[] = $halloweenCheck;
+            $halloweenCheck->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHalloweenCheck(HalloweenCheck $halloweenCheck): self
+    {
+        if ($this->halloweenChecks->contains($halloweenCheck)) {
+            $this->halloweenChecks->removeElement($halloweenCheck);
+            // set the owning side to null (unless already changed)
+            if ($halloweenCheck->getUser() === $this) {
+                $halloweenCheck->setUser(null);
             }
         }
 
