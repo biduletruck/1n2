@@ -8,6 +8,7 @@ use App\Form\HalloweenType;
 use App\Repository\HalloweenCheckRepository;
 use App\Repository\HalloweenRepository;
 use phpDocumentor\Reflection\Types\This;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,25 +21,28 @@ class HalloweenController extends AbstractController
 {
     /**
      * @Route("/", name="halloween_index", methods={"GET"})
-     * @param HalloweenRepository $halloweenRepository
+     * @param HalloweenCheckRepository $halloweenCheckRepository
      * @return Response
      */
-    public function index(HalloweenRepository $halloweenRepository): Response
+    public function index(HalloweenCheckRepository $halloweenCheckRepository): Response
     {
+        $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
         return $this->render('halloween/index.html.twig', [
-//            'halloweens' => $halloweenRepository->findAll(),
+            'halloweenCheck' => count($halloweenCheck),
         ]);
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/list", name="halloween_list", methods={"GET"})
      * @param HalloweenRepository $halloweenRepository
      * @return Response
      */
-    public function list(HalloweenRepository $halloweenRepository): Response
+    public function list(HalloweenRepository $halloweenRepository, HalloweenCheckRepository $halloweenCheckRepository): Response
     {
         return $this->render('halloween/list.html.twig', [
             'halloweens' => $halloweenRepository->findAll(),
+            'halloweenChecks' => $halloweenCheckRepository->findAll(),
         ]);
     }
 
@@ -51,7 +55,7 @@ class HalloweenController extends AbstractController
     public function new(Request $request, HalloweenCheckRepository $halloweenCheckRepository): Response
     {
         $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
-        if ( count($halloweenCheck) >= 0)
+        if ( count($halloweenCheck) === 0)
         {
             $limiteQuizz = new HalloweenCheck();
             $limiteQuizz->setUser($this->getUser())->setCreatedAt(new \DateTime());
@@ -67,7 +71,9 @@ class HalloweenController extends AbstractController
         }
         else
         {
+            $this->addFlash('danger', 'Vous avez déjà participé au quiz !!!');
             return $this->redirectToRoute('halloween_index');
+
         }
 
 
@@ -77,7 +83,7 @@ class HalloweenController extends AbstractController
             $halloween->setFinishedAt(new \DateTime());
             $entityManager->persist($halloween);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Votre participation a bien été prise en compte');
             return $this->redirectToRoute('halloween_index');
         }
 
@@ -88,6 +94,7 @@ class HalloweenController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="halloween_show", methods={"GET"})
      * @param Halloween $halloween
      * @return Response
@@ -100,6 +107,7 @@ class HalloweenController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}/edit", name="halloween_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Halloween $halloween
@@ -123,6 +131,7 @@ class HalloweenController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="halloween_delete", methods={"DELETE"})
      * @param Request $request
      * @param Halloween $halloween
