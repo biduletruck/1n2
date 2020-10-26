@@ -26,7 +26,7 @@ class HalloweenController extends AbstractController
     public function index(HalloweenRepository $halloweenRepository): Response
     {
         return $this->render('halloween/index.html.twig', [
-            'halloweens' => $halloweenRepository->findAll(),
+//            'halloweens' => $halloweenRepository->findAll(),
         ]);
     }
 

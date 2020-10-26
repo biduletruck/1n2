@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choices{% endblock %}
+
+{% block body %}
+    <h1>Choices</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ choice.id }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ choice.CreatedAt ? choice.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('choices_index') }}">back to list</a>
+
+    <a href="{{ path('choices_edit', {'id': choice.id}) }}">edit</a>
+
+    {{ include('choices/_delete_form.html.twig') }}
+{% endblock %}

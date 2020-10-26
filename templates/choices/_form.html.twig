@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+{#{{ dump(choice) }}#}
+{{ dump(questions) }}
+    <ul class="body_noel">
+    {% for question in questions %}
+        {{ question.Wording | nl2br}}
+
+            <ul>
+                {% for answer in question.answers %}
+
+{#                    <li> {{ answer.Wording }} </li>#}
+
+
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="answers[{{ question.id }}]" value="{{ answer.id }}"
+                                    {% if checked is defined %}{{ checked }}{% endif %} >
+                            <span class="upper">{{ loop.index }}.</span> {{ answer.Wording }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </ul>
+
+    {% endfor %}
+    </ul>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
