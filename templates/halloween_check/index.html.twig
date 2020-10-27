@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HalloweenCheck index{% endblock %}
+
+{% block body %}
+    <h1>HalloweenCheck index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for halloween_check in halloween_checks %}
+            <tr>
+                <td>{{ halloween_check.id }}</td>
+                <td>{{ halloween_check.createdAt ? halloween_check.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('halloween_check_show', {'id': halloween_check.id}) }}">show</a>
+                    <a href="{{ path('halloween_check_edit', {'id': halloween_check.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('halloween_check_new') }}">Create new</a>
+{% endblock %}
