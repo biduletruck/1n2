@@ -26,7 +26,12 @@ class HalloweenController extends AbstractController
      */
     public function index(HalloweenCheckRepository $halloweenCheckRepository): Response
     {
+        $this->container->get('session')->remove('timeForm');
         $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
+        if( $halloweenCheck > 0)
+        {
+            $this->addFlash('info', 'Vous avez déjà participé au quiz !!!');
+        }
         return $this->render('halloween/index.html.twig', [
             'halloweenCheck' => count($halloweenCheck),
         ]);
@@ -54,6 +59,13 @@ class HalloweenController extends AbstractController
      */
     public function new(Request $request, HalloweenCheckRepository $halloweenCheckRepository): Response
     {
+        $session = $this->container->get('session');
+
+        if (!$session->has('timeForm'))
+        {
+            $session->set('timeForm', new \DateTime());
+        }
+
         $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
         if ( count($halloweenCheck) === 0)
         {
@@ -65,7 +77,6 @@ class HalloweenController extends AbstractController
 
             $halloween = new Halloween();
             $halloween->setUser($this->getUser());
-            $halloween->setCreatedAt(new \DateTime());
             $form = $this->createForm(HalloweenType::class, $halloween);
             $form->handleRequest($request);
         }
@@ -81,6 +92,8 @@ class HalloweenController extends AbstractController
 //        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $halloween->setFinishedAt(new \DateTime());
+            $halloween->setCreatedAt($session->get('timeForm'));
+            $session->remove('timeForm');
             $entityManager->persist($halloween);
             $entityManager->flush();
             $this->addFlash('success', 'Votre participation a bien été prise en compte');

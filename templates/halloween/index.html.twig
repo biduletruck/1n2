@@ -3,7 +3,6 @@
 {% block title %}Halloween index{% endblock %}
 
 {% block body %}
-
     <div class="row justify-content-center align-self-center text-center">
         <img src="{{ asset('build/halloween_head.png') }}" class="img-fluid" alt="">
 
@@ -33,7 +32,8 @@
                     </ul>
                 </div>
                 <div class="col-12 text-center halloweek">
-                    <h2 class="alert-info text-center">Avant de commencer, assurez-vous d'avoir le temps nécessaire aucun retour ne sera possible ...</h2>
+                    <h2 class="alert-danger text-center">Avant de commencer, assurez-vous d'avoir le temps nécessaire aucun retour ne sera possible ...</h2>
+                    <h2 class="alert-danger text-center">Vous n'aurez que 5 minutes pour répondre au questionnaire!</h2>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
     {%  if halloweenCheck == 0 %}
     <div class="row">
         <div class="col-12 text-center halloweek">
-            <a href="{{ path('halloween_new') }}" class="btn btn-info">J'ai compris les conditions ... je me lance</a>
+            <a href="{{ path('halloween_new') }}" class="btn btn-lg btn-danger">J'ai compris les conditions ... je me lance</a>
         </div>
     </div>
     {% endif %}

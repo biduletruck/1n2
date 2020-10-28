@@ -19,7 +19,7 @@
 
         {% endfor %}
 
-        <button class="btn btn-success halloweek" id="truc">{{ button_label|default('Valider mes réponses') }}</button>
+        <button class="btn btn-lg btn-danger halloweek" id="truc">{{ button_label|default('Valider mes réponses') }}</button>
         {{ form_end(form) }}
     </div>
 
@@ -79,7 +79,7 @@
             updateTimer();
         }
 
-        countdown( "ten-countdown", 10, 0 );
+        countdown( "ten-countdown", 5, 0 );
 
     </script>
 
