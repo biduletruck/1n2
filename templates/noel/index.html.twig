@@ -11,6 +11,7 @@
                 <th>Conseiller</th>
                 <th>colis</th>
                 <th>Cheque cadeaux</th>
+                <th>adresse email</th>
                 <th>CreatedAt</th>
                 <th>actions</th>
             </tr>
@@ -21,6 +22,7 @@
                 <td>{{ noel.user.username }}</td>
                 <td>{{ noel.choixColis.nomColis }}</td>
                 <td>{{ noel.choixCheque.nomCheque }}</td>
+                <td>{{ noel.adresseMail.nomCheque }}</td>
                 <td>{{ noel.CreatedAt ? noel.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('noel_show', {'id': noel.id}) }}">show</a>
