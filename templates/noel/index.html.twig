@@ -22,7 +22,7 @@
                 <td>{{ noel.user.username }}</td>
                 <td>{{ noel.choixColis.nomColis }}</td>
                 <td>{{ noel.choixCheque.nomCheque }}</td>
-                <td>{{ noel.adresseMail.nomCheque }}</td>
+                <td>{{ noel.adresseMail }}</td>
                 <td>{{ noel.CreatedAt ? noel.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('noel_show', {'id': noel.id}) }}">show</a>
