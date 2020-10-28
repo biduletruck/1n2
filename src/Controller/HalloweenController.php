@@ -28,7 +28,7 @@ class HalloweenController extends AbstractController
     {
         $this->container->get('session')->remove('timeForm');
         $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
-        if( $halloweenCheck > 0)
+        if( count($halloweenCheck) > 0)
         {
             $this->addFlash('info', 'Vous avez déjà participé au quiz !!!');
         }
