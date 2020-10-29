@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\String\s;
 
 /**
  * @Route("/halloween")
@@ -22,10 +23,16 @@ class HalloweenController extends AbstractController
     /**
      * @Route("/", name="halloween_index", methods={"GET"})
      * @param HalloweenCheckRepository $halloweenCheckRepository
+     * @param HalloweenRepository $halloweenRepository
      * @return Response
      */
-    public function index(HalloweenCheckRepository $halloweenCheckRepository): Response
+    public function index(HalloweenCheckRepository $halloweenCheckRepository, HalloweenRepository $halloweenRepository): Response
     {
+        $startTime = new \DateTime("30-10-2020 09:00:00");
+        $testDate = new \DateTime();
+        $test = $testDate < $startTime ? false : true;
+//        $total = $halloweenRepository->findTotal($this->getUser());
+
         $this->container->get('session')->remove('timeForm');
         $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
         if( count($halloweenCheck) > 0)
@@ -34,6 +41,7 @@ class HalloweenController extends AbstractController
         }
         return $this->render('halloween/index.html.twig', [
             'halloweenCheck' => count($halloweenCheck),
+            'test' => $test,
         ]);
     }
 
@@ -67,10 +75,11 @@ class HalloweenController extends AbstractController
         }
 
         $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
+
         if ( count($halloweenCheck) === 0)
         {
             $limiteQuizz = new HalloweenCheck();
-            $limiteQuizz->setUser($this->getUser())->setCreatedAt(new \DateTime());
+            $limiteQuizz->setUser($this->getUser())->setCreatedAt($session->get('timeForm'));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($limiteQuizz);
             $entityManager->flush();
