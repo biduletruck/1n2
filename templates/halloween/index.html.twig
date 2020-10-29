@@ -12,7 +12,7 @@
         </div>
     </div>
     <br>
-{% if test != true %}
+{% if test == true %}
     <div class="row justify-content-center align-self-center ">
         <div class="col-md-12 col-lg-8">
             <div class="row bg-white text-left">
@@ -40,7 +40,7 @@
         </div>
     </div>
     <br>
-    {%  if halloweenCheck >= 0 %}
+    {%  if halloweenCheck == 0 %}
     <div class="row">
         <div class="col-12 text-center halloweek">
             <a href="{{ path('halloween_new') }}" class="btn btn-lg btn-danger">J'ai compris les conditions ... je me lance</a>
