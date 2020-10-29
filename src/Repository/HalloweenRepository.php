@@ -23,11 +23,10 @@ class HalloweenRepository extends ServiceEntityRepository
     //  * @return Halloween[] Returns an array of Halloween objects
     //  */
 
-    public function findTotal($value)
+    public function findByExampleField($value)
     {
         return $this->createQueryBuilder('h')
             ->select('h.User')
-            ->addSelect('sum(h.Quest1 + h.Quest2 +h.Quest3 + h.Quest4 + h.Quest5 + h.Quest6 + h.Quest7 + h.Quest8 + h.Quest9 + h.Quest10) as total')
             ->andWhere('h.User = :val')
             ->setParameter('val', $value)
             ->orderBy('h.id', 'ASC')

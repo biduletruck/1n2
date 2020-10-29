@@ -49,6 +49,7 @@ class HalloweenController extends AbstractController
      * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/list", name="halloween_list", methods={"GET"})
      * @param HalloweenRepository $halloweenRepository
+     * @param HalloweenCheckRepository $halloweenCheckRepository
      * @return Response
      */
     public function list(HalloweenRepository $halloweenRepository, HalloweenCheckRepository $halloweenCheckRepository): Response
@@ -56,6 +57,29 @@ class HalloweenController extends AbstractController
         return $this->render('halloween/list.html.twig', [
             'halloweens' => $halloweenRepository->findAll(),
             'halloweenChecks' => $halloweenCheckRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/classement", name="halloween_classement", methods={"GET"})
+     * @param HalloweenRepository $halloweenRepository
+     * @return Response
+     */
+    public function classement(HalloweenRepository $halloweenRepository): Response
+    {
+
+        $test = $halloweenRepository->findBy(
+            [],
+            ['Total' => 'DESC']
+        );
+        /** @var $test Halloween */
+//        $duree = $test->getFinishedAt() - $test->getCreatedAt();
+        return $this->render('halloween/classement.html.twig', [
+            'halloweens' => $halloweenRepository->findBy(
+                [],
+                ['Total' => 'DESC']
+            ),
+//            'duree' => $duree,
         ]);
     }
 
@@ -76,7 +100,7 @@ class HalloweenController extends AbstractController
 
         $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
 
-        if ( count($halloweenCheck) === 0)
+        if ( count($halloweenCheck) >= 0)
         {
             $limiteQuizz = new HalloweenCheck();
             $limiteQuizz->setUser($this->getUser())->setCreatedAt($session->get('timeForm'));
@@ -100,12 +124,23 @@ class HalloweenController extends AbstractController
         if ($form->isSubmitted() ) {
 //        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $result = $halloween->getQuest1()
+                + $halloween->getQuest2()
+                + $halloween->getQuest3()
+                + $halloween->getQuest4()
+                + $halloween->getQuest5()
+                + $halloween->getQuest6()
+                + $halloween->getQuest7()
+                + $halloween->getQuest8()
+                + $halloween->getQuest9()
+                + $halloween->getQuest10();
+            $halloween->setTotal($result);
             $halloween->setFinishedAt(new \DateTime());
             $halloween->setCreatedAt($session->get('timeForm'));
             $session->remove('timeForm');
             $entityManager->persist($halloween);
             $entityManager->flush();
-            $this->addFlash('success', 'Votre participation a bien été prise en compte');
+            $this->addFlash('success', 'Votre participation a bien été prise en compte et votre score est de : ' . $result . '/10');
             return $this->redirectToRoute('halloween_index');
         }
 

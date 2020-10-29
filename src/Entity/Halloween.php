@@ -83,6 +83,11 @@ class Halloween
      */
     private $finishedAt;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $Total;
+
     public function __construct()
     {
 //        $this->createdAt = new \DateTime();
@@ -245,6 +250,18 @@ class Halloween
     public function setFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $this->finishedAt = $finishedAt;
+
+        return $this;
+    }
+
+    public function getTotal(): ?int
+    {
+        return $this->Total;
+    }
+
+    public function setTotal(?int $Total): self
+    {
+        $this->Total = $Total;
 
         return $this;
     }

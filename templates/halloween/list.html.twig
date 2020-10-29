@@ -5,26 +5,19 @@
 {% block body %}
     <h1>Halloween listing</h1>
 <div class="row">
-    <div class="col-3">
+    <div class="col-12 col-md-4 col-lg-2">
         <table class="table">
             <thead>
             <tr>
-                <th>Id</th>
                 <th>User</th>
                 <th>CreatedAt</th>
-                <th>actions</th>
             </tr>
             </thead>
             <tbody>
             {% for halloweenCheck in halloweenChecks %}
                 <tr>
-                    <td>{{ halloweenCheck.id }}</td>
                     <td>{{ halloweenCheck.User }}</td>
                     <td>{{ halloweenCheck.createdAt ? halloweenCheck.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>
-                        {#                        <a href="{{ path('halloween_show', {'id': halloween.id}) }}">show</a>#}
-                        {#                        <a href="{{ path('halloween_edit', {'id': halloween.id}) }}">edit</a>#}
-                    </td>
                 </tr>
             {% else %}
                 <tr>
@@ -34,7 +27,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-9">
+    <div class="col-12 col-md-8 col-lg-10">
         <table class="table">
             <thead>
             <tr>
@@ -52,7 +45,10 @@
                 <th>Quest8</th>
                 <th>Quest9</th>
                 <th>Quest10</th>
+                <th>Total points</th>
+                {% if is_granted("ROLE_SUPERADMIN") %}
                 <th>actions</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -72,10 +68,13 @@
                     <td>{{ halloween.Quest8 }}</td>
                     <td>{{ halloween.Quest9 }}</td>
                     <td>{{ halloween.Quest10 }}</td>
+                    <td>{{ halloween.Total }}</td>
+                    {% if is_granted('ROLE_SUPERADMIN') %}
                     <td>
                         <a href="{{ path('halloween_show', {'id': halloween.id}) }}">show</a>
                         <a href="{{ path('halloween_edit', {'id': halloween.id}) }}">edit</a>
                     </td>
+                    {% endif %}
                 </tr>
             {% else %}
                 <tr>
@@ -87,6 +86,4 @@
     </div>
 </div>
 
-
-    <a href="{{ path('halloween_new') }}">Create new</a>
 {% endblock %}
