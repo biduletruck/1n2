@@ -29,9 +29,15 @@ class HalloweenController extends AbstractController
     public function index(HalloweenCheckRepository $halloweenCheckRepository, HalloweenRepository $halloweenRepository): Response
     {
         $startTime = new \DateTime("30-10-2020 09:00:00");
+        $endTime = new \Datetime('30-10-2020 14:00:00');
         $testDate = new \DateTime();
-        $test = $testDate < $startTime ? false : true;
-//        $total = $halloweenRepository->findTotal($this->getUser());
+
+
+        if( ($startTime < $testDate) && ($endTime > $testDate)){
+            $retest = true;
+        }else {
+            $retest = false;
+        }
 
         $this->container->get('session')->remove('timeForm');
         $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
@@ -41,7 +47,7 @@ class HalloweenController extends AbstractController
         }
         return $this->render('halloween/index.html.twig', [
             'halloweenCheck' => count($halloweenCheck),
-            'test' => $test,
+            'test' => $retest,
         ]);
     }
 
