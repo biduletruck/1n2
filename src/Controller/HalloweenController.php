@@ -29,7 +29,7 @@ class HalloweenController extends AbstractController
     public function index(HalloweenCheckRepository $halloweenCheckRepository, HalloweenRepository $halloweenRepository): Response
     {
         $startTime = new \DateTime("30-10-2020 09:00:00");
-        $endTime = new \Datetime('30-10-2020 14:00:00');
+        $endTime = new \Datetime('30-10-2020 15:00:00');
         $testDate = new \DateTime();
 
 
