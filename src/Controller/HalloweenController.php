@@ -106,7 +106,7 @@ class HalloweenController extends AbstractController
 
         $halloweenCheck = $halloweenCheckRepository->findBy(['User' => $this->getUser()]);
 
-        if ( count($halloweenCheck) === 0)
+        if ( count($halloweenCheck) >= 0)
         {
             $limiteQuizz = new HalloweenCheck();
             $limiteQuizz->setUser($this->getUser())->setCreatedAt($session->get('timeForm'));
