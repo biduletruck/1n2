@@ -20,7 +20,12 @@
             <tr>
                 <th>User</th>
                 <th>Total points</th>
-{#                <th>Durée de réponse</th>#}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>Date début</th>
+                    <th>Date fin</th>
+                {% endif %}
+
+
             </tr>
             </thead>
             <tbody>
@@ -28,7 +33,10 @@
                 <tr>
                     <td>{{ halloween.User }}</td>
                     <td>{{ halloween.Total }}</td>
-{#                    <td>{{ halloween.finishedAt - halloween.createdAt }}</td>#}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <td>{{ halloween.createdAt }}</td>
+                    <td>{{ halloween.finishedAt}}</td>
+                    {% endif %}
 
                 </tr>
             {% else %}

@@ -5,7 +5,7 @@ namespace App\EventSubscriber;
 use App\Entity\Matches;
 use App\Entity\Users;
 use App\Repository\PredictionsRepository;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
@@ -22,7 +22,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     private $entityManager;
     private $passwordEncoder;
 
-    public function __construct(EntityManager $entityManager, PredictionsRepository $predictionsRepository, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, PredictionsRepository $predictionsRepository, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->predictionsRepository = $predictionsRepository;
         $this->entityManager = $entityManager;
