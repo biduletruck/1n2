@@ -3,21 +3,71 @@
 {% block title %}Summer game{% endblock %}
 
 {% block body %}
-    {#        {{ dump(form) }}#}
-            <form action="" method="post" name="Quizz">
-            {%  for question in form %}
-{#                {{ dump(question) }}#}
+{#            {{ dump(poll) }}#}
+    <section>
+        <H1>{{ poll.title }}</H1>
+    </section>
+    <section>
+        <form action="" method="post" id="summer_quizz" name="Quizz">
+        {%  for question in form %}
+    {#                {{ dump(question) }}#}
+            <div>
+                <H2>{{ question.wording | raw}}</H2>
+            {% for reponse in question.answers %}
+    {#                    {{ dump(reponse) }}#}
                 <div>
-                    <H2>{{ question.wording | raw}}</H2>
-                {% for reponse in question.answers %}
-{#                    {{ dump(reponse) }}#}
-                    <div>
-                        <input type="radio" name="{{ question.id }}" id="{{ reponse.id }}" name="{{ reponse.id }}"  value="{{ reponse.id }}">
-                        <label for="{{ question.id }}">{{ reponse.Wording}}</label>
-                    </div>
-                {% endfor %}
+                    <input type="radio" name="{{ question.id }}" id="{{ reponse.id }}" name="{{ reponse.id }}"  value="{{ reponse.id }}">
+                    <label for="{{ question.id }}">{{ reponse.Wording}}</label>
                 </div>
             {% endfor %}
-            <button type="submit" >Valider</button>
-            </form>
+            </div>
+        {% endfor %}
+        <button type="submit" >Valider</button>
+        </form>
+    </section>
+{% endblock %}
+
+
+{% block js %}
+
+    <script>
+
+        function countdown( elementName, minutes, seconds )
+        {
+            var element, endTime, hours, mins, msLeft, time;
+
+            function twoDigits( n )
+            {
+                return (n <= 9 ? "0" + n : n);
+            }
+
+            function formAction() {
+                document.getElementById("summer_quizz").submit();
+            }
+
+            function updateTimer()
+            {
+                msLeft = endTime - (+new Date);
+                if ( msLeft < 1000 ) {
+                    element.innerHTML = "Time is up!";
+                    formAction();
+                } else {
+                    time = new Date( msLeft );
+                    hours = time.getUTCHours();
+                    mins = time.getUTCMinutes();
+                    element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+                    setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+                }
+            }
+
+            element = document.getElementById( elementName );
+            endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+            updateTimer();
+        }
+
+        countdown( "ten-countdown", {{ poll.duration }}, 0 );
+
+    </script>
+
+
 {% endblock %}

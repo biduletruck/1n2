@@ -54,14 +54,8 @@ class HomeController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         if($request->isMethod('post'))
         {
-//            dump($_POST);
-//            dump( $request->request->getIterator());
-//            dump($participationsRepository->findOneBy(["User" => $this->getUser()]));
-//            $result = $request->request->getIterator();
-
 
             $participation = $participationsRepository->findOneBy (['User' => $this->getUser()]);
-//            $participation->setCreatedAt(new \DateTime());
             $pollRepo = $entityManager->getRepository(Polls::class);
             $participation->getPoll();
 
@@ -147,6 +141,7 @@ class HomeController extends AbstractController
 
             return $this->render('/Summer_game/game.html.twig', [
                 'form' => [$a, $b, $c, $d, $e],
+                'poll' => $pollsRepository->find(1)
 
             ]);
         }
