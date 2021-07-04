@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Participations;
 use App\Form\Participations1Type;
 use App\Repository\ParticipationsRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,7 @@ class ParticipationsController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/new", name="participations_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -49,6 +51,7 @@ class ParticipationsController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_ADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="participations_show", methods={"GET"})
      */
     public function show(Participations $participation): Response
@@ -59,6 +62,7 @@ class ParticipationsController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}/edit", name="participations_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Participations $participation): Response
@@ -79,6 +83,7 @@ class ParticipationsController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="participations_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Participations $participation): Response

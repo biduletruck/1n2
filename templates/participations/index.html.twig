@@ -31,7 +31,7 @@
                 <td>{{ participation.createdAt ? participation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 {% if is_granted("ROLE_ADMIN") %}
                     <td>{{ participation.dateValidation ? participation.dateValidation|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ dateDiff(participation.createdAt, participation.dateValidation)  }}</td>
+                    <td>{{ participation.delta ~ "sec" }}</td>
 
                     <td>
                         <a href="{{ path('participations_show', {'id': participation.id}) }}">show</a>
