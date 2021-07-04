@@ -95,11 +95,11 @@
 
 
 body {
-    margin-top: 70px;
+    margin-top: 85px;
     /*min-height: 110vh;*/
     background-color: #F2F2F2;
     /*color: white;*/
-    /*background-image: url("../images/ucl-bg-header.jpg");*/
+    background-image: url("../images/bg_beach.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -251,8 +251,22 @@ table{
 
 .body_halloween {
     background: rgb(2,0,36);
-    background: linear-gradient(87deg, rgba(2,0,36,1) 0%, rgba(204,155,16,1) 31%, rgba(204,155,16,1) 57%, rgba(2,0,36,1) 100%);
+    background: linear-gradient(87deg, rgba(2,0,36,1) 15%, rgba(204,155,16,1) 40%, rgba(204,155,16,1) 57%, rgba(2,0,36,1) 100%);
 }
+
+
+.summer-bg{
+    background-image: linear-gradient(180deg, rgba(42, 155, 183, 0.80) 91%, rgba(153, 131, 26, 0.80) 100%);
+}
+.title_alert{
+    font-size: 4rem;
+    color: white;
+}
+
+.summer-text{
+    color: white;
+}
+
 @font-face {
     font-family: "Scary";
     src: url('../images/Scary Halloween Font.ttf');
@@ -263,8 +277,14 @@ table{
     src: url('../images/halloweek.ttf');
 }
 
-
-
+@font-face {
+    font-family: "Summer_001";
+    src: url('../images/Summer.otf');
+}
+@font-face {
+    font-family: "Summer_002";
+    src: url('../images/Aesthetic_Violet.otf');
+}
 
 .scary{
     font-family: "Scary";
@@ -272,4 +292,12 @@ table{
 
 .halloweek{
     font-family: "halloweek";
+}
+
+.Summer_001{
+    font-family: "Summer_001";
+}
+
+.Summer_002{
+    font-family: "Summer_002";
 }

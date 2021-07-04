@@ -48,7 +48,18 @@ class HomeController extends AbstractController
     /**
      * @Route("/summer_game", name="summer_game")
      */
-    public function summer_game(UsersRepository $usersRepository, AnswersRepository $answersRepository, QuestionsRepository $questionsRepository, Request $request, PollsRepository $pollsRepository, ParticipationsRepository $participationsRepository): Response
+    public function summer_game(PollsRepository $pollsRepository)
+    {
+        return $this->render('/Summer_game/summer_index.html.twig', [
+            'poll' => $pollsRepository->find(1)
+        ]);
+    }
+
+
+    /**
+     * @Route("/summer_game_play", name="summer_game_play")
+     */
+    public function summer_game_play(UsersRepository $usersRepository, AnswersRepository $answersRepository, QuestionsRepository $questionsRepository, Request $request, PollsRepository $pollsRepository, ParticipationsRepository $participationsRepository): Response
     {
         $participationDate = new \DateTime();
         $entityManager = $this->getDoctrine()->getManager();

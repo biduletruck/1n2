@@ -26,8 +26,9 @@
     {% endblock %}
     <header class=""></header>
 
+    </div>
     <div class="container-fluid ">
-        {% if app.session is not null and app.session.started %}
+         {% if app.session is not null and app.session.started %}
             {% for label, messages in app.session.flashbag.all %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }}">
