@@ -48,7 +48,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/summer_game", name="summer_game")
      */
-    public function test(UsersRepository $usersRepository, AnswersRepository $answersRepository, QuestionsRepository $questionsRepository, Request $request, PollsRepository $pollsRepository, ParticipationsRepository $participationsRepository): Response
+    public function summer_game(UsersRepository $usersRepository, AnswersRepository $answersRepository, QuestionsRepository $questionsRepository, Request $request, PollsRepository $pollsRepository, ParticipationsRepository $participationsRepository): Response
     {
         $participationDate = new \DateTime();
         $entityManager = $this->getDoctrine()->getManager();
