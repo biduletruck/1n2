@@ -1,0 +1,51 @@
+{% extends 'base_halloween.html.twig' %}
+
+{% block title %}Halloween classement{% endblock %}
+
+{% block body %}
+
+
+    <div class="row justify-content-center align-self-center text-center">
+        <img src="{{ asset('build/halloween_head.png') }}" class="img-fluid" alt="">
+    </div>
+    <br>
+    <div class="jumbotron">
+        <h1 class="halloweek">Classement du quiz d' Halloween</h1>
+    </div>
+<div class="row">
+
+    <div class="col-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Total points</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>Date début</th>
+                    <th>Date fin</th>
+                {% endif %}
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for halloween in halloweens %}
+                <tr>
+                    <td>{{ halloween.User }}</td>
+                    <td>{{ halloween.Total }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <td>{{ halloween.createdAt }}</td>
+                    <td>{{ halloween.finishedAt}}</td>
+                    {% endif %}
+
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
