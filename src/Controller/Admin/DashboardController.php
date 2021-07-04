@@ -43,13 +43,13 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Ce Sitel 3 - Champion League');
+            ->setTitle('Ce Sitel 3');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linktoRoute('Retour au site', 'fas fa-futbol', 'halloween_index');
+        yield MenuItem::linktoRoute('Retour au site', 'fas fa-futbol', 'home');
         yield MenuItem::section('Gestion des utilisateurs');
         yield MenuItem::linkToCrud('Utilisateurs', 'far fa-id-card', Users::class)->setPermission('ROLE_ADMIN');
 //        yield MenuItem::section('Gestion des équipes');
