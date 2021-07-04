@@ -19,12 +19,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <br>
-                                <H2 class="summer-text Summer_002">{{ question.wording | raw}}</H2>
+                                <H2 class="summer-text Summer_002">{{ question.wording | convert_encoding('UTF-8', 'ISO-8859-1')}}</H2>
                                 {% for reponse in question.answers %}
                                     <div class="row summer-text">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="{{ question.id }}" id="{{ reponse.id }}" name="{{ reponse.id }}"  value="{{ reponse.id }}">
-                                            <label class="form-check-label" for="{{ question.id }}">{{ reponse.Wording}}</label>
+                                            <label class="form-check-label" for="{{ question.id }}">{{ reponse.Wording | convert_encoding('UTF-8', 'ISO-8859-1')}}</label>
                                         </div>
                                     </div>
                                 {% endfor %}

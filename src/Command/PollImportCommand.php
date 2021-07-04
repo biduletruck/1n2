@@ -71,7 +71,7 @@ class PollImportCommand extends Command
             try {
                 $poll = new Polls();
                 $poll
-                    ->setTitle(utf8_decode($row["poll_wording"]))
+                    ->setTitle(utf8_encode($row["poll_wording"]))
                     ->setDuration((int)$row["poll_duration"])
                     ->setCreatedAt(new \DateTime())
 
@@ -147,7 +147,7 @@ class PollImportCommand extends Command
                 $reponse = new Answers();
                 $reponse
                     ->setQuestion($this->questionsRepository->find($row["question_id"]))
-                    ->setWording(utf8_decode($row["answer_wording"]))
+                    ->setWording(utf8_encode($row["answer_wording"]))
                     ->setAnswerNumber((int) $row["answer_number"])
                     ->setAnswerValue((int) $row["answer_value"])
 
