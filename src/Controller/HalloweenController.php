@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use function Symfony\Component\String\s;
 
 /**
- * @Route("/trucdelamorthalloween")
+ * @Route("/halloween")
  */
 class HalloweenController extends AbstractController
 {
