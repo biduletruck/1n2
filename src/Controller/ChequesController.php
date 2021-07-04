@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cheques;
 use App\Form\ChequesType;
 use App\Repository\ChequesRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,7 @@ class ChequesController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/new", name="cheques_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -49,6 +51,7 @@ class ChequesController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_ADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="cheques_show", methods={"GET"})
      */
     public function show(Cheques $cheque): Response
@@ -59,6 +62,7 @@ class ChequesController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}/edit", name="cheques_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Cheques $cheque): Response
@@ -79,6 +83,7 @@ class ChequesController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_SUPERADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/{id}", name="cheques_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Cheques $cheque): Response

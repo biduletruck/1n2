@@ -97,6 +97,8 @@ class HomeController extends AbstractController
             }
             $participation->setScore($totalPoints);
             $participation->setDateValidation($heureValidation);
+            $dateDiff = $heureValidation->diff($participation->getCreatedAt());
+            $participation->setDelta($dateDiff->s);
             $entityManager->persist($participation);
             $entityManager->flush();
 
@@ -128,28 +130,28 @@ class HomeController extends AbstractController
 
 
             for ($i = 1; $i <= 5; $i++) {
-                $rand = random_int(1, 10);
+                $rand = random_int(1, 25);
 
-                $a = random_int(1, 10);
-                $b = random_int(1, 10);
+                $a = random_int(1, 25);
+                $b = random_int(1, 25);
                 while($b == $a )
                 {
-                    $b = random_int(1, 10);
+                    $b = random_int(1, 25);
                 }
-                $c = random_int(1, 10);
+                $c = random_int(1, 25);
                 while($c == $a || $c == $b)
                 {
-                    $c = random_int(1, 10);
+                    $c = random_int(1, 25);
                 }
-                $d = random_int(1, 10);
+                $d = random_int(1, 25);
                 while($d == $a || $d == $b || $d == $c)
                 {
-                    $d = random_int(1, 10);
+                    $d = random_int(1, 25);
                 }
-                $e = random_int(1, 10);
+                $e = random_int(1, 25);
                 while($e == $a || $e == $b || $e == $c || $e == $d)
                 {
-                    $e = random_int(1, 10);
+                    $e = random_int(1, 25);
                 }
             }
 

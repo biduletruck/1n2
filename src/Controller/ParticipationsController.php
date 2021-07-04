@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/participations")
+ * @Route("/participations")
  */
 class ParticipationsController extends AbstractController
 {
@@ -21,7 +21,7 @@ class ParticipationsController extends AbstractController
     public function index(ParticipationsRepository $participationsRepository): Response
     {
         return $this->render('participations/index.html.twig', [
-            'participations' => $participationsRepository->findAll(),
+            'participations' => $participationsRepository->findBy([],['score' => 'DESC', 'delta' => 'ASC']),
         ]);
     }
 

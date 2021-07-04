@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Participations</h1>
 
-    {{ include('participations/_form.html.twig', {'button_label': 'Update'}) }}
-
     <a href="{{ path('participations_index') }}">back to list</a>
-
-    {{ include('participations/_delete_form.html.twig') }}
+    {% if is_granted("ROLE_SUPERADMIN") %}
+        {{ include('participations/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('participations/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

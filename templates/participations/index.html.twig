@@ -3,25 +3,43 @@
 {% block title %}Participations index{% endblock %}
 
 {% block body %}
-    <h1>Participations index</h1>
+    <div class="row">
+        <div class="col-12 Summer_002 summer-text">
+            <h1>Classement des participants </h1>
+        </div>
+    </div>
+
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>CreatedAt</th>
-                <th>actions</th>
+                <th>Participant</th>
+                <th>score</th>
+                <th>Date de passage</th>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <th>Date de fin</th>
+                    <th>Durée du quiz</th>
+                    <th>actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
         {% for participation in participations %}
             <tr>
-                <td>{{ participation.id }}</td>
+                <td>{{ participation.user.nom }}</td>
+                <td>{{ participation.score }}</td>
                 <td>{{ participation.createdAt ? participation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('participations_show', {'id': participation.id}) }}">show</a>
-                    <a href="{{ path('participations_edit', {'id': participation.id}) }}">edit</a>
-                </td>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <td>{{ participation.dateValidation ? participation.dateValidation|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ dateDiff(participation.createdAt, participation.dateValidation)  }}</td>
+
+                    <td>
+                        <a href="{{ path('participations_show', {'id': participation.id}) }}">show</a>
+                        {% if is_granted("ROLE_SUPERADMIN") %}
+                            <a href="{{ path('participations_edit', {'id': participation.id}) }}">edit</a>
+                        {% endif %}
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -30,6 +48,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('participations_new') }}">Create new</a>
+    {% if is_granted("ROLE_SUPERADMIN") %}
+        <a href="{{ path('participations_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

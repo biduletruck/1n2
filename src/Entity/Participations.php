@@ -49,6 +49,11 @@ class Participations
      */
     private $dateValidation;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $delta;
+
     public function __construct()
     {
         $this->choices = new ArrayCollection();
@@ -146,6 +151,18 @@ class Participations
     public function setDateValidation(?\DateTimeInterface $dateValidation): self
     {
         $this->dateValidation = $dateValidation;
+
+        return $this;
+    }
+
+    public function getDelta(): ?int
+    {
+        return $this->delta;
+    }
+
+    public function setDelta(?int $delta): self
+    {
+        $this->delta = $delta;
 
         return $this;
     }
