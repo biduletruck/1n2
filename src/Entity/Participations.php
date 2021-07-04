@@ -39,6 +39,16 @@ class Participations
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $score;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateValidation;
+
     public function __construct()
     {
         $this->choices = new ArrayCollection();
@@ -112,6 +122,30 @@ class Participations
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getScore(): ?int
+    {
+        return $this->score;
+    }
+
+    public function setScore(?int $score): self
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    public function getDateValidation(): ?\DateTimeInterface
+    {
+        return $this->dateValidation;
+    }
+
+    public function setDateValidation(?\DateTimeInterface $dateValidation): self
+    {
+        $this->dateValidation = $dateValidation;
 
         return $this;
     }

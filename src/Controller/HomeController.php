@@ -50,8 +50,10 @@ class HomeController extends AbstractController
      */
     public function summer_game(PollsRepository $pollsRepository)
     {
+        $open = new \DateTime();
         return $this->render('/Summer_game/summer_index.html.twig', [
-            'poll' => $pollsRepository->find(1)
+            'poll' => $pollsRepository->find(1),
+            'open' => $open
         ]);
     }
 
@@ -61,6 +63,7 @@ class HomeController extends AbstractController
      */
     public function summer_game_play(UsersRepository $usersRepository, AnswersRepository $answersRepository, QuestionsRepository $questionsRepository, Request $request, PollsRepository $pollsRepository, ParticipationsRepository $participationsRepository): Response
     {
+
         $participationDate = new \DateTime();
         $entityManager = $this->getDoctrine()->getManager();
         if($request->isMethod('post'))
@@ -76,23 +79,29 @@ class HomeController extends AbstractController
             $questions = $poll->getQuestions();
 
             $result = $request->request;
-
+            $totalPoints = 0;
+            $heureValidation = new \DateTime();
             foreach ($result as $q => $r)
            {
                 // Choix pour la première question
                 $questionOne = $questions->get($q);
-                $answers = $questionOne->getAnswers();
-
+                $answers = $answersRepository->find($r);
+                $totalPoints += $answers->getAnswerValue();
                 $choice = new Choices();
                 $choice->setQuestion($questionOne);
-                $choice->addAnswer($answersRepository->find($r));
+                $choice->addAnswer($answers);
 
                 $entityManager->persist($choice);
                 $participation->addChoice($choice);
                 $entityManager->flush();
             }
+            $participation->setScore($totalPoints);
+            $participation->setDateValidation($heureValidation);
+            $entityManager->persist($participation);
+            $entityManager->flush();
 
-            $this->addFlash('success', 'merci de votre participation, vous aurez les résultats très prochainement');
+
+            $this->addFlash('success', 'merci de votre participation, vous avez eu ' . $totalPoints . '/5');
             return $this->redirectToRoute('home');
 
         }
@@ -157,7 +166,7 @@ class HomeController extends AbstractController
             ]);
         }
         $this->addFlash('danger', 'la participation à ce quizz est fermé');
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('summer_game');
 
     }
 }

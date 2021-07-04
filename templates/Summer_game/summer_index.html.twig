@@ -5,7 +5,7 @@
 {% block body %}
     <div class="row">
         <div class="col-12 text-center Summer_002">
-            {% if poll.openAt < "now"|date("m/d/Y")  %}
+            {% if poll.openAt > open  %}
                 <h1>Ouverture du quiz le {{ poll.openAt | format_datetime(locale='fr') }}</h1>
             {% else %}
                 <h1>Fermeture du quiz le {{ poll.closedAt | format_datetime(locale='fr') }}</h1>
@@ -47,11 +47,14 @@
         </div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-12 text-center Summer_002">
-            <a href="{{ path('summer_game_play') }}" class="btn btn-lg btn-danger">J'ai compris les conditions ... je me lance</a>
+    {% if open > poll.openAt  and  open < poll.closedAt %}
+        <div class="row">
+            <div class="col-12 text-center Summer_002">
+                <a href="{{ path('summer_game_play') }}" class="btn btn-lg btn-danger">J'ai compris les conditions ... je me lance</a>
+            </div>
         </div>
-    </div>
+    {% endif %}
+
     <br>
 
 {% endblock %}
