@@ -51,7 +51,7 @@ class HomeController extends AbstractController
     public function test(UsersRepository $usersRepository, AnswersRepository $answersRepository, QuestionsRepository $questionsRepository, Request $request, PollsRepository $pollsRepository, ParticipationsRepository $participationsRepository): Response
     {
         $participationDate = new \DateTime();
-
+        $entityManager = $this->getDoctrine()->getManager();
         if($request->isMethod('post'))
         {
 //            dump($_POST);
@@ -59,20 +59,14 @@ class HomeController extends AbstractController
 //            dump($participationsRepository->findOneBy(["User" => $this->getUser()]));
 //            $result = $request->request->getIterator();
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $participation = new Participations();
 
-            $participation->setCreatedAt(new \DateTime());
-
+            $participation = $participationsRepository->findOneBy (['User' => $this->getUser()]);
+//            $participation->setCreatedAt(new \DateTime());
             $pollRepo = $entityManager->getRepository(Polls::class);
+            $participation->getPoll();
+
             $poll = $pollsRepository->find(1);
-            $user = $this->getUser();
-            $participation->setUser($user);
-            $participation->setPoll($poll);
 
-
-            $entityManager->persist($participation);
-            $entityManager->flush(); // Nous devons flusher une premiére fois pour avoir un identifiant pour la participation
 
             $questions = $poll->getQuestions();
 
@@ -108,6 +102,17 @@ class HomeController extends AbstractController
                 $this->addFlash('danger', 'Vous avez déjà participé au quizz !!');
                 return $this->redirectToRoute('home');
             }
+
+            $participation = new Participations();
+            $participation->setCreatedAt(new \DateTime());
+            $pollRepo = $entityManager->getRepository(Polls::class);
+            $poll = $pollsRepository->find(1);
+            $participation->setUser($this->getUser());
+            $participation->setPoll($poll);
+            $entityManager->persist($participation);
+            $entityManager->flush(); // Nous devons flusher une premiére fois pour avoir un identifiant pour la participation
+
+
             for ($i = 1; $i <= 5; $i++) {
                 $rand = random_int(1, 10);
 
