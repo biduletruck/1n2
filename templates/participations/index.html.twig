@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participations index{% endblock %}
+
+{% block body %}
+    <h1>Participations index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participation in participations %}
+            <tr>
+                <td>{{ participation.id }}</td>
+                <td>{{ participation.createdAt ? participation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('participations_show', {'id': participation.id}) }}">show</a>
+                    <a href="{{ path('participations_edit', {'id': participation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('participations_new') }}">Create new</a>
+{% endblock %}

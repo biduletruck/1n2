@@ -8,6 +8,7 @@ use App\Form\RegistrationFormType;
 use App\Form\UsersType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -23,7 +24,9 @@ class UsersCrudController extends AbstractCrudController
     {
         return [
             TextField::new('username', 'Login BOOST'),
-            TextField::new('password', 'Mot de pass'),
+            TextField::new('Nom', 'Nom et prénom'),
+            DateField::new('dateEntree', 'Date d\'entrée' ),
+//            TextField::new('password', 'Mot de passe'),
             ChoiceField::new('roles', 'Role utilisateur')->setChoices(['ROLE_USER' => 'ROLE_USER','ROLE_ADMIN' => 'ROLE_ADMIN'])->allowMultipleChoices(),
 
         ];

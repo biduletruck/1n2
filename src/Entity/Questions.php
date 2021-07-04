@@ -143,7 +143,7 @@ class Questions
 
     public function __toString()
     {
-        return $this->Poll . " - Question N° " . $this->Wording;
+        return $this->Poll . " - Question N° " . $this->QuestionNumber;
     }
 
     public function getQuestionNumber(): ?int

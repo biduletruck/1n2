@@ -44,6 +44,16 @@ class Polls
      */
     private $duration;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $openAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $closedAt;
+
 
     public function __construct()
     {
@@ -156,6 +166,30 @@ class Polls
     public function setDuration(?int $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getOpenAt(): ?\DateTimeInterface
+    {
+        return $this->openAt;
+    }
+
+    public function setOpenAt(?\DateTimeInterface $openAt): self
+    {
+        $this->openAt = $openAt;
+
+        return $this;
+    }
+
+    public function getClosedAt(): ?\DateTimeInterface
+    {
+        return $this->closedAt;
+    }
+
+    public function setClosedAt(?\DateTimeInterface $closedAt): self
+    {
+        $this->closedAt = $closedAt;
 
         return $this;
     }

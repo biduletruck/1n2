@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Summer game{% endblock %}
+
+{% block body %}
+    {#        {{ dump(form) }}#}
+            <form action="" method="post" name="Quizz">
+            {%  for question in form %}
+{#                {{ dump(question) }}#}
+                <div>
+                    <H2>{{ question.wording | raw}}</H2>
+                {% for reponse in question.answers %}
+{#                    {{ dump(reponse) }}#}
+                    <div>
+                        <input type="radio" name="{{ question.id }}" id="{{ reponse.id }}" name="{{ reponse.id }}"  value="{{ reponse.id }}">
+                        <label for="{{ question.id }}">{{ reponse.Wording}}</label>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" >Valider</button>
+            </form>
+{% endblock %}

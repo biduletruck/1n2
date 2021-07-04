@@ -30,9 +30,14 @@ class Participations
     private $Poll;
 
     /**
-     * @ORM\OneToMany(targetEntity=Choices::class, mappedBy="Participation")
+     * @ORM\OneToMany(targetEntity=Choices::class, mappedBy="Participation", cascade={"persist", "remove", "merge"}, orphanRemoval=true))
      */
     private $choices;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -95,6 +100,18 @@ class Participations
                 $choice->setParticipation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

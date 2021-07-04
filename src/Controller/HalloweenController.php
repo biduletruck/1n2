@@ -36,7 +36,8 @@ class HalloweenController extends AbstractController
         if( ($startTime < $testDate) && ($endTime > $testDate)){
             $retest = true;
         }else {
-            $retest = false;
+            $retest = true;
+//            $retest = false;
         }
 
         $this->container->get('session')->remove('timeForm');

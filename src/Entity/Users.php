@@ -74,6 +74,16 @@ class Users implements UserInterface
      */
     private $halloweenChecks;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Nom;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateEntree;
+
 
 
     public function __construct()
@@ -379,6 +389,30 @@ class Users implements UserInterface
                 $halloweenCheck->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->Nom;
+    }
+
+    public function setNom(?string $Nom): self
+    {
+        $this->Nom = $Nom;
+
+        return $this;
+    }
+
+    public function getDateEntree(): ?\DateTimeInterface
+    {
+        return $this->dateEntree;
+    }
+
+    public function setDateEntree(?\DateTimeInterface $dateEntree): self
+    {
+        $this->dateEntree = $dateEntree;
 
         return $this;
     }

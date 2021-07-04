@@ -20,10 +20,12 @@ class PollsCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('Id'),
-            TextField::new('Title'),
-            DateTimeField::new('CreatedAt'),
-            IntegerField::new('Duration'),
+//            IdField::new('Id'),
+            TextField::new('Title', 'Titre du quizz'),
+            DateTimeField::new('CreatedAt', 'Créé Le'),
+            DateTimeField::new('openAt', 'Date d\' ouverture du quizz'),
+            DateTimeField::new('closedAt', 'Date de fermeture du quizz'),
+            IntegerField::new('Duration', 'Durée du quizz'),
         ];
     }
 }

@@ -50,15 +50,15 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linktoRoute('Retour au site', 'fas fa-futbol', 'halloween_index');
-//        yield MenuItem::section('Gestion des utilisateurs');
-//        yield MenuItem::linkToCrud('Utilisateurs', 'far fa-id-card', Users::class)->setPermission('ROLE_ADMIN');
+        yield MenuItem::section('Gestion des utilisateurs');
+        yield MenuItem::linkToCrud('Utilisateurs', 'far fa-id-card', Users::class)->setPermission('ROLE_ADMIN');
 //        yield MenuItem::section('Gestion des équipes');
 //        yield MenuItem::linkToCrud('Les équipes', 'fas fa-users', Teams::class);
 //        yield MenuItem::linkToCrud('Choix victoires', null, Victories::class)->setPermission('ROLE_SUPERADMIN');
 //        yield MenuItem::section('Gestion des matchs');
 //        yield MenuItem::linkToCrud('Les matchs', null, Matches::class);
 //        yield MenuItem::linkToCrud('Les pronostiques', null, Predictions::class);
-//        // yield MenuItem::linkToCrud('The Label', 'icon class', EntityClass::class);
+//         yield MenuItem::linkToCrud('The Label', 'icon class', EntityClass::class);
 //        yield MenuItem::section('Evenement BBQ CeSitel3');
 //        yield MenuItem::linkToCrud('Suivi des inscriptions BBQ', null, BbqEvent::class);
 //        yield MenuItem::section('Noel 2020');
@@ -66,13 +66,13 @@ class DashboardController extends AbstractDashboardController
 //        yield MenuItem::linkToCrud('Cheque de noel', null, Cheques::class);
 //        yield MenuItem::linkToCrud('Listing de Noel', null, Noel::class);
         // muenu questionnaire
-//        yield MenuItem::section('Questionnaires');
-//        yield MenuItem::linkToCrud('Création questionnaire', null, Polls::class);
-//        yield MenuItem::linkToCrud('Questions', null, Questions::class);
-//        yield MenuItem::linkToCrud('Reponses', null, Answers::class);
-//        yield MenuItem::linkToCrud('Liste des réponses', null, Choices::class);
-        // Menu Halloween
-        yield MenuItem::linkToCrud('Listing des participations', null, HalloweenCheck::class);
-        yield MenuItem::linkToCrud('Listing des quiz', null, Halloween::class);
+        yield MenuItem::section('Questionnaires');
+        yield MenuItem::linkToCrud('Création questionnaire', null, Polls::class);
+        yield MenuItem::linkToCrud('Questions', null, Questions::class);
+        yield MenuItem::linkToCrud('Reponses', null, Answers::class);
+        // yield MenuItem::linkToCrud('Liste des réponses', null, Choices::class);
+//         Menu Halloween
+//        yield MenuItem::linkToCrud('Listing des participations', null, HalloweenCheck::class);
+//        yield MenuItem::linkToCrud('Listing des quiz', null, Halloween::class);
     }
 }

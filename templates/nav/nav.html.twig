@@ -1,7 +1,7 @@
 {% block nav %}
     <header class="header">
         <nav class="navbar navbar-expand-lg fixed-top py-3">
-            <div class="container"><a class="navbar-brand" href="{{ path('halloween_index') }}"><img src="{{ asset('build/cesitel.png') }}" height="40px"></a>
+            <div class="container"><a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('build/cesitel.png') }}" height="40px"></a>
 {#            <div class="container"><a href="{{ path('matches_day') }}" class="navbar-brand text-uppercase font-weight-bold">Transparent Nav</a>#}
                 <div id="ten-countdown"></div>
                 <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
@@ -20,15 +20,25 @@
 {#                    <ul class="navbar-nav ml-auto">#}
 {#                        <li class="nav-item"><a href="{{ path('bbq') }}" class="nav-link text-uppercase font-weight-bold">BBQ Sitel3</a></li>#}
 {#                    </ul>#}
-                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="{{ path('halloween_index') }}" class="nav-link text-uppercase font-weight-bold">Quizz d' Halloween</a></li>
-                        <li class="nav-item"><a href="{{ path('halloween_classement') }}" class="nav-link text-uppercase font-weight-bold">Classement</a></li>
+{#                     <ul class="navbar-nav ml-auto">#}
+{#                        <li class="nav-item"><a href="{{ path('halloween_index') }}" class="nav-link text-uppercase font-weight-bold">Quizz d' Halloween</a></li>#}
+{#                        <li class="nav-item"><a href="{{ path('halloween_classement') }}" class="nav-link text-uppercase font-weight-bold">Classement</a></li>#}
+{#                    </ul>#}
+{#                    {% if is_granted('ROLE_ADMIN') %}#}
+{#                    <ul class="navbar-nav ml-auto">#}
+{#                        <li class="nav-item"><a href="{{ path('halloween_check_index') }}" class="nav-link text-uppercase font-weight-bold">Listing participants</a></li>#}
+{#                        <li class="nav-item"><a href="{{ path('halloween_list') }}" class="nav-link text-uppercase font-weight-bold">Listing Quiz</a></li>#}
+{#                    </ul>#}
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="{{ path('summer_game') }}" class="nav-link text-uppercase font-weight-bold">Quizz de l'été</a></li>
+{#                        <li class="nav-item"><a href="{{ path('halloween_classement') }}" class="nav-link text-uppercase font-weight-bold">Classement</a></li>#}
                     </ul>
                     {% if is_granted('ROLE_ADMIN') %}
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="{{ path('halloween_check_index') }}" class="nav-link text-uppercase font-weight-bold">Listing participants</a></li>
-                        <li class="nav-item"><a href="{{ path('halloween_list') }}" class="nav-link text-uppercase font-weight-bold">Listing Quiz</a></li>
-                    </ul>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a href="{{ path('participations_index') }}" class="nav-link text-uppercase font-weight-bold">Listing participants</a></li>
+{#                            <li class="nav-item"><a href="{{ path('halloween_list') }}" class="nav-link text-uppercase font-weight-bold">Listing Quiz</a></li>#}
+                        </ul>
 
                     {% endif %}
                     {% if is_granted("ROLE_SUPERADMIN") %}

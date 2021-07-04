@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Participations{% endblock %}
+
+{% block body %}
+    <h1>Create new Participations</h1>
+
+    {{ include('participations/_form.html.twig') }}
+
+    <a href="{{ path('participations_index') }}">back to list</a>
+{% endblock %}

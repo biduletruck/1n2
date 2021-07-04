@@ -5,6 +5,7 @@
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
+/public/csv/*.csv
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
@@ -23,3 +24,4 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 .env
 /.idea
+*.csv
