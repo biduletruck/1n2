@@ -3,27 +3,39 @@
 {% block title %}Summer game{% endblock %}
 
 {% block body %}
-{#            {{ dump(poll) }}#}
     <section>
-        <H1>{{ poll.title }}</H1>
+        <div class="row rounded justify-content-center align-self-center">
+            <div class="col-12 text-center summer-text title_alert Summer_002">
+                <H1>{{ poll.title }}</H1>
+            </div>
+        </div>
+
     </section>
     <section>
-        <form action="" method="post" id="summer_quizz" name="Quizz">
-        {%  for question in form %}
-    {#                {{ dump(question) }}#}
-            <div>
-                <H2>{{ question.wording | raw}}</H2>
-            {% for reponse in question.answers %}
-    {#                    {{ dump(reponse) }}#}
-                <div>
-                    <input type="radio" name="{{ question.id }}" id="{{ reponse.id }}" name="{{ reponse.id }}"  value="{{ reponse.id }}">
-                    <label for="{{ question.id }}">{{ reponse.Wording}}</label>
-                </div>
-            {% endfor %}
+        <div class="row rounded justify-content-center align-self-center ">
+            <div class="col-12 col-md-10 col-lg-8 summer-bg">
+                <form action="" method="post" id="summer_quizz" name="Quizz">
+                    {%  for question in form %}
+                        <div class="row">
+                            <div class="col-12">
+                                <br>
+                                <H2 class="summer-text Summer_002">{{ question.wording | raw}}</H2>
+                                {% for reponse in question.answers %}
+                                    <div class="row summer-text">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="{{ question.id }}" id="{{ reponse.id }}" name="{{ reponse.id }}"  value="{{ reponse.id }}">
+                                            <label class="form-check-label" for="{{ question.id }}">{{ reponse.Wording}}</label>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <button type="submit" >Valider</button>
+                </form>
             </div>
-        {% endfor %}
-        <button type="submit" >Valider</button>
-        </form>
+        </div>
     </section>
 {% endblock %}
 
