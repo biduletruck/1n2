@@ -3,6 +3,16 @@
 {% block title %}Summer game{% endblock %}
 
 {% block body %}
+    <div class="row">
+        <div class="col-12 text-center Summer_002">
+            {% if poll.openAt < "now"|date("m/d/Y")  %}
+                <h1>Ouverture du quiz le {{ poll.openAt | format_datetime(locale='fr') }}</h1>
+            {% else %}
+                <h1>Fermeture du quiz le {{ poll.closedAt | format_datetime(locale='fr') }}</h1>
+            {% endif %}
+            <br>
+        </div>
+    </div>
     <div class="row justify-content-center align-self-center  ">
         <div class="col-md-12 col-lg-8 summer-bg">
             <div class="row text-left">
@@ -12,14 +22,14 @@
                 <div class="col-12 text-center Summer_002 summer-text ">
                     <div class="col-12">
                         <H2>Votre CSE organise un grand quiz pour tous les salariés de Sitel Troyes?</H2>
-                        <h3>Avant de commencer nous vous invitons à prendre connaisance des consignes de jeu.</h3>
+                        <h3>Avant de commencer nous vous invitons à prendre connaisance des consignes de jeu, sous peine d'invalider votre participation.</h3>
                     </div>
-                   <div class="col-12">
-                       <br>
-                       <h3>Afin de limiter les fraudes, nous avons mis en place des règles stricts pour que vous ne puissiez participer qu'une seule et unique fois !</h3>
-                       <br>
-                       <h3>ATTENTION, ne pas respecter les règles suivantes aura pour concéquence d'invalider votre participation !</h3>
-                   </div>
+{#                   <div class="col-12">#}
+{#                       <br>#}
+{#                       <h3>Afin de limiter les fraudes, nous avons mis en place des règles stricts pour que vous ne puissiez participer qu'une seule et unique fois !</h3>#}
+{#                       <br>#}
+{#                       <h3>ATTENTION, ne pas respecter les règles suivantes aura pour concéquence d'invalider votre participation !</h3>#}
+{#                   </div>#}
                 </div>
                 <div class="col-12 summer-text">
                     <ul>
@@ -43,9 +53,5 @@
         </div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-12 text-center Summer_002">
-            <h1>Ouverture du quiz le {{ poll.openAt | format_datetime(locale='fr') }}</h1>
-        </div>
-    </div>
+
 {% endblock %}
