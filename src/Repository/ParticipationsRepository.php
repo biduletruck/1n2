@@ -19,22 +19,23 @@ class ParticipationsRepository extends ServiceEntityRepository
         parent::__construct($registry, Participations::class);
     }
 
-    // /**
-    //  * @return Participations[] Returns an array of Participations objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+    * @return Participations[] Returns an array of Participations objects
+    */
+
+    public function findAllWithOrder()
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('p', '(TIMETOSEC(TIMEDIFF(p.dateValidation, p.createdAt))) as delta')
+
+            ->orderBy('p.score', 'ASC')
+            ->orderBy('p.delta', ' DESC')
+
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Participations

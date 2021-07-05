@@ -22,7 +22,7 @@ class ParticipationsController extends AbstractController
     public function index(ParticipationsRepository $participationsRepository): Response
     {
         return $this->render('participations/index.html.twig', [
-            'participations' => $participationsRepository->findBy([],['score' => 'DESC', 'delta' => 'ASC']),
+            'participations' => $participationsRepository->findAllWithOrder(),
         ]);
     }
 

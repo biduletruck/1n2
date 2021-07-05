@@ -9,21 +9,21 @@
         <tbody>
             <tr>
                 <th>Nom du participant</th>
-                <td>{{ participation.user.Nom }}</td>
-            </tr>
-            <tr>
-                <th>Date de participation</th>
-                <td>{{ participation.createdAt ? participation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                {% for choix in participation.choices  %}
-                    <th>     {{ choix.question.wording | raw }} </th>
-                        {% for reponse in choix.answer %}
-                    <td> {{ reponse | raw }} </td>
-                    <td> {{ reponse.AnswerValue }}</td>
-                {% endfor %}
-            </tr>
-                {% endfor %}
+{#                <td>{{ participation.user.Nom }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Date de participation</th>#}
+{#                <td>{{ participation.createdAt ? participation.createdAt|date('Y-m-d H:i:s') : '' }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                {% for choix in participation.choices  %}#}
+{#                    <th>     {{ choix.question.wording | raw }} </th>#}
+{#                        {% for reponse in choix.answer %}#}
+{#                    <td> {{ reponse | raw }} </td>#}
+{#                    <td> {{ reponse.AnswerValue }}</td>#}
+{#                {% endfor %}#}
+{#            </tr>#}
+{#                {% endfor %}#}
 
 
 

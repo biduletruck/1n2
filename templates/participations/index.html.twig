@@ -19,24 +19,28 @@
                 {% if is_granted("ROLE_ADMIN") %}
                     <th>Date de fin</th>
                     <th>Durée du quiz</th>
-                    <th>actions</th>
+                    {% if is_granted("ROLE_SUPERADMIN") %}
+                        <th>actions</th>
+                    {% endif %}
                 {% endif %}
             </tr>
         </thead>
         <tbody>
         {% for participation in participations %}
+{#            {{ dump(participation) }}#}
             <tr>
-                <td>{{ participation.user.nom }}</td>
-                <td>{{ participation.score }}</td>
-                <td>{{ participation.createdAt ? participation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ participation[0].user.nom }}</td>
+                <td>{{ participation[0].score }}</td>
+                <td>{{ participation[0].createdAt ? participation[0].createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 {% if is_granted("ROLE_ADMIN") %}
-                    <td>{{ participation.dateValidation ? participation.dateValidation|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ participation[0].dateValidation ? participation[0].dateValidation|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ participation.delta ~ "sec" }}</td>
 
                     <td>
-                        <a href="{{ path('participations_show', {'id': participation.id}) }}">show</a>
                         {% if is_granted("ROLE_SUPERADMIN") %}
-                            <a href="{{ path('participations_edit', {'id': participation.id}) }}">edit</a>
+                        <a href="{{ path('participations_show', {'id': participation[0].id}) }}">show</a>
+
+                            <a href="{{ path('participations_edit', {'id': participation[0].id}) }}">edit</a>
                         {% endif %}
                     </td>
                 {% endif %}
