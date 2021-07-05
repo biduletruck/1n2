@@ -17,9 +17,9 @@
             </tr>
             <tr>
                 {% for choix in participation.choices  %}
-                    <th>     {{ choix.question.wording }} </th>
+                    <th>     {{ choix.question.wording | raw }} </th>
                         {% for reponse in choix.answer %}
-                    <td> {{ reponse }} </td>
+                    <td> {{ reponse | raw }} </td>
                     <td> {{ reponse.AnswerValue }}</td>
                 {% endfor %}
             </tr>
