@@ -29,7 +29,7 @@ class ParticipationsRepository extends ServiceEntityRepository
             ->select('p', '(TIMETOSEC(TIMEDIFF(p.dateValidation, p.createdAt))) as delta')
 
             ->addOrderBy('p.score', 'DESC')
-            ->addOrderBy('p.delta', ' ASC')
+            ->addOrderBy('p.delta', ' DESC')
             ->getQuery()
             ->getResult()
         ;
