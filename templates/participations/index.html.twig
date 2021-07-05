@@ -31,9 +31,9 @@
             <tr>
                 <td>{{ participation[0].user.nom }}</td>
                 <td>{{ participation[0].score }}</td>
-                <td>{{ participation[0].createdAt ? participation[0].createdAt|format_datetime('full', 'short', locale='fr') : '' }}</td>
+                <td>{{ participation[0].createdAt ? participation[0].createdAt|format_datetime('full', 'medium', locale='fr') : '' }}</td>
                 {% if is_granted("ROLE_ADMIN") %}
-                    <td>{{ participation[0].dateValidation ? participation[0].dateValidation|format_datetime('full', 'short', locale='fr') : '' }}</td>
+                    <td>{{ participation[0].dateValidation ? participation[0].dateValidation|format_datetime('full', 'medium', locale='fr') : '' }}</td>
                     <td>{{ participation.duree ~ "sec" }}</td>
 
                     <td>
