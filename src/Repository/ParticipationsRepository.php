@@ -28,9 +28,8 @@ class ParticipationsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->select('p', '(TIMETOSEC(TIMEDIFF(p.dateValidation, p.createdAt))) as delta')
 
-            ->orderBy('p.score', 'ASC')
-            ->orderBy('p.delta', ' DESC')
-
+            ->addOrderBy('p.score', 'ASC')
+            ->addOrderBy('p.delta', ' DESC')
             ->getQuery()
             ->getResult()
         ;
