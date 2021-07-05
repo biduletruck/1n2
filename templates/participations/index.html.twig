@@ -34,7 +34,7 @@
                 <td>{{ participation[0].createdAt ? participation[0].createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 {% if is_granted("ROLE_ADMIN") %}
                     <td>{{ participation[0].dateValidation ? participation[0].dateValidation|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ participation.delta ~ "sec" }}</td>
+                    <td>{{ participation.duree ~ "sec" }}</td>
 
                     <td>
                         {% if is_granted("ROLE_SUPERADMIN") %}

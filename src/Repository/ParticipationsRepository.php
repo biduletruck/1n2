@@ -26,10 +26,10 @@ class ParticipationsRepository extends ServiceEntityRepository
     public function findAllWithOrder()
     {
         return $this->createQueryBuilder('p')
-            ->select('p', '(TIMETOSEC(TIMEDIFF(p.dateValidation, p.createdAt))) as delta')
+            ->select('p', '(TIMETOSEC(TIMEDIFF(p.dateValidation, p.createdAt))) as duree')
 
             ->addOrderBy('p.score', 'DESC')
-            ->addOrderBy('p.delta', ' DESC')
+            ->addOrderBy('duree', ' ASC')
             ->getQuery()
             ->getResult()
         ;
