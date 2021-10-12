@@ -61,10 +61,10 @@ class DashboardController extends AbstractDashboardController
 //         yield MenuItem::linkToCrud('The Label', 'icon class', EntityClass::class);
 //        yield MenuItem::section('Evenement BBQ CeSitel3');
 //        yield MenuItem::linkToCrud('Suivi des inscriptions BBQ', null, BbqEvent::class);
-//        yield MenuItem::section('Noel 2020');
-//        yield MenuItem::linkToCrud('Colis de noel', null, Colis::class);
-//        yield MenuItem::linkToCrud('Cheque de noel', null, Cheques::class);
-//        yield MenuItem::linkToCrud('Listing de Noel', null, Noel::class);
+        yield MenuItem::section('Noel 2020');
+        yield MenuItem::linkToCrud('Colis de noel', null, Colis::class);
+        yield MenuItem::linkToCrud('Cheque de noel', null, Cheques::class);
+        yield MenuItem::linkToCrud('Listing de Noel', null, Noel::class);
         // muenu questionnaire
         yield MenuItem::section('Questionnaires');
         yield MenuItem::linkToCrud('Création questionnaire', null, Polls::class);
