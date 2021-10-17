@@ -75,7 +75,7 @@ class HomeController extends AbstractController
         {
 
             $participation = $participationsRepository->findOneBy (['User' => $this->getUser(),'Poll' => $pollsRepository->find(2)]);
-            dd($participation);
+
             $pollRepo = $entityManager->getRepository(Polls::class);
             $participation->getPoll();
 
