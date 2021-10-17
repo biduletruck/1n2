@@ -20,7 +20,7 @@ class TeamsCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $image= ImageField::new('thumbnailFile')->setFormType(VichImageType::class);
-        $imageFile = ImageField::new('thumbnail')->setBasePath('/images/thumbnails');
+        $imageFile = ImageField::new('thumbnail')->setBasePath('/public/images/thumbnails/')->onlyOnDetail();
         $fields = [
             TextField::new('Name', 'Nom de l\'équipe'),
         ];

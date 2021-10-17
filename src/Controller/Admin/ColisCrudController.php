@@ -19,8 +19,8 @@ class ColisCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $imageFile = ImageField::new('thumbnail')->setBasePath('/images/thumbnails')->onlyOnDetail();
         $image= ImageField::new('thumbnailFile')->setFormType(VichImageType::class);
-        $imageFile = ImageField::new('thumbnail')->setBasePath('/images/thumbnails');
         $fields = [
             TextField::new('nomColis', 'Nom du colis'),
             TextField::new('referenceColis', 'Réference du colis'),

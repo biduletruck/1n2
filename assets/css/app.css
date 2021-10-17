@@ -99,7 +99,7 @@ body {
     /*min-height: 110vh;*/
     background-color: #F2F2F2;
     /*color: white;*/
-    background-image: url("../images/bg_beach.jpg");
+    background-image: url("../images/tim_burtton_wallpaper.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -269,12 +269,12 @@ table{
 
 @font-face {
     font-family: "Scary";
-    src: url('../images/Scary Halloween Font.ttf');
+    src: url('../images/Wonderland Scratch.ttf');
 }
 
 @font-face {
-    font-family: "halloweek";
-    src: url('../images/halloweek.ttf');
+    font-family: "Ghostly";
+    src: url('../images/Ghostly.ttf');
 }
 
 @font-face {
@@ -291,7 +291,7 @@ table{
 }
 
 .halloweek{
-    font-family: "halloweek";
+    font-family: "Ghostly";
 }
 
 .Summer_001{

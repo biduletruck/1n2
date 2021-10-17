@@ -27,7 +27,7 @@ class ParticipationsRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->select('p', '(TIMETOSEC(TIMEDIFF(p.dateValidation, p.createdAt))) as duree')
-
+            ->andWhere('p.Poll = 2 ')
             ->addOrderBy('p.score', 'DESC')
             ->addOrderBy('duree', ' ASC')
             ->getQuery()

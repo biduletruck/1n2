@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}halloween2021 game{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="row rounded justify-content-center align-self-center">
+            <div class="col-12 text-center summer-text title_alert scary">
+                <H1>{{ poll.title }}</H1>
+            </div>
+        </div>
+
+    </section>
+    <section>
+        <div class="row rounded justify-content-center align-self-center ">
+            <div class="col-12 col-md-10 col-lg-8 summer-bg">
+                <form action="" method="post" id="summer_quizz" name="Quizz">
+                    {%  for question in form %}
+                        <div class="row">
+                            <div class="col-12">
+                                <br>
+                                <H2 class="summer-text scary">{{ question.wording | raw }}</H2>
+                                {% for reponse in question.answers %}
+                                    <div class="row summer-text">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="{{ question.id }}" id="{{ reponse.id }}" name="{{ reponse.id }}"  value="{{ reponse.id }}">
+                                            <label class="form-check-label" for="{{ question.id }}">{{ reponse.Wording | raw}}</label>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="col-12 text-center">
+                        <button class="btn btn-lg btn-success scary" type="submit" >Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block js %}
+
+    <script>
+
+        function countdown( elementName, minutes, seconds )
+        {
+            var element, endTime, hours, mins, msLeft, time;
+
+            function twoDigits( n )
+            {
+                return (n <= 9 ? "0" + n : n);
+            }
+
+            function formAction() {
+                document.getElementById("summer_quizz").submit();
+            }
+
+            function updateTimer()
+            {
+                msLeft = endTime - (+new Date);
+                if ( msLeft < 1000 ) {
+                    element.innerHTML = "Time is up!";
+                    formAction();
+                } else {
+                    time = new Date( msLeft );
+                    hours = time.getUTCHours();
+                    mins = time.getUTCMinutes();
+                    element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+                    setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+                }
+            }
+
+            element = document.getElementById( elementName );
+            endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+            updateTimer();
+        }
+
+        countdown( "ten-countdown", {{ poll.duration }}, 0 );
+
+    </script>
+
+
+{% endblock %}

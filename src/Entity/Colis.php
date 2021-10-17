@@ -48,7 +48,7 @@ class Colis
     private $updatedAt;
 
     /**
-     * @Vich\UploadableField(mapping="thumbnails", fileNameProperty="thumbnail")
+     * @Vich\UploadableField(mapping="thumbnails ", fileNameProperty="thumbnails")
      */
     private $thumbnailFile;
 
@@ -152,7 +152,7 @@ class Colis
      * @param mixed $thumbnail
      * @return Colis
      */
-    public function setThumbnail($thumbnail)
+    public function setThumbnail($thumbnail): Colis
     {
         $this->thumbnail = $thumbnail;
         return $this;
@@ -170,7 +170,7 @@ class Colis
      * @param mixed $updatedAt
      * @return Colis
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt): Colis
     {
         $this->updatedAt = $updatedAt;
         return $this;
@@ -188,7 +188,7 @@ class Colis
      * @param mixed $thumbnailFile
      * @return Colis
      */
-    public function setThumbnailFile($thumbnailFile)
+    public function setThumbnailFile($thumbnailFile): Colis
     {
         $this->thumbnailFile = $thumbnailFile;
         return $this;
