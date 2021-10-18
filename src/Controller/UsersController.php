@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Users;
+use App\Form\UsersPasswordType;
 use App\Form\UsersType;
 use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -110,6 +111,40 @@ class UsersController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{id}/resetpassword", name="users_resetPassword", methods={"GET","POST"})
+     * @param Request $request
+     * @param Users $user
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
+     */
+    public function resetPassword(Request $request, Users $user, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $form = $this->createForm(UsersPasswordType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('users_index');
+        }
+
+        return $this->render('users/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
 
     /**
      * @Route("/{id}", name="users_delete", methods={"DELETE"})

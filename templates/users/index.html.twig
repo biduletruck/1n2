@@ -27,6 +27,7 @@
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ path('users_show', {'id': user.id}) }}">show</a>
                     <a class="btn btn-primary btn-sm" href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-danger btn-sm" href="{{ path('users_resetPassword', {'id': user.id}) }}">password</a>
                 </td>
             </tr>
         {% else %}
