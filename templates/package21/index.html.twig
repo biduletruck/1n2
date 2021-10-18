@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Package21 index{% endblock %}
+
+{% block body %}
+    <h1>Package21 index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TitlePackage</th>
+                <th>RefPackage</th>
+                <th>DescriptionPackage</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for package21 in package21s %}
+            <tr>
+                <td>{{ package21.id }}</td>
+                <td>{{ package21.titlePackage }}</td>
+                <td>{{ package21.refPackage }}</td>
+                <td>{{ package21.descriptionPackage }}</td>
+                <td>{{ package21.image }}</td>
+                <td>
+                    <a href="{{ path('package21_show', {'id': package21.id}) }}">show</a>
+                    <a href="{{ path('package21_edit', {'id': package21.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('package21_new') }}">Create new</a>
+{% endblock %}

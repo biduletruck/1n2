@@ -84,6 +84,11 @@ class Users implements UserInterface
      */
     private $dateEntree;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commande21::class, mappedBy="salarie", orphanRemoval=true)
+     */
+    private $commande21s;
+
 
 
     public function __construct()
@@ -95,6 +100,7 @@ class Users implements UserInterface
         $this->participations = new ArrayCollection();
         $this->halloweens = new ArrayCollection();
         $this->halloweenChecks = new ArrayCollection();
+        $this->commande21s = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -413,6 +419,36 @@ class Users implements UserInterface
     public function setDateEntree(?\DateTimeInterface $dateEntree): self
     {
         $this->dateEntree = $dateEntree;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commande21[]
+     */
+    public function getCommande21s(): Collection
+    {
+        return $this->commande21s;
+    }
+
+    public function addCommande21(Commande21 $commande21): self
+    {
+        if (!$this->commande21s->contains($commande21)) {
+            $this->commande21s[] = $commande21;
+            $commande21->setSalarie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande21(Commande21 $commande21): self
+    {
+        if ($this->commande21s->removeElement($commande21)) {
+            // set the owning side to null (unless already changed)
+            if ($commande21->getSalarie() === $this) {
+                $commande21->setSalarie(null);
+            }
+        }
 
         return $this;
     }

@@ -5,13 +5,16 @@ namespace App\Controller\Admin;
 use App\Entity\Answers;
 use App\Entity\Bbq;
 use App\Entity\BbqEvent;
+use App\Entity\Cheque21;
 use App\Entity\Cheques;
 use App\Entity\Choices;
 use App\Entity\Colis;
+use App\Entity\Commande21;
 use App\Entity\Halloween;
 use App\Entity\HalloweenCheck;
 use App\Entity\Matches;
 use App\Entity\Noel;
+use App\Entity\Package21;
 use App\Entity\Polls;
 use App\Entity\Predictions;
 use App\Entity\Questions;
@@ -74,5 +77,9 @@ class DashboardController extends AbstractDashboardController
 //         Menu Halloween
 //        yield MenuItem::linkToCrud('Listing des participations', null, HalloweenCheck::class);
 //        yield MenuItem::linkToCrud('Listing des quiz', null, Halloween::class);
+        yield MenuItem::section('Commandes de Noel 2021');
+        yield MenuItem::linkToCrud('Colis de noel', null, Package21::class);
+        yield MenuItem::linkToCrud('Cheque de noel', null, Cheque21::class);
+        yield MenuItem::linkToCrud('Listing de Noel', null, Commande21::class);
     }
 }

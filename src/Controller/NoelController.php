@@ -3,11 +3,16 @@
 namespace App\Controller;
 
 
+use App\Entity\Commande21;
 use App\Entity\Noel;
+use App\Form\Commande21Type;
 use App\Form\NoelType;
+use App\Repository\Cheque21Repository;
 use App\Repository\ChequesRepository;
 use App\Repository\ColisRepository;
+use App\Repository\Commande21Repository;
 use App\Repository\NoelRepository;
+use App\Repository\Package21Repository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,19 +41,19 @@ class NoelController extends AbstractController
     /**
      * @Route("/", name="noel_new", methods={"GET","POST"})
      * @param Request $request
-     * @param NoelRepository $noelRepository
-     * @param ColisRepository $colisRepository
-     * @param ChequesRepository $chequesRepository
+     * @param Commande21Repository $colisRepository
+     * @param Package21Repository $package
+     * @param Cheque21Repository $chequesRepository
      * @return Response
      */
-    public function new(Request $request, NoelRepository $noelRepository, ColisRepository $colisRepository, ChequesRepository $chequesRepository): Response
+    public function new(Request $request, Commande21Repository $colisRepository, Package21Repository $package, Cheque21Repository $chequesRepository): Response
     {
-        $noel = new Noel();
-        $control = count($noelRepository->findBy(['User' => $this->getUser()]));
-        $colis = $colisRepository->findAll();
+        $noel = new Commande21();
+        $control = count($colisRepository->findBy(['salarie' => $this->getUser()]));
+        $colis = $package->findAll();
         $cheques = $chequesRepository->findAll();
-        $noel->setUser($this->getUser());
-        $form = $this->createForm(NoelType::class, $noel);
+        $noel->setSalarie($this->getUser());
+        $form = $this->createForm(Commande21Type::class, $noel);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

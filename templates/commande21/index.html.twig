@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande21 index{% endblock %}
+
+{% block body %}
+    <h1>Commande21 index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreatedAt</th>
+                <th>EmailSalarie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande21 in commande21s %}
+            <tr>
+                <td>{{ commande21.id }}</td>
+                <td>{{ commande21.createdAt ? commande21.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ commande21.emailSalarie }}</td>
+                <td>
+                    <a href="{{ path('commande21_show', {'id': commande21.id}) }}">show</a>
+                    <a href="{{ path('commande21_edit', {'id': commande21.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('commande21_new') }}">Create new</a>
+{% endblock %}

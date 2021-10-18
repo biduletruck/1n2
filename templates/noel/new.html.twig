@@ -5,35 +5,39 @@
 {% block body %}
 
     <div class="jumbotron">
-        <div class=" alert alert-danger">
-            Les commandes sont maintenant fermées.
-        </div>
+{#        <div class=" alert alert-danger">#}
+{#            Les commandes sont maintenant fermées.#}
+{#        </div>#}
         <img src="{{ asset('build/cse_logo.png') }}" alt="">
         <h3>Votre CSE Sitel Troyes a le plaisir de vous offrir* en cette fin d’année un colis gourmand et festif !!!</h3>
         <p>Nous avons présélectionné pour vous plusieurs thèmes de colis afin que vous puissiez choisir celui qui vous fera plaisir.</p>
         <p>Et comme chaque année, des chèques cadeaux vous serons offerts avec cette fois la possibilité pour vous de choisir entre le format papier ou le numérique.</p>
-        <H4>Attention, nous attendons votre réponse au plus tard pour le <strong>23 octobre 2020</strong></H4> <h6>(sans choix de votre part nous vous attribuerons un colis par défaut ainsi que le format papier pour vos chèques cadeaux).</H6>
+        <H4>Attention, nous attendons votre réponse au plus tard pour le <strong>23 octobre 2021</strong></H4> <h6>(sans choix de votre part nous vous attribuerons un colis par défaut ainsi que le format papier pour vos chèques cadeaux).</H6>
         <br>
         <H4>Les membres du CSE Sitel Troyes vous souhaitent de passer de bonnes fêtes de fin d’année.</H4><br>
         <h4>Protegez-vous!!! Respectez les gestes barrières.</h4><br>
         <h6>*Ces cadeaux sont exclusivement réservés aux salariés de Sitel Troyes ayant une ancienneté d’au moins 3 mois au sein de l’établissement.</h6>
 
     </div>
-    <div class="row">
-        {% for coli in colis %}
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>{{ coli.nomColis }}</h3>
-                    </div>
-                    <img src="{{ asset('images/thumbnails/' ~ coli.thumbnail) }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ coli.titre }}</h5>
-                        <p class="card-text">{{ coli.descriptionColis |nl2br  }}</p>
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-10">
+            <div class="row">
+            {% for coli in colis %}
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>{{ coli.titlePackage }}</h3>
+                        </div>
+                        <img src="{{ asset('images/thumbnails/' ~ coli.image) }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+{#                            <h5 class="card-title">{{ coli.titlePackage }}</h5>#}
+                            <p class="card-text">{{ coli.descriptionPackage | raw }}</p>
+                        </div>
                     </div>
                 </div>
+            {% endfor %}
             </div>
-        {% endfor %}
+        </div>
     </div>
     <br>
     <div class="row justify-content-center">
@@ -41,13 +45,13 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h3>{{ cheque.nomCheque }}</h3>
+                        <h3>{{ cheque.titleCheque }}</h3>
                     </div>
-                    <img src="{{ asset('images/thumbnails/' ~ cheque.thumbnail) }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('images/thumbnails/' ~ cheque.imageCheque) }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         {#                        <h5 class="card-title">{{ coli.titre }}</h5>#}
-                        <p class="card-text">{{ cheque.description |nl2br  }}</p>
-                        <a href="{{ cheque.lien }}" class="btn btn-info" target="_blank">PLus d'infos ...</a>
+                        <p class="card-text">{{ cheque.descriptionCheque |raw  }}</p>
+{#                        <a href="{{ cheque.lien }}" class="btn btn-info" target="_blank">PLus d'infos ...</a>#}
                     </div>
                 </div>
             </div>
@@ -55,16 +59,16 @@
     </div>
     <br>
 
-{#    {% if control == 0  %}#}
-{#        {{ include('noel/_form.html.twig') }}#}
-{#    {% else %}#}
-{#        <div class="row justify-content-center alert alert-info">#}
-{#            <h2 class="text-center">Votre commande a déjà été prise en compte. <br> En cas de problème merci de contacter le CSE directement.</h2>#}
-{#        </div>#}
-{#    {% endif %}#}
+    {% if control == 0  %}
+        {{ include('commande21/_form.html.twig') }}
+    {% else %}
+        <div class="row justify-content-center alert alert-info">
+            <h2 class="text-center">Votre commande a déjà été prise en compte. <br> En cas de problème merci de contacter le CSE directement.</h2>
+        </div>
+    {% endif %}
 
-    <div class=" alert alert-danger">
-        Les commandes sont maintenant fermées.
-    </div>
+{#    <div class=" alert alert-danger">#}
+{#        Les commandes sont maintenant fermées.#}
+{#    </div>#}
 
 {% endblock %}

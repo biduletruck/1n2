@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Package21{% endblock %}
+
+{% block body %}
+    <h1>Package21</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ package21.id }}</td>
+            </tr>
+            <tr>
+                <th>TitlePackage</th>
+                <td>{{ package21.titlePackage }}</td>
+            </tr>
+            <tr>
+                <th>RefPackage</th>
+                <td>{{ package21.refPackage }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionPackage</th>
+                <td>{{ package21.descriptionPackage }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ package21.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('package21_index') }}">back to list</a>
+
+    <a href="{{ path('package21_edit', {'id': package21.id}) }}">edit</a>
+
+    {{ include('package21/_delete_form.html.twig') }}
+{% endblock %}

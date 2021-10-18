@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cheque21 index{% endblock %}
+
+{% block body %}
+    <h1>Cheque21 index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TitleCheque</th>
+                <th>DescriptionCheque</th>
+                <th>ImageCheque</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cheque21 in cheque21s %}
+            <tr>
+                <td>{{ cheque21.id }}</td>
+                <td>{{ cheque21.titleCheque }}</td>
+                <td>{{ cheque21.descriptionCheque }}</td>
+                <td>{{ cheque21.imageCheque }}</td>
+                <td>
+                    <a href="{{ path('cheque21_show', {'id': cheque21.id}) }}">show</a>
+                    <a href="{{ path('cheque21_edit', {'id': cheque21.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('cheque21_new') }}">Create new</a>
+{% endblock %}
