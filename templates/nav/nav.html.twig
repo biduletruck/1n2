@@ -29,15 +29,18 @@
 {#                        <li class="nav-item"><a href="{{ path('halloween_check_index') }}" class="nav-link text-uppercase font-weight-bold">Listing participants</a></li>#}
 {#                        <li class="nav-item"><a href="{{ path('halloween_list') }}" class="nav-link text-uppercase font-weight-bold">Listing Quiz</a></li>#}
 {#                    </ul>#}
-
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="{{ path('noel_new') }}" class="nav-link text-uppercase font-weight-bold">Colis de Noël 2021</a></li>
+                        {#                        <li class="nav-item"><a href="{{ path('halloween_classement') }}" class="nav-link text-uppercase font-weight-bold">Classement</a></li>#}
+                    </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a href="{{ path('halloween_game') }}" class="nav-link text-uppercase font-weight-bold">Quizz d' Halloween 2021</a></li>
 {#                        <li class="nav-item"><a href="{{ path('halloween_classement') }}" class="nav-link text-uppercase font-weight-bold">Classement</a></li>#}
                     </ul>
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item"><a href="{{ path('participations_index') }}" class="nav-link text-uppercase font-weight-bold">Classement des participants</a></li>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="{{ path('participations_index') }}" class="nav-link text-uppercase font-weight-bold">Classement des participants</a></li>
 {#                            <li class="nav-item"><a href="{{ path('halloween_list') }}" class="nav-link text-uppercase font-weight-bold">Listing Quiz</a></li>#}
-                        </ul>
+                    </ul>
 
                     {% if is_granted("ROLE_SUPERADMIN") %}
                     <ul class="navbar-nav ml-auto">
