@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12 text-center scary">
+        <div class="col-12 text-center scary summer-text">
             {% if poll.openAt > open  %}
                 <h1>Ouverture du quiz le {{ poll.openAt | format_datetime(locale='fr') }}</h1>
             {% else %}
