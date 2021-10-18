@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UsersType extends AbstractType
+class UsersPasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,12 +19,12 @@ class UsersType extends AbstractType
             ->add('username', TextType::class, [
                 'attr'      => array('class' => 'form-control')
             ])
-            ->remove('password', PasswordType::class, [
+            ->add('password', PasswordType::class, [
                 'required' => false,
                 'attr'      => array('class' => 'form-control')
             ])
 
-            ->add('roles', ChoiceType::class, array(
+            ->remove('roles', ChoiceType::class, array(
                 'label'  => 'Droit de l\'utilisateur' ,
                 'expanded'  => true,
                 'multiple'  => true,
@@ -35,7 +35,7 @@ class UsersType extends AbstractType
 //                    'SuperAdministrateur' => 'ROLE_SUPERADMIN'
                 ]
             ))
-            ->add('dateEntree', DateType::class, [
+            ->remove('dateEntree', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr'      => array('class' => 'form-control')

@@ -45,6 +45,8 @@ class UsersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -89,12 +91,15 @@ class UsersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
+
+//                $user->setPassword(
+//                    $passwordEncoder->encodePassword(
+//                        $user,
+//                        $form->get('password')->getData()
+//                    )
+//                );
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('users_index');
