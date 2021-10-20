@@ -24,12 +24,12 @@ class DoctrineSubscriber implements EventSubscriber
     }
 
 
-//    public function getSubscribedEvents()
-//    {
+    public function getSubscribedEvents()
+    {
 //        return [
 //            Events::postUpdate
 //        ];
-//    }
+    }
 
 //    public function postUpdate(LifecycleEventArgs $args)
 //    {
