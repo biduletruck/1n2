@@ -25,7 +25,7 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.Nom }}</td>
-                <td>{{ user.dateEntree }}</td>
+                <td>{{ user.dateEntree ? user.dateEntree|date('d/m/Y') : '' }}</td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ path('users_show', {'id': user.id}) }}">show</a>
                     <a class="btn btn-primary btn-sm" href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
