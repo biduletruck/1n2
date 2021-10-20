@@ -32,7 +32,7 @@ class UsersType extends AbstractType
                 'choices'  => [
                     'Utilisateur' => 'ROLE_USER',
                     'Administrateur' => 'ROLE_ADMIN',
-//                    'SuperAdministrateur' => 'ROLE_SUPERADMIN'
+                    'SuperAdministrateur' => 'ROLE_SUPERADMIN'
                 ]
             ))
             ->add('dateEntree', DateType::class, [
