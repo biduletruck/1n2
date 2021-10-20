@@ -39,6 +39,11 @@ class Cheque21
      */
     private $commande21s;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $profile;
+
     public function __construct()
     {
         $this->commande21s = new ArrayCollection();
@@ -118,5 +123,17 @@ class Cheque21
     public function __toString()
     {
         return $this->titleCheque;
+    }
+
+    public function getProfile(): ?bool
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(bool $profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
     }
 }

@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class Commande21Type extends AbstractType
+class Commande21LightType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -46,7 +46,7 @@ class Commande21Type extends AbstractType
                 'attr'      => array('class' => 'form-control'),
                 'query_builder' => function(EntityRepository $er){
                     return $er->createQueryBuilder('c')
-                        ->andWhere('c.profile = true')
+                        ->andWhere('c.profile = false')
                         ;
                 }
             ]);

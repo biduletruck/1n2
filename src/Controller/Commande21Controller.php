@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commande21;
-use App\Form\Commande21Type;
+use App\Form\Commande21LightType;
 use App\Repository\Commande21Repository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class Commande21Controller extends AbstractController
     public function new(Request $request): Response
     {
         $commande21 = new Commande21();
-        $form = $this->createForm(Commande21Type::class, $commande21);
+        $form = $this->createForm(Commande21LightType::class, $commande21);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class Commande21Controller extends AbstractController
      */
     public function edit(Request $request, Commande21 $commande21): Response
     {
-        $form = $this->createForm(Commande21Type::class, $commande21);
+        $form = $this->createForm(Commande21LightType::class, $commande21);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

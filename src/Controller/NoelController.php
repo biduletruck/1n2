@@ -5,6 +5,8 @@ namespace App\Controller;
 
 use App\Entity\Commande21;
 use App\Entity\Noel;
+use App\Entity\Users;
+use App\Form\Commande21LightType;
 use App\Form\Commande21Type;
 use App\Form\NoelType;
 use App\Repository\Cheque21Repository;
@@ -13,6 +15,8 @@ use App\Repository\ColisRepository;
 use App\Repository\Commande21Repository;
 use App\Repository\NoelRepository;
 use App\Repository\Package21Repository;
+use App\Repository\UsersRepository;
+use phpDocumentor\Reflection\Types\True_;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,14 +50,23 @@ class NoelController extends AbstractController
      * @param Cheque21Repository $chequesRepository
      * @return Response
      */
-    public function new(Request $request, Commande21Repository $colisRepository, Package21Repository $package, Cheque21Repository $chequesRepository): Response
+    public function new(Request $request, UsersRepository $users, Commande21Repository $colisRepository, Package21Repository $package, Cheque21Repository $chequesRepository): Response
     {
-        $noel = new Commande21();
         $control = count($colisRepository->findBy(['salarie' => $this->getUser()]));
+        $noel = new Commande21();
+        $noel->setSalarie($users->find($this->getUser()));
+
         $colis = $package->findAll();
-        $cheques = $chequesRepository->findAll();
-        $noel->setSalarie($this->getUser());
-        $form = $this->createForm(Commande21Type::class, $noel);
+
+        $cheques = null;
+        $form = $this->createForm(Commande21LightType::class, $noel);
+        if ($users->find($this->getUser())->getDateEntree() < new \DateTime('2021-07-31') )
+        {
+            $cheques = $chequesRepository->findBy(['profile' => True]);
+            $form = $this->createForm(Commande21Type::class, $noel);
+        }
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
