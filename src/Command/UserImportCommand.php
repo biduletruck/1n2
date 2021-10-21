@@ -70,7 +70,7 @@ class UserImportCommand extends Command
                     ->setPassword($this->asPassword($user,$row["PASSWORD"] ))
                     ->setRoles(["ROLE_USER"])
                     ->setNom($row["NOM_PRENOM"])
-//                    ->setDateEntree(new \DateTime($row["DT_ENTREE"]))
+                    ->setDateEntree(new \DateTime($row["DT_ENTREE"]))
                 ;
                 $this->em->persist($user);
                 $this->em->flush();
