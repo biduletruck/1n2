@@ -47,4 +47,35 @@ class Commande21Repository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function countCommandes()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('count(c) as nbCommandes')
+            ->getQuery()
+            ->getSingleResult()
+            ;
+    }
+
+    public function countCommandesByType()
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.package', 'p')
+            ->select('count(c.package) as nbCommandes, p.titlePackage as titre')
+            ->addGroupBy('titre')
+            ->getQuery()
+            ->getArrayResult()
+            ;
+    }
+
+    public function countCommandesByCheque()
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.cheque', 'p')
+            ->select('count(c.cheque) as nbCheque, p.titleCheque as titre')
+            ->addGroupBy('titre')
+            ->getQuery()
+            ->getArrayResult()
+            ;
+    }
 }

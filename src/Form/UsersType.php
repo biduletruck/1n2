@@ -19,6 +19,9 @@ class UsersType extends AbstractType
             ->add('username', TextType::class, [
                 'attr'      => array('class' => 'form-control')
             ])
+            ->add('nom', TextType::class, [
+                'attr'      => array('class' => 'form-control')
+            ])
             ->remove('password', PasswordType::class, [
                 'required' => false,
                 'attr'      => array('class' => 'form-control')

@@ -3,31 +3,72 @@
 {% block title %}Noel index{% endblock %}
 
 {% block body %}
-    <h1>Noel index</h1>
+    <div>
+        <h1>Listing des cadeaux de Noel 2021
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nombre de salariés</th>
+                    <th>Nombre de commandes</th>
+                    <th>Colis</th>
+                    <th>nombre de colis</th>
+                    <th>Cheque</th>
+                    <th>Nombre de cheque</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ countUsers["nbUsers"] |e }}</td>
+                    <td>{{ countCommandes["nbCommandes"] |e }}</td>
+
+                    {% for package in countPackages %}
+                        <td>{{ package["titre"] |e }}</td>
+                        <td>{{ package["nbCommandes"] |e }}</td>
+                    {% endfor %}
+
+                    {% for cheque in countCheques %}
+                        <td>{{ cheque["titre"] |e }}</td>
+                        <td>{{ cheque["nbCheque"] |e }}</td>
+                    {% endfor %}
+                    <td></td>
+
+                    countCheques
+                </tr>
+                </tbody>
+            </table>
+
+    </div>
+
+
 
     <table class="table">
         <thead>
             <tr>
+                <th>Matricule</th>
                 <th>Conseiller</th>
                 <th>colis</th>
                 <th>Cheque cadeaux</th>
                 <th>adresse email</th>
                 <th>CreatedAt</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for noel in noels %}
+        {% for salarie in salaries %}
+            {% set myVar = 2 %}
+            {% if myVar not in salarie.roles|keys %}
             <tr>
-                <td>{{ noel.user.username }}</td>
-                <td>{{ noel.choixColis.nomColis }}</td>
-                <td>{{ noel.choixCheque.nomCheque }}</td>
-                <td>{{ noel.adresseMail }}</td>
-                <td>{{ noel.CreatedAt ? noel.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('noel_show', {'id': noel.id}) }}">show</a>
-                    <a href="{{ path('noel_edit', {'id': noel.id}) }}">edit</a>
-                </td>
+                <td>{{ salarie.username }}</td>
+                <td>{{ salarie.nom }}</td>
+                {% for noel in noels %}
+                    {% if salarie.username == noel.salarie.username%}
+                        <td>{{ noel.package.titlePackage}}</td>
+                        <td>{{ noel.cheque.titleCheque }}</td>
+                        <td>{{ noel.emailSalarie }}</td>
+                        <td>{{ noel.createdAt ? noel.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
             </tr>
         {% else %}
             <tr>

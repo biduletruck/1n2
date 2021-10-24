@@ -7,6 +7,7 @@ use App\Entity\Users;
 use App\Form\RegistrationFormType;
 use App\Form\UsersType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -27,6 +28,7 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('Nom', 'Nom et prénom'),
             DateField::new('dateEntree', 'Date d\'entrée' ),
 //            TextField::new('password', 'Mot de passe'),
+        BooleanField::new('isActive', 'Utilisateur actif ?'),
 
             ChoiceField::new('roles', 'Role utilisateur')->setChoices(['ROLE_USER' => 'ROLE_USER','ROLE_ADMIN' => 'ROLE_ADMIN','ROLE_SUPERADMIN' => 'ROLE_SUPERADMIN'])->allowMultipleChoices(),
 

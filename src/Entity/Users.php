@@ -89,6 +89,11 @@ class Users implements UserInterface
      */
     private $commande21s;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
+
 
 
     public function __construct()
@@ -449,6 +454,18 @@ class Users implements UserInterface
                 $commande21->setSalarie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

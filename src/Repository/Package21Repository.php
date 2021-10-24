@@ -19,6 +19,16 @@ class Package21Repository extends ServiceEntityRepository
         parent::__construct($registry, Package21::class);
     }
 
+    public function countPackages()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p) as nbPackage')
+            ->addGroupBy('p.titlePackage')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Package21[] Returns an array of Package21 objects
     //  */

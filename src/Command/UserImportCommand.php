@@ -3,7 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Users;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 use Symfony\Component\Console\Command\Command;
@@ -19,16 +19,21 @@ class UserImportCommand extends Command
 
     private $em;
     private $passwordEncoder;
+    private $usersRepository;
     private $ajout = 0;
     private $exclus = 0;
     private $container;
 
-    public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, ContainerInterface $container)
+    public function __construct(EntityManagerInterface $em,
+                                UserPasswordEncoderInterface $passwordEncoder,
+                                ContainerInterface $container,
+                                UsersRepository $usersRepository)
     {
         parent::__construct();
 
         $this->em = $em;
         $this->container = $container;
+        $this->usersRepository = $usersRepository;
         $this->passwordEncoder = $passwordEncoder;
     }
 
@@ -48,10 +53,83 @@ class UserImportCommand extends Command
         );
     }
 
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    protected function deactiveAllUsers(): void
+    {
+        $allUsers = $this->usersRepository->findAll();
+        foreach ($allUsers as $user)
+        {
+            if (!in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+                $user->setIsActive(false);
+            }
+            $this->em->persist($user);
+        }
+        $this->em->flush();
+    }
+
+    /**
+     * @param $row
+     * @throws \Exception
+     */
+    protected function addNewuser($row): void
+    {
+        $user = new Users();
+        $user
+            ->setUsername($row["MATRICULE_RH"])
+            ->setPassword($this->asPassword($user, $row["PASSWORD"]))
+            ->setRoles(["ROLE_USER"])
+            ->setNom($row["NOM_PRENOM"])
+            ->setIsActive(true)
+            ->setDateEntree(new \DateTime($row["DT_ENTREE"]));
+        $this->em->persist($user);
+
+    }
+
+
+    /**
+     * @throws \Exception
+     */
+    protected function ifUserExist($user, $row)
+    {
+        /** @var  Users $user */
+        if($user !== null)
+        {
+            $this->updateEnterDaterUser($user, $row);
+            $this->activateUser($user);
+        }else{
+            $this->addNewuser($row);
+        }
+    }
+
+    protected function updateEnterDaterUser($user, $row): bool
+    {
+        /** @var  Users $user */
+        $user->setDateEntree(new \DateTime($row["DT_ENTREE"]));
+        $this->em->persist($user);
+
+        return true;
+    }
+
+    protected function activateUser($user): bool
+    {
+        /** @var  Users $user */
+        $user->setIsActive(true);
+        $this->em->persist($user);
+        return true;
+    }
+
+    /**
+     * @throws \League\Csv\InvalidArgument
+     * @throws \League\Csv\Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $io->title("Importation du fichier des nouveaux utilisateurs");
+
+        $this->deactiveAllUsers();
 
         $reader = Reader::createFromPath('%kernel.root_dir%/../public/csv/agents_cse.csv', 'r');
 
@@ -63,30 +141,9 @@ class UserImportCommand extends Command
         $io->progressStart(iterator_count($reader));
         foreach ($reader as $row)
         {
-            try {
-                $user = new Users();
-                $user
-                    ->setUsername($row["MATRICULE_RH"])
-                    ->setPassword($this->asPassword($user,$row["PASSWORD"] ))
-                    ->setRoles(["ROLE_USER"])
-                    ->setNom($row["NOM_PRENOM"])
-                    ->setDateEntree(new \DateTime($row["DT_ENTREE"]))
-                ;
-                $this->em->persist($user);
-                $this->em->flush();
-                $this->ajout ++;
-
-            } catch (UniqueConstraintViolationException $e) {
-                $errorMessage = $e->getMessage();
-                $this->em = $this->container->get('doctrine')->resetManager();
-                $this->exclus ++;
-            }
-            catch(\Exception $e){
-                $errorMessage = $e->getMessage();
-                $this->em = $this->container->get('doctrine')->resetManager();
-                $this->exclus ++;
-                print($errorMessage);
-            }
+            $user = $this->usersRepository->findOneBy(['username' => $row["MATRICULE_RH"]]);
+            $this->ifUserExist($user, $row);
+            $this->em->flush();
             $io->progressAdvance();
         }
 
@@ -97,4 +154,6 @@ class UserImportCommand extends Command
 
         return Command::SUCCESS;
     }
+
+
 }

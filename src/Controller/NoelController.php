@@ -32,12 +32,20 @@ class NoelController extends AbstractController
     /**
      * @Security("is_granted('ROLE_ADMIN')", statusCode=404, message="Resource not found.")
      * @Route("/list", name="noel_index", methods={"GET"})
-     * @param NoelRepository $noelRepository
+     * @param Commande21Repository $noelRepository
      * @return Response
      */
-    public function index(NoelRepository $noelRepository): Response
+    public function index(Commande21Repository $noelRepository,
+                          UsersRepository $usersRepository,
+                          Package21Repository $package21Repository,
+                          Cheque21Repository $cheque21Repository): Response
     {
         return $this->render('noel/index.html.twig', [
+            'salaries' =>$usersRepository->findBy([],['Nom' => 'ASC']),
+            'countUsers' => $usersRepository->countSalaries(),
+            'countCommandes' => $noelRepository->countCommandes(),
+            'countCheques' => $noelRepository->countCommandesByCheque(),
+            'countPackages' => $noelRepository->countCommandesByType(),
             'noels' => $noelRepository->findAll(),
         ]);
     }
@@ -45,6 +53,7 @@ class NoelController extends AbstractController
     /**
      * @Route("/", name="noel_new", methods={"GET","POST"})
      * @param Request $request
+     * @param UsersRepository $users
      * @param Commande21Repository $colisRepository
      * @param Package21Repository $package
      * @param Cheque21Repository $chequesRepository
