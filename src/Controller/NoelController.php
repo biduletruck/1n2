@@ -41,7 +41,7 @@ class NoelController extends AbstractController
                           Cheque21Repository $cheque21Repository): Response
     {
         return $this->render('noel/index.html.twig', [
-            'salaries' =>$usersRepository->findBy([],['Nom' => 'ASC']),
+            'salaries' =>$usersRepository->findBy(["isActive" =>true],['Nom' => 'ASC']),
             'countUsers' => $usersRepository->countSalaries(),
             'countCommandes' => $noelRepository->countCommandes(),
             'countCheques' => $noelRepository->countCommandesByCheque(),
