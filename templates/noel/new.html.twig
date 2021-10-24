@@ -5,6 +5,7 @@
 {% block body %}
 
     <div class="jumbotron">
+
 {#        <div class=" alert alert-danger">#}
 {#            Les commandes sont maintenant fermées.#}
 {#        </div>#}
@@ -21,7 +22,9 @@
         <h6>* Ces cadeaux sont exclusivement réservés à tous les salariés de Sitel Troyes.</h6>
         <h6>** Les colis seront offerts à TOUS les salariés sans restriction d' ancienneté.</h6>
         <h6>** Les chèque cadeaux seront offerts à tous les salariés ayant une ancienneté d’au moins 3 mois au sein de l’établissement au 31 Octobre 2021.</h6>
-
+        {% if is_granted("ROLE_ADMIN") %}
+            <a href="{{ path('noel_index') }}" class="btn btn-lg btn-dark">Listing Colis de Noël 2021</a>
+        {% endif %}
     </div>
     <div class="row justify-content-center">
         <div class="col-12 col-sm-12 col-md-10 col-lg-10">
