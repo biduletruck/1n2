@@ -3,7 +3,10 @@
 {% block title %}Noel index{% endblock %}
 
 {% block body %}
-    <div>
+    <div class="row text-center">
+        <div class="col-12">
+
+
         <h1>Listing des cadeaux de Noel 2021</h1>
             <table class="table">
                 <thead>
@@ -16,39 +19,68 @@
                 <tr>
                     <td>{{ countUsers["nbUsers"] |e }}</td>
                     <td>{{ countCommandes["nbCommandes"] |e }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6  ">
+            <table class="table text-center">
+                <thead>
+                <tr>
+                    <th colspan="2"> Les colis</th>
+                </tr>
+                <tr>
+                    <th>Colis</th>
+                    <th>nombre de colis</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                    {% for package in countPackages %}
+                        <tr>
+                            <td>{{ package["titre"] |e }}</td>
+                            <td>{{ package["nbCommandes"] |e }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-sm-12 col-md-6  ">
+            <table class="table text-center">
+                <thead>
+                <tr>
+                    <th colspan="2"> Les chèques</th>
+                </tr>
+                <tr>
+                    <th>Chèques</th>
+                    <th>nombre de chèques</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                {% for cheque in countCheques %}
+                    <tr>
+                        <td>{{ cheque["titre"] |e }}</td>
+                        <td>{{ cheque["nbCheque"] |e }}</td>
+                    </tr>
+                {% endfor %}
 
                 </tbody>
             </table>
 
-        <table class="table text-center">
-            <thead>
-            <tr>
-                <th colspan="2"> Les colis</th>
-                <th colspan="2"> Les chèques</th>
-            </tr>
-            <tr>
-                <th>Colis</th>
-                <th>nombre de colis</th>
-                <th>Cheque</th>
-                <th>Nombre de cheque</th>
-            </tr>
 
-            </thead>
-            <tbody>
-            <tr>
-                {% for package in countPackages %}
-                    <td>{{ package["titre"] |e }}</td>
-                    <td>{{ package["nbCommandes"] |e }}</td>
-                    {% endfor %}
+        </div>
 
-                {% for cheque in countCheques %}
-                    <td>{{ cheque["titre"] |e }}</td>
-                    <td>{{ cheque["nbCheque"] |e }}</td>
-                {% endfor %}
-            </tbody>
-        </table>
 
     </div>
+
+
+
 
 
 
