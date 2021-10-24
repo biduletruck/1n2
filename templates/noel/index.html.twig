@@ -4,17 +4,12 @@
 
 {% block body %}
     <div>
-        <h1>Listing des cadeaux de Noel 2021
+        <h1>Listing des cadeaux de Noel 2021</h1>
             <table class="table">
                 <thead>
                 <tr>
                     <th>Nombre de salariés</th>
                     <th>Nombre de commandes</th>
-                    <th>Colis</th>
-                    <th>nombre de colis</th>
-                    <th>Cheque</th>
-                    <th>Nombre de cheque</th>
-
                 </tr>
                 </thead>
                 <tbody>
@@ -22,21 +17,36 @@
                     <td>{{ countUsers["nbUsers"] |e }}</td>
                     <td>{{ countCommandes["nbCommandes"] |e }}</td>
 
-                    {% for package in countPackages %}
-                        <td>{{ package["titre"] |e }}</td>
-                        <td>{{ package["nbCommandes"] |e }}</td>
-                    {% endfor %}
-
-                    {% for cheque in countCheques %}
-                        <td>{{ cheque["titre"] |e }}</td>
-                        <td>{{ cheque["nbCheque"] |e }}</td>
-                    {% endfor %}
-                    <td></td>
-
-                    countCheques
-                </tr>
                 </tbody>
             </table>
+
+        <table class="table text-center">
+            <thead>
+            <tr>
+                <th colspan="2"> Les colis</th>
+                <th colspan="2"> Les chèques</th>
+            </tr>
+            <tr>
+                <th>Colis</th>
+                <th>nombre de colis</th>
+                <th>Cheque</th>
+                <th>Nombre de cheque</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr>
+                {% for package in countPackages %}
+                    <td>{{ package["titre"] |e }}</td>
+                    <td>{{ package["nbCommandes"] |e }}</td>
+                    {% endfor %}
+
+                {% for cheque in countCheques %}
+                    <td>{{ cheque["titre"] |e }}</td>
+                    <td>{{ cheque["nbCheque"] |e }}</td>
+                {% endfor %}
+            </tbody>
+        </table>
 
     </div>
 
