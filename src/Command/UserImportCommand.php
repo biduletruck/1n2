@@ -96,7 +96,7 @@ class UserImportCommand extends Command
         /** @var  Users $user */
         if($user !== null)
         {
-            $this->updateEnterDaterUser($user, $row);
+//            $this->updateEnterDaterUser($user, $row);
             $this->activateUser($user);
         }else{
             $this->addNewuser($row);
