@@ -94,7 +94,10 @@ class Users implements UserInterface
      */
     private $isActive;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity=Ancv2022commande::class, mappedBy="User")
+     */
+    private $ancv2022commandes;
 
     public function __construct()
     {
@@ -106,6 +109,9 @@ class Users implements UserInterface
         $this->halloweens = new ArrayCollection();
         $this->halloweenChecks = new ArrayCollection();
         $this->commande21s = new ArrayCollection();
+        $this->CreatedAt = new ArrayCollection();
+        $this->ancv2022comanndes = new ArrayCollection();
+        $this->ancv2022commandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -469,5 +475,40 @@ class Users implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Ancv2022commande>
+     */
+    public function getAncv2022commandes(): Collection
+    {
+        return $this->ancv2022commandes;
+    }
+
+    public function addAncv2022commande(Ancv2022commande $ancv2022commande): self
+    {
+        if (!$this->ancv2022commandes->contains($ancv2022commande)) {
+            $this->ancv2022commandes[] = $ancv2022commande;
+            $ancv2022commande->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAncv2022commande(Ancv2022commande $ancv2022commande): self
+    {
+        if ($this->ancv2022commandes->removeElement($ancv2022commande)) {
+            // set the owning side to null (unless already changed)
+            if ($ancv2022commande->getUser() === $this) {
+                $ancv2022commande->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
+
 
 }

@@ -81,9 +81,6 @@
     "doctrine/persistence": {
         "version": "2.1.0"
     },
-    "doctrine/reflection": {
-        "version": "1.2.1"
-    },
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
@@ -137,12 +134,6 @@
     },
     "nikic/php-parser": {
         "version": "v4.10.2"
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.2.3"
-    },
-    "php": {
-        "version": "7.2"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -248,9 +239,6 @@
         "files": [
             "./config/packages/dev/debug.yaml"
         ]
-    },
-    "symfony/debug-pack": {
-        "version": "v1.0.8"
     },
     "symfony/dependency-injection": {
         "version": "v5.1.8"
@@ -392,8 +380,8 @@
     "symfony/options-resolver": {
         "version": "v5.1.8"
     },
-    "symfony/orm-pack": {
-        "version": "v2.0.0"
+    "symfony/password-hasher": {
+        "version": "v5.4.8"
     },
     "symfony/phpunit-bridge": {
         "version": "4.3",
@@ -431,14 +419,14 @@
     "symfony/polyfill-php80": {
         "version": "v1.20.0"
     },
+    "symfony/polyfill-php81": {
+        "version": "v1.25.0"
+    },
     "symfony/polyfill-uuid": {
         "version": "v1.20.0"
     },
     "symfony/process": {
         "version": "v5.1.8"
-    },
-    "symfony/profiler-pack": {
-        "version": "v1.0.4"
     },
     "symfony/property-access": {
         "version": "v5.1.8"
@@ -490,9 +478,6 @@
     "symfony/serializer": {
         "version": "v5.1.8"
     },
-    "symfony/serializer-pack": {
-        "version": "v1.0.3"
-    },
     "symfony/service-contracts": {
         "version": "v2.2.0"
     },
@@ -501,9 +486,6 @@
     },
     "symfony/string": {
         "version": "v5.1.8"
-    },
-    "symfony/test-pack": {
-        "version": "v1.0.6"
     },
     "symfony/translation": {
         "version": "3.3",
@@ -537,9 +519,6 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
-    },
-    "symfony/twig-pack": {
-        "version": "v1.0.0"
     },
     "symfony/uid": {
         "version": "v5.1.8"
@@ -627,10 +606,7 @@
         ]
     },
     "twig/extra-bundle": {
-        "version": "v3.1.1"
-    },
-    "twig/intl-extra": {
-        "version": "v3.1.1"
+        "version": "v3.3.8"
     },
     "twig/twig": {
         "version": "v3.1.1"
@@ -649,11 +625,5 @@
     },
     "webmozart/assert": {
         "version": "1.9.1"
-    },
-    "zendframework/zend-code": {
-        "version": "3.4.1"
-    },
-    "zendframework/zend-eventmanager": {
-        "version": "3.2.1"
     }
 }
