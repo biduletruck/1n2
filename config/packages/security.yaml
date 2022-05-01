@@ -38,10 +38,18 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/register, roles: ROLE_SUPERADMIN }
-         - { path: ^/players, roles: ROLE_SUPERADMIN }
-         - { path: ^/users, roles: ROLE_SUPERADMIN }
-         - { path: ^/matches/new, roles: ROLE_SUPERADMIN }
+         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/players, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/users, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/matches/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-         - { path: /, roles: ROLE_USER }
-         - { path: /edit, roles: ROLE_SUPERADMIN }
+         - { path: /, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: /edit, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#         - { path: ^/admin, roles: ROLE_ADMIN }
+#           - { path: ^/register, roles: ROLE_SUPERADMIN }
+#           - { path: ^/players, roles: ROLE_SUPERADMIN }
+#           - { path: ^/users, roles: ROLE_SUPERADMIN }
+#           - { path: ^/matches/new, roles: ROLE_SUPERADMIN }
+#           - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#           - { path: /, roles: ROLE_USER }
+#           - { path: /edit, roles: ROLE_SUPERADMIN }
