@@ -44,9 +44,20 @@ class Ancv2022
      */
     private $User;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nomImage;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Ancien;
+
     public function __construct()
     {
         $this->User = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -128,6 +139,35 @@ class Ancv2022
                 $user->setCheque(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNomImage(): ?string
+    {
+        return $this->nomImage;
+    }
+
+    public function setNomImage(?string $nomImage): self
+    {
+        $this->nomImage = $nomImage;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
+    public function getAncien(): ?int
+    {
+        return $this->Ancien;
+    }
+
+    public function setAncien(int $Ancien): self
+    {
+        $this->Ancien = $Ancien;
 
         return $this;
     }

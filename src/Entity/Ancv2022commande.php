@@ -32,7 +32,10 @@ class Ancv2022commande
      */
     private $User;
 
-
+    public function __construct()
+    {
+        $this->CreatedAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ancv2022commande index{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1 class="">Commande de chèques vacances 2022</h1>
+    </div>
+    <div class="jumbotron">
+        Votre CSE a le plaisir de vous informer qu’il reconduira l’opération chèques cadeaux et carte culture cette année.
+        <br>
+        <br>
+        Les conditions d'attribution sont les suivantes:
+        <br>
+        <br>
+        Sont éligibles à la carte culture uniquement, les salariés ayant une ancienneté de 3 à 6 mois au 31 mars 2022.
+        <br>
+        <br>
+        Sont éligibles aux chèques vacances et/ou Carte culture, les salariés ayant plus de 6 mois d’ancienneté dans l’entreprise au 31 mars 2022.
+        <br>
+        Vous avez le choix entre 3 répartitions: <br>
+        1- 100% du montant en Carte Culture Illicado <br>
+        2- 100% du montant en Chèque vancances (format papier) => choix par defaut en cas de non réponse <br>
+        3- 50% du montant en Chèque vacances (format papier) + 50% du montant en Carte Culture Illicado
+        <br>
+        <a href="{{ path('app_ancv2022commande_new') }}" class="btn btn-lg btn-success">Je fais mon choix </a>
+    </div>
+
+
+    {% if is_granted("ROLE_ADMIN") %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom salarié</th>
+                <th>Validation</th>
+                <th>Type de chèque</th>
+                {% if is_granted("ROLE_SUPERADMIN") %}
+                    <th>actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for ancv2022commande in ancv2022commandes %}
+            <tr>
+                <td>{{ ancv2022commande.user.nom }}</td>
+                <td>{{ ancv2022commande.CreatedAt ? ancv2022commande.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ ancv2022commande.cheque.name }}</td>
+                {% if is_granted("ROLE_SUPERADMIN") %}
+                    <td>
+                        <a href="{{ path('app_ancv2022commande_show', {'id': ancv2022commande.id}) }}">show</a>
+                        <a href="{{ path('app_ancv2022commande_edit', {'id': ancv2022commande.id}) }}">edit</a>
+                    </td>
+                {% endif %}
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+{% endblock %}

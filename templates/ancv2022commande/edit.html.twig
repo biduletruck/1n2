@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Ancv2022commande{% endblock %}
+
+{% block body %}
+    <h1>Edit Ancv2022commande</h1>
+
+    {{ include('ancv2022commande/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_ancv2022commande_index') }}">back to list</a>
+
+    {{ include('ancv2022commande/_delete_form.html.twig') }}
+{% endblock %}

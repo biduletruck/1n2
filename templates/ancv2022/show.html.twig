@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ancv2022{% endblock %}
+
+{% block body %}
+    <h1>Ancv2022</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ancv2022.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ ancv2022.Name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ ancv2022.Description }}</td>
+            </tr>
+            <tr>
+                <th>Activated</th>
+                <td>{{ ancv2022.Activated ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ ancv2022.CreatedAt ? ancv2022.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NomImage</th>
+                <td>{{ ancv2022.nomImage }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ancv2022_index') }}">back to list</a>
+
+    <a href="{{ path('app_ancv2022_edit', {'id': ancv2022.id}) }}">edit</a>
+
+    {{ include('ancv2022/_delete_form.html.twig') }}
+{% endblock %}

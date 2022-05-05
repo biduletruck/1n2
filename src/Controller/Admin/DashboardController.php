@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Ancv2022;
+use App\Entity\Ancv2022commande;
 use App\Entity\Answers;
 use App\Entity\Bbq;
 use App\Entity\BbqEvent;
@@ -81,5 +83,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Colis de noel', null, Package21::class);
         yield MenuItem::linkToCrud('Cheque de noel', null, Cheque21::class);
         yield MenuItem::linkToCrud('Listing de Noel', null, Commande21::class);
+
+        yield MenuItem::section('Ancv 2022');
+        yield MenuItem::linkToCrud('Cheque vacances 2022', null, Ancv2022::class);
+        yield MenuItem::linkToCrud('Commande ANCV 2022', null, Ancv2022commande::class);
+
     }
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande 2022{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1 class="">Choisir ses chèques</h1>
+    </div>
+
+    {{ include('ancv2022commande/_form.html.twig') }}
+
+{#    <a href="{{ path('app_ancv2022commande_index') }}">back to list</a>#}
+{% endblock %}

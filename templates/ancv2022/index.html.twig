@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ancv2022 index{% endblock %}
+
+{% block body %}
+    <h1>Ancv2022 index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Activated</th>
+                <th>CreatedAt</th>
+                <th>NomImage</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ancv2022 in ancv2022s %}
+            <tr>
+                <td>{{ ancv2022.id }}</td>
+                <td>{{ ancv2022.Name }}</td>
+                <td>{{ ancv2022.Description }}</td>
+                <td>{{ ancv2022.Activated ? 'Yes' : 'No' }}</td>
+                <td>{{ ancv2022.CreatedAt ? ancv2022.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ ancv2022.nomImage }}</td>
+                <td>
+                    <a href="{{ path('app_ancv2022_show', {'id': ancv2022.id}) }}">show</a>
+                    <a href="{{ path('app_ancv2022_edit', {'id': ancv2022.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ancv2022_new') }}">Create new</a>
+{% endblock %}
