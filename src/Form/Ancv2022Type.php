@@ -17,6 +17,7 @@ class Ancv2022Type extends AbstractType
             ->add('Activated')
             ->add('CreatedAt')
             ->add('nomImage')
+            ->add('ancien')
         ;
     }
 
