@@ -55,7 +55,7 @@ class HomeController extends AbstractController
     {
         $open = new \DateTime();
         return $this->render('halloween2021/halloween2021_index.html.twig', [
-            'poll' => $pollsRepository->find(2),
+            'poll' => $pollsRepository->find(1),
             'open' => $open
         ]);
     }
