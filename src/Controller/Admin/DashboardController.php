@@ -77,8 +77,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Reponses', null, Answers::class);
         // yield MenuItem::linkToCrud('Liste des réponses', null, Choices::class);
 //         Menu Halloween
-//        yield MenuItem::linkToCrud('Listing des participations', null, HalloweenCheck::class);
-//        yield MenuItem::linkToCrud('Listing des quiz', null, Halloween::class);
+        yield MenuItem::linkToCrud('Listing des participations', null, HalloweenCheck::class);
+        yield MenuItem::linkToCrud('Listing des quiz', null, Halloween::class);
         yield MenuItem::section('Commandes de Noel 2021');
         yield MenuItem::linkToCrud('Colis de noel', null, Package21::class);
         yield MenuItem::linkToCrud('Cheque de noel', null, Cheque21::class);
