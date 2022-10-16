@@ -6,11 +6,11 @@
 
     <div class="jumbotron">
 
-        <div class=" alert alert-danger">
-            <h1>Les commandes sont maintenant fermées.</h1>
-            <H2>Si vous n'avez pas eu le temps de faire votre choix, il vous sera attribué</H2>
-            <h3>Le colis sucré et les chèque cadeaux au format papier (si vous en aviez le droit)</h3>
-        </div>
+{#        <div class=" alert alert-danger">#}
+{#            <h1>Les commandes sont maintenant fermées.</h1>#}
+{#            <H2>Si vous n'avez pas eu le temps de faire votre choix, il vous sera attribué</H2>#}
+{#            <h3>Le colis sucré et les chèques cadeaux au format papier (si vous en aviez le droit)</h3>#}
+{#        </div>#}
         <img src="{{ asset('build/logo_cse3.png') }}" alt="" width="150px" height="150px">
         <h3>Votre CSE Troyes a le plaisir de vous offrir <b>*</b> en cette fin d'année un colis gourmand et festif<b>**</b> ainsi que des chèques cadeaux<b>***</b></h3>
         <p>Nous avons présélectionné pour vous plusieurs thèmes de colis afin que vous puissiez choisir celui qui vous fera plaisir.</p>
@@ -24,7 +24,7 @@
         <h6>** Les colis seront offerts à TOUS les salariés sans restriction d'ancienneté.</h6>
         <h6>** Les chèques cadeaux seront offerts à tous les salariés ayant une ancienneté d’au moins 3 mois au sein de l’établissement au 31 Octobre 2022.</h6>
         {% if is_granted("ROLE_ADMIN") %}
-            <a href="{{ path('noel_index') }}" class="btn btn-lg btn-dark">Listing Colis de Noël 2021</a>
+            <a href="{{ path('noel_index') }}" class="btn btn-lg btn-dark">Listing Colis de Noël 2022</a>
         {% endif %}
     </div>
     <div class="row justify-content-center">
