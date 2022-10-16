@@ -69,7 +69,7 @@ class NoelController extends AbstractController
 
         $cheques = null;
         $form = $this->createForm(Commande21LightType::class, $noel);
-        if ($users->find($this->getUser())->getDateEntree() < new \DateTime('2021-07-31') )
+        if ($users->find($this->getUser())->getDateEntree() < new \DateTime('2022-10-31') )
         {
             $cheques = $chequesRepository->findBy(['profile' => True]);
             $form = $this->createForm(Commande21Type::class, $noel);
