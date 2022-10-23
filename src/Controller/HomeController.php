@@ -105,13 +105,13 @@ class HomeController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         if($request->isMethod('post'))
         {
-
-            $participation = $participationsRepository->findOneBy (['User' => $this->getUser(),'Poll' => $pollsRepository->find(2)]);
+//            dd($request->request->get("poll"));
+            $participation = $participationsRepository->findOneBy (['User' => $this->getUser(),'Poll' => $pollsRepository->find($request->request->get("poll"))]);
 
             $pollRepo = $entityManager->getRepository(Polls::class);
             $participation->getPoll();
 
-            $poll = $pollsRepository->find(1);
+            $poll = $pollsRepository->find($request->request->get("poll"));
 
             $questions = $poll->getQuestions();
 
@@ -170,7 +170,7 @@ class HomeController extends AbstractController
             $poll = $pollsRepository->find($openPoll->getId());
             $participation->setUser($this->getUser());
             $participation->setPoll($poll);
-//            $entityManager->persist($participation);
+            $entityManager->persist($participation);
             $entityManager->flush(); // Nous devons flusher une premiére fois pour avoir un identifiant pour la participation
 
             // on recherche les catégories de question

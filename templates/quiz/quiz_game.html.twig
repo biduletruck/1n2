@@ -9,7 +9,7 @@
                 <H1>{{ poll.title }}</H1>
             </div>
         </div>
-
+{{ dump(form) }}
     </section>
     <section>
         <div class="row rounded justify-content-center align-self-center ">
@@ -36,6 +36,7 @@
                             </div>
                         </div>
                     {% endfor %}
+                    <input type="hidden" name="poll" value="{{ poll.id }}">
                     <div class="col-12 text-center">
                         <button class="btn btn-lg btn-success scary" type="submit" >Valider</button>
                     </div>
