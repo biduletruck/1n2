@@ -36,15 +36,26 @@ class PollsRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Polls
+
+    public function findQuizIsOpen($value): ?polls
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->andWhere('p.openAt < :val')
+            ->andWhere('p.closedAt >:val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
+    public function findNextQuiz($value): ?polls
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.openAt > :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
 }

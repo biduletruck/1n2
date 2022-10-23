@@ -36,15 +36,16 @@ class ParticipationsRepository extends ServiceEntityRepository
     }
 
 
-    /*
-    public function findOneBySomeField($value): ?Participations
+
+    public function findParticipation($user, $quiz): ?Participations
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('p.Poll = :quiz')
+            ->andWhere('p.User = :user')
+            ->setParameter('quiz', $quiz)
+            ->setParameter('user', $user)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

@@ -54,6 +54,8 @@ class UsersController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+
+            $user->setIsActive(true);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();

@@ -36,15 +36,38 @@ class QuestionsRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Questions
+
+    public function countCategorysInQuestion($quiz)
     {
         return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('COUNT(DISTINCT q.Difficulty) as nbCat')
+            ->andWhere('q.Poll = :quiz')
+            ->setParameter('quiz', $quiz)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
+    public function QuestionsInCategory($category)
+    {
+        return $this->createQueryBuilder('q')
+            ->select('DISTINCT q.id as Questions')
+            ->andWhere('q.Difficulty = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findCategorysInQuestion($quiz)
+    {
+        return $this->createQueryBuilder('q')
+            ->select('DISTINCT q.Difficulty as category')
+            ->andWhere('q.Poll = :quiz')
+            ->setParameter('quiz', $quiz)
+            ->getQuery()
+            ->getArrayResult()
+            ;
+    }
+
 }

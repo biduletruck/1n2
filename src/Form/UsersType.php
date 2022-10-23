@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Users;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -22,7 +23,7 @@ class UsersType extends AbstractType
             ->add('nom', TextType::class, [
                 'attr'      => array('class' => 'form-control')
             ])
-            ->remove('password', PasswordType::class, [
+            ->add('password', PasswordType::class, [
                 'required' => false,
                 'attr'      => array('class' => 'form-control')
             ])
@@ -38,6 +39,16 @@ class UsersType extends AbstractType
                     'SuperAdministrateur' => 'ROLE_SUPERADMIN'
                 ]
             ))
+//            ->add('isActive', ChoiceType::class, array(
+//                'label'  => 'actif' ,
+//                'expanded'  => true,
+//                'multiple'  => true,
+//                'attr'      => array('class' => 'form-check'),
+//                'choices'  => [
+//                    'Oui' => true,
+//                    'Non' => false
+//                ]
+//            ))
             ->add('dateEntree', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
