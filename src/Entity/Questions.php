@@ -44,6 +44,16 @@ class Questions
      */
     private $QuestionNumber;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Picture;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Difficulty;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
@@ -154,6 +164,30 @@ class Questions
     public function setQuestionNumber(int $QuestionNumber): self
     {
         $this->QuestionNumber = $QuestionNumber;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->Picture;
+    }
+
+    public function setPicture(?string $Picture): self
+    {
+        $this->Picture = $Picture;
+
+        return $this;
+    }
+
+    public function getDifficulty(): ?int
+    {
+        return $this->Difficulty;
+    }
+
+    public function setDifficulty(int $Difficulty): self
+    {
+        $this->Difficulty = $Difficulty;
 
         return $this;
     }

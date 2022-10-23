@@ -17,6 +17,8 @@ class AnswerType extends AbstractType
             ->add('AnswerValue')
             ->add('Question')
             ->add('choices')
+            ->add('Picture')
+            ->add('Difficulty')
         ;
     }
 
