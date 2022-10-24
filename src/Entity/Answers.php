@@ -38,12 +38,12 @@ class Answers
     /**
      * @ORM\Column(type="integer")
      */
-    private $AnswerNumber;
+    private ?int $AnswerNumber;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $AnswerValue;
+    private ?int $AnswerValue;
 
     public function __construct()
     {

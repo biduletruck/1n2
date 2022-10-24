@@ -21,22 +21,23 @@
                         <div class="row">
                             <div class="col-12">
                                 <br>
+                                <H2 class="summer-text halloweek">{{ question.wording | raw }}</H2>
 
+                                {% for answer in question.answers.values %}
 
-                                <H2 class="summer-text halloweek">{{ question[0].wording | raw }}</H2>
-                                {% for reponse in question[0].answers %}
                                     <div class="row summer-text">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="{{ question[0].id }}" id="{{ reponse.id }}" name="{{ reponse.id }}"  value="{{ reponse.id }}">
-                                            <label class="form-check-label" for="{{ question[0].id }}">{{ reponse.Wording | raw}}</label>
+                                            <input class="form-check-input" type="radio" name="{{ question.id }}" id="{{ answer.id }}"  value="{{ answer.id }}">
+                                            <label class="form-check-label" for="{{ question.id }}">{{ answer.Wording | raw}}</label>
                                         </div>
                                     </div>
+
                                 {% endfor %}
-                                <br>
+{#                                <br>#}
                             </div>
                         </div>
                     {% endfor %}
-                    <input type="hidden" name="poll" value="{{ poll.id }}">
+{#                    <input type="hidden" name="poll" value="{{ poll.id }}">#}
                     <div class="col-12 text-center">
                         <button class="btn btn-lg btn-success scary" type="submit" >Valider</button>
                     </div>

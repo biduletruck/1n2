@@ -109,21 +109,25 @@ class HomeController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         if($request->isMethod('post'))
         {
-//            dd($request->request->get("poll"));
-            $participation = $participationsRepository->findOneBy (['User' => $this->getUser(),'Poll' => $pollsRepository->find($request->request->get("poll"))]);
-
+            $truc = $request->request->keys();
+//            dd($truc[0]);
+            $tempPoll = $questionsRepository->find($truc[0])->getPoll()->getId();
+            $participation = $participationsRepository->findOneBy (['User' => $this->getUser(),'Poll' => $pollsRepository->find($tempPoll)]);
+//            dd($participation);
             $pollRepo = $entityManager->getRepository(Polls::class);
             $participation->getPoll();
 
-            $poll = $pollsRepository->find($request->request->get("poll"));
+            $poll = $pollsRepository->find($tempPoll);
 
             $questions = $poll->getQuestions();
 
             $result = $request->request;
             $totalPoints = 0;
             $heureValidation = new \DateTime();
+
             foreach ($result as $q => $r)
             {
+
                 // Choix pour la première question
                 $questionOne = $questions->get($q);
                 $answers = $answersRepository->find($r);
@@ -164,7 +168,7 @@ class HomeController extends AbstractController
 
         //on vérifie la participation à ce quiz
         $participation = $participationsRepository->findParticipation($usersRepository->find($this->getUser())->getId(), $openPoll->getId() );
-
+//        $participation = "";
         //si aucune particiaption alors ...
         if(empty($participation)) {
 
@@ -189,10 +193,10 @@ class HomeController extends AbstractController
                     $listing[] = $list["Questions"];
                 }
                 //tire au sort 1 question au hasard par catégorie
-                $questions[] = $questionsRepository->findBy(["Difficulty" => $category['category'], "QuestionNumber" => $listing[array_rand($listing,1)]]);
+                $questions[] = $questionsRepository->find($listing[array_rand($listing,1)]);
 
+//                dd($listing, $listing[array_rand($listing,1)],$questions[0]->getAnswers()->getIterator());
             }
-//            dd($questions);
         }
         else{
                 $this->addFlash('danger', 'Vous avez déjà participé au quiz !!');
