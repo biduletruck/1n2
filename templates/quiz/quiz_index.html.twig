@@ -3,6 +3,12 @@
 {% block title %}Quiz CSE{% endblock %}
 
 {% block body %}
+    {{ dump(poll)}}
+
+    {% if poll.defaultPoll == true %}
+        <h1>Truc de fou</h1>
+    {% endif %}
+
     <div class="row">
         <div class="col-12 text-center scary summer-text">
             {% if poll.openAt > open  %}
@@ -17,7 +23,7 @@
         <div class="col-md-12 col-lg-8 summer-bg">
             <div class="row text-left">
                 <div class="col-12">
-                    <h1 class=" title_alert text-center scary">Quiz Tim Burton</h1>
+                    <h1 class=" title_alert text-center scary">{{ poll.title }}</h1>
                 </div>
                 <div class="col-12 text-center scary summer-text ">
                     <div class="col-12">
@@ -41,7 +47,7 @@
                 </div>
                 <div class="col-12 text-center scary">
                     <h2 class="alert-danger text-center">Avant de commencer, assurez-vous d'avoir le temps nécessaire aucun retour ne sera possible ... et pas de seconde chance!</h2>
-                    <h2 class="alert-danger text-center">Vous n'aurez que 5 minutes pour répondre au questionnaire!</h2>
+                    <h2 class="alert-danger text-center">Vous n'aurez que {{ poll.duration}} minutes pour répondre au questionnaire!</h2>
                 </div>
             </div>
         </div>
