@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Polls;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -26,6 +27,9 @@ class PollsCrudController extends AbstractCrudController
             DateTimeField::new('openAt', 'Date d\' ouverture du quizz'),
             DateTimeField::new('closedAt', 'Date de fermeture du quizz'),
             IntegerField::new('Duration', 'Durée du quizz'),
+            TextEditorField::new('Description'),
+            TextEditorField::new('Consignes'),
+            BooleanField::new('DefaultPoll'),
         ];
     }
 }

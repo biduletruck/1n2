@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\Ancv2022Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -170,5 +171,10 @@ class Ancv2022
         $this->Ancien = $Ancien;
 
         return $this;
+    }
+
+    public function isActivated(): ?bool
+    {
+        return $this->Activated;
     }
 }

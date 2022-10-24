@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AncvRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -77,5 +78,10 @@ class Ancv
         $this->User = $User;
 
         return $this;
+    }
+
+    public function isAnswers(): ?bool
+    {
+        return $this->Answers;
     }
 }

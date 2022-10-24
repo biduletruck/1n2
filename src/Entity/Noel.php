@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\NoelRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -131,5 +132,10 @@ class Noel
         $this->optin = $optin;
 
         return $this;
+    }
+
+    public function isOptin(): ?bool
+    {
+        return $this->optin;
     }
 }

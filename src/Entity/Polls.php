@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PollsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,6 +54,21 @@ class Polls
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $closedAt;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $Description;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $Consignes;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $DefaultPoll;
 
 
     public function __construct()
@@ -190,6 +206,42 @@ class Polls
     public function setClosedAt(?\DateTimeInterface $closedAt): self
     {
         $this->closedAt = $closedAt;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->Description;
+    }
+
+    public function setDescription(?string $Description): self
+    {
+        $this->Description = $Description;
+
+        return $this;
+    }
+
+    public function getConsignes(): ?string
+    {
+        return $this->Consignes;
+    }
+
+    public function setConsignes(?string $Consignes): self
+    {
+        $this->Consignes = $Consignes;
+
+        return $this;
+    }
+
+    public function isDefaultPoll(): ?bool
+    {
+        return $this->DefaultPoll;
+    }
+
+    public function setDefaultPoll(bool $DefaultPoll): self
+    {
+        $this->DefaultPoll = $DefaultPoll;
 
         return $this;
     }

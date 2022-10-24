@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BbqEventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -187,6 +188,36 @@ class BbqEvent
         $this->tennis = $tennis;
 
         return $this;
+    }
+
+    public function isConjoint(): ?bool
+    {
+        return $this->conjoint;
+    }
+
+    public function isPresent(): ?bool
+    {
+        return $this->present;
+    }
+
+    public function isReglement(): ?bool
+    {
+        return $this->reglement;
+    }
+
+    public function isRoller(): ?bool
+    {
+        return $this->roller;
+    }
+
+    public function isFoot(): ?bool
+    {
+        return $this->foot;
+    }
+
+    public function isTennis(): ?bool
+    {
+        return $this->tennis;
     }
 
 

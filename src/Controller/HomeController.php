@@ -59,6 +59,10 @@ class HomeController extends AbstractController
         if (empty($openPoll))
         {
             $openPoll = $pollsRepository->findNextQuiz((new \DateTime()));
+            if (empty($openPoll))
+            {
+                $openPoll = $pollsRepository->findOneBy(["DefaultPoll" => 1]);
+            }
         }
 //        else {
 //            $this->addFlash('danger', 'la participation à ce quizz est fermé');
