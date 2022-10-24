@@ -3,57 +3,44 @@
 {% block title %}Quiz CSE{% endblock %}
 
 {% block body %}
-    {{ dump(poll)}}
-
-    {% if poll.defaultPoll == true %}
-        <h1>Truc de fou</h1>
-    {% endif %}
-
-    <div class="row">
-        <div class="col-12 text-center scary summer-text">
-            {% if poll.openAt > open  %}
-                <h1>Ouverture du quiz le {{ poll.openAt | format_datetime(locale='fr') }}</h1>
-            {% else %}
-                <h1>Fermeture du quiz le {{ poll.closedAt | format_datetime(locale='fr') }}</h1>
-            {% endif %}
-            <br>
-        </div>
-    </div>
-    <div class="row justify-content-center align-self-center  ">
-        <div class="col-md-12 col-lg-8 summer-bg">
-            <div class="row text-left">
-                <div class="col-12">
-                    <h1 class=" title_alert text-center scary">{{ poll.title }}</h1>
-                </div>
-                <div class="col-12 text-center scary summer-text ">
-                    <div class="col-12">
-                        <H2>Votre CSE organise un grand quiz pour tous les salariés de Sitel Troyes !</H2>
-                        <h3>Avant de commencer nous vous invitons à prendre connaisance des consignes de jeu, sous peine d'invalider votre participation.</h3>
-                    </div>
-{#                   <div class="col-12">#}
-{#                       <br>#}
-{#                       <h3>Afin de limiter les fraudes, nous avons mis en place des règles stricts pour que vous ne puissiez participer qu'une seule et unique fois !</h3>#}
-{#                       <br>#}
-{#                       <h3>ATTENTION, ne pas respecter les règles suivantes aura pour concéquence d'invalider votre participation !</h3>#}
-{#                   </div>#}
-                </div>
-                <div class="col-12 summer-text">
-                    <ul>
-                        <li>Il est interdit de rafraichir la page</li>
-                        <li>Il est interdit de revenir à la page précédente</li>
-                        <li>Il est interdit de recommencer le quizz</li>
-                        <li>Il est interdit de fermer la page pour reprendre le quiz</li>
-                    </ul>
-                </div>
-                <div class="col-12 text-center scary">
-                    <h2 class="alert-danger text-center">Avant de commencer, assurez-vous d'avoir le temps nécessaire aucun retour ne sera possible ... et pas de seconde chance!</h2>
-                    <h2 class="alert-danger text-center">Vous n'aurez que {{ poll.duration}} minutes pour répondre au questionnaire!</h2>
-                </div>
+        <div class="row">
+            <div class="col-12 text-center scary summer-text">
+                <h1>{{ poll.title }}</h1>
             </div>
         </div>
-    </div>
+    {% if poll.defaultPoll == false %}
+        <br>
+        <div class="row">
+            <div class="col-12 text-center scary summer-text">
+                {% if poll.openAt > open  %}
+                    <h1>Ouverture du quiz le {{ poll.openAt | format_datetime(locale='fr') }}</h1>
+                {% else %}
+                    <h1>Fermeture du quiz le {{ poll.closedAt | format_datetime(locale='fr') }}</h1>
+                {% endif %}
+                <br>
+            </div>
+        </div>
+    {% endif %}
+        <br>
+        <div class="row">
+            <div class="col-12 text-center scary summer-text">
+                <h1>{{ poll.description | raw}}</h1>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12 scary summer-text">
+                {{ poll.consignes | raw}}
+            </div>
+        </div>
     <br>
     {% if open > poll.openAt  and  open < poll.closedAt %}
+
+        <div class="col-12 text-center scary">#}
+            <h2 class="alert-danger text-center">Avant de commencer, assurez-vous d'avoir le temps nécessaire aucun retour ne sera possible ... et pas de seconde chance!</h2>
+            <h2 class="alert-danger text-center">Vous n'aurez que {{ poll.duration}} minutes pour répondre au questionnaire!</h2>
+        </div>
+        <br>
         <div class="row">
             <div class="col-12 text-center scary">
                 <a href="{{ path('quiz_play') }}" class="btn btn-lg btn-danger">J'ai compris les conditions ... je me lance</a>
