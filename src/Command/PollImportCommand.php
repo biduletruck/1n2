@@ -25,6 +25,7 @@ class PollImportCommand extends Command
     private $em;
     private $questionsRepository;
     private $pollsRepository;
+    private $poll;
 
 
     private $container;
@@ -73,11 +74,16 @@ class PollImportCommand extends Command
                 $poll
                     ->setTitle(utf8_encode($row["poll_wording"]))
                     ->setDuration((int)$row["poll_duration"])
+                    ->setDefaultPoll(0)
+                    ->setIdentifiant(utf8_encode($row['identifiant']))
                     ->setCreatedAt(new \DateTime())
 
                 ;
                 $this->em->persist($poll);
                 $this->em->flush();
+
+                $this->poll = $this->pollsRepository->findOneBy(["identifiant" => $row['identifiant'] ]);
+
 //                $this->ajout ++;
 
             } catch (UniqueConstraintViolationException $e) {
@@ -109,9 +115,11 @@ class PollImportCommand extends Command
             try {
                 $question = new Questions();
                 $question
-                    ->setPoll($this->pollsRepository->find($row["poll_id"]))
+                    ->setPoll($this->pollsRepository->find($this->poll))
                     ->setWording(utf8_encode($row["question_wording"]))
                     ->setQuestionNumber((int) $row["question_number"])
+                    ->setPicture($row["picture"])
+                    ->setDifficulty((int) $row["difficulty"])
 
                 ;
                 $this->em->persist($question);

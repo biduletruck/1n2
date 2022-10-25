@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class PollImportCommand extends Command
+class OldPollsImportCommand extends Command
 {
     protected static $defaultName = 'pollImport';
 
