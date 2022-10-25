@@ -23,6 +23,7 @@ class PollsCrudController extends AbstractCrudController
         return [
 //            IdField::new('Id'),
             TextField::new('Title', 'Titre du quizz'),
+            TextField::new('Identifiant','Identifiant'),
             DateTimeField::new('CreatedAt', 'Créé Le'),
             DateTimeField::new('openAt', 'Date d\' ouverture du quizz'),
             DateTimeField::new('closedAt', 'Date de fermeture du quizz'),

@@ -70,6 +70,11 @@ class Polls
      */
     private $DefaultPoll;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Identifiant;
+
 
     public function __construct()
     {
@@ -242,6 +247,18 @@ class Polls
     public function setDefaultPoll(bool $DefaultPoll): self
     {
         $this->DefaultPoll = $DefaultPoll;
+
+        return $this;
+    }
+
+    public function getIdentifiant(): ?string
+    {
+        return $this->Identifiant;
+    }
+
+    public function setIdentifiant(?string $Identifiant): self
+    {
+        $this->Identifiant = $Identifiant;
 
         return $this;
     }
