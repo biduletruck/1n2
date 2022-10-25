@@ -30,13 +30,20 @@
 {#                        <li class="nav-item"><a href="{{ path('bbq') }}" class="nav-link text-uppercase font-weight-bold">BBQ Sitel3</a></li>#}
 {#                    </ul>#}
                      <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="{{ path('halloween_index') }}" class="nav-link text-uppercase font-weight-bold">Quizz d' Halloween</a></li>
-                        <li class="nav-item"><a href="{{ path('halloween_classement') }}" class="nav-link text-uppercase font-weight-bold">Classement</a></li>
+                        <li class="nav-item"><a href="{{ path('quiz') }}" class="nav-link text-uppercase font-weight-bold">Quizz</a></li>
+{#                        <li class="nav-item"><a href="{{ path('halloween_classement') }}" class="nav-link text-uppercase font-weight-bold">Classement</a></li>#}
+                    </ul>
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="{{ path('noel_new') }}" class="nav-link text-uppercase font-weight-bold">Colis de Noël</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item"><a href="{{ path('noel_index') }}" class="nav-link text-uppercase font-weight-bold">Listing des colis</a></li>
+                        {% endif %}
                     </ul>
 {#                    {% if is_granted('ROLE_ADMIN') %}#}
 {#                    <ul class="navbar-nav ml-auto">#}
 {#                        <li class="nav-item"><a href="{{ path('halloween_check_index') }}" class="nav-link text-uppercase font-weight-bold">Listing participants</a></li>#}
-{#                        <li class="nav-item"><a href="{{ path('halloween_list') }}" class="nav-link text-uppercase font-weight-bold">Listing Quiz</a></li>#}
+{#                        <li class="nav-item"><a href="{{ path('noel_index') }}" class="nav-link text-uppercase font-weight-bold">Listing Quiz</a></li>#}
 {#                    </ul>#}
 {#                    <ul class="navbar-nav ml-auto">#}
 {#                        <li class="nav-item"><a href="{{ path('noel_new') }}" class="nav-link text-uppercase font-weight-bold">Colis de Noël 2021</a></li>#}

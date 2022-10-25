@@ -26,6 +26,7 @@ class PollImportCommand extends Command
     private $questionsRepository;
     private $pollsRepository;
     private $poll;
+    private $newQuestion;
 
 
     private $container;
@@ -64,25 +65,31 @@ class PollImportCommand extends Command
             ->setEnclosure('"')
             ->setHeaderOffset(0);
 
+
         $io->progressStart(iterator_count($reader_poll));
 
         $io->section("Création du nouveau questionnaire");
         foreach ($reader_poll as $row)
         {
+//            dd($row);
             try {
                 $poll = new Polls();
                 $poll
-                    ->setTitle(utf8_encode($row["poll_wording"]))
-                    ->setDuration((int)$row["poll_duration"])
+                    ->setTitle($row["title"])
+                    ->setDuration((int)$row["duration"])
                     ->setDefaultPoll(0)
-                    ->setIdentifiant(utf8_encode($row['identifiant']))
+                    ->setIdentifiant($row['identifiant'])
                     ->setCreatedAt(new \DateTime())
+//                    ->setOpenAt(new \DateTime($row['open_at']))
+//                    ->setClosedAt(new \DateTime($row['closed_ad']))
+                    ->setConsignes($row['consignes'])
+                    ->setDescription($row['descritpion'])
 
                 ;
                 $this->em->persist($poll);
                 $this->em->flush();
 
-                $this->poll = $this->pollsRepository->findOneBy(["identifiant" => $row['identifiant'] ]);
+                $this->poll = $this->pollsRepository->findOneBy(["Identifiant" => $row['identifiant'] ]);
 
 //                $this->ajout ++;
 
@@ -112,11 +119,13 @@ class PollImportCommand extends Command
         $io->section("Importation des questions");
         foreach ($reader_questions as $row)
         {
+//            dd($row);
+
             try {
                 $question = new Questions();
                 $question
-                    ->setPoll($this->pollsRepository->find($this->poll))
-                    ->setWording(utf8_encode($row["question_wording"]))
+                    ->setPoll($this->poll)
+                    ->setWording("<div>" . $row["wording"] . "</div>")
                     ->setQuestionNumber((int) $row["question_number"])
                     ->setPicture($row["picture"])
                     ->setDifficulty((int) $row["difficulty"])
@@ -151,11 +160,13 @@ class PollImportCommand extends Command
         $io->section("Importation des réponses");
         foreach ($reader_answer as $row)
         {
+//            $tmpQuestion = $this->questionsRepository->findOneBy()by(["QuestionNumber" => $row["question_identifiant"]]);
+
             try {
                 $reponse = new Answers();
                 $reponse
-                    ->setQuestion($this->questionsRepository->find($row["question_id"]))
-                    ->setWording(utf8_encode($row["answer_wording"]))
+                    ->setQuestion($this->questionsRepository->findOneBy(["QuestionNumber" => $row["question_identifiant"]]))
+                    ->setWording("<div>" . $row["wording"] . "</div>")
                     ->setAnswerNumber((int) $row["answer_number"])
                     ->setAnswerValue((int) $row["answer_value"])
 

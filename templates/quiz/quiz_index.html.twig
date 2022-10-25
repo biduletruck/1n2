@@ -15,7 +15,7 @@
                 {% if poll.openAt > open  %}
                     <h1>Ouverture du quiz le {{ poll.openAt | format_datetime(locale='fr') }}</h1>
                 {% else %}
-                    <h1>Fermeture du quiz le {{ poll.closedAt | format_datetime(locale='fr') }}</h1>
+                    <h3>Fermeture du quiz le {{ poll.closedAt | format_datetime(locale='fr') }}</h3>
                 {% endif %}
                 <br>
             </div>
@@ -30,7 +30,7 @@
         <br>
         <div class="row">
             <div class="col-12 scary summer-text">
-                {{ poll.consignes | raw}}
+                <h3> {{ poll.consignes | raw}}</h3>
             </div>
         </div>
     <br>

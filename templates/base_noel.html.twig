@@ -18,11 +18,11 @@
     </head>
 
     <body class="body_noel">
-{#    {% block nav %}#}
-{#        {% if is_granted('ROLE_USER') %}#}
-{#            {% include "nav/nav.html.twig" %}#}
-{#        {% endif %}#}
-{#    {% endblock %}#}
+    {% block nav %}
+        {% if is_granted('ROLE_USER') %}
+            {% include "nav/nav.html.twig" %}
+        {% endif %}
+    {% endblock %}
 
     <div class="container-fluid ">
         {% if app.session is not null and app.session.started %}
