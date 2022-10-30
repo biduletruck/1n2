@@ -3,7 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, height=device-height" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            #sortable { list-style-type: none; margin: 0; padding: 0; width: 700px; }
+            #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 150px; height: 150px; font-size: 4em; text-align: center; }
+        </style>
         <title>
             CeSitel3 |
             {% block title %}
@@ -50,6 +54,15 @@
 
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+        <script>
+            $( function() {
+                $( "#sortable" ).sortable().disableSelection();
+
+            } );
+        </script>
     {% endblock %}
     {% block js %}
     {% endblock %}

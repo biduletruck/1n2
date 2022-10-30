@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CPClassement{% endblock %}
+
+{% block body %}
+    <h1>CPClassement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ c_p_classement.id }}</td>
+            </tr>
+            <tr>
+                <th>ClassementPhoto</th>
+                <td>{{ c_p_classement.ClassementPhoto }}</td>
+            </tr>
+            <tr>
+                <th>NombrePoints</th>
+                <td>{{ c_p_classement.NombrePoints }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ c_p_classement.UpdatedAt ? c_p_classement.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_c_p_classement_index') }}">back to list</a>
+
+    <a href="{{ path('app_c_p_classement_edit', {'id': c_p_classement.id}) }}">edit</a>
+
+    {{ include('cp_classement/_delete_form.html.twig') }}
+{% endblock %}

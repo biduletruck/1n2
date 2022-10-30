@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CPImages{% endblock %}
+
+{% block body %}
+    <h1>CPImages</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ c_p_image.id }}</td>
+            </tr>
+            <tr>
+                <th>NonParticipant</th>
+                <td>{{ c_p_image.NonParticipant }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ c_p_image.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_c_p_images_index') }}">back to list</a>
+
+    <a href="{{ path('app_c_p_images_edit', {'id': c_p_image.id}) }}">edit</a>
+
+    {{ include('cp_images/_delete_form.html.twig') }}
+{% endblock %}

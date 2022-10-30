@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CPImages{% endblock %}
+
+{% block body %}
+    <h1>Edit CPImages</h1>
+
+    {{ include('cp_images/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_c_p_images_index') }}">back to list</a>
+
+    {{ include('cp_images/_delete_form.html.twig') }}
+{% endblock %}

@@ -100,6 +100,16 @@ class Users implements UserInterface
      */
     private $ancv2022commandes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CPParticipation::class, mappedBy="User")
+     */
+    private $cPParticipations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CPClassement::class, mappedBy="User")
+     */
+    private $cPClassements;
+
     public function __construct()
     {
         $this->predictions = new ArrayCollection();
@@ -113,6 +123,8 @@ class Users implements UserInterface
         $this->CreatedAt = new ArrayCollection();
         $this->ancv2022comanndes = new ArrayCollection();
         $this->ancv2022commandes = new ArrayCollection();
+        $this->cPParticipations = new ArrayCollection();
+        $this->cPClassements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -510,6 +522,66 @@ class Users implements UserInterface
     public function isIsActive(): ?bool
     {
         return $this->isActive;
+    }
+
+    /**
+     * @return Collection<int, CPParticipation>
+     */
+    public function getCPParticipations(): Collection
+    {
+        return $this->cPParticipations;
+    }
+
+    public function addCPParticipation(CPParticipation $cPParticipation): self
+    {
+        if (!$this->cPParticipations->contains($cPParticipation)) {
+            $this->cPParticipations[] = $cPParticipation;
+            $cPParticipation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCPParticipation(CPParticipation $cPParticipation): self
+    {
+        if ($this->cPParticipations->removeElement($cPParticipation)) {
+            // set the owning side to null (unless already changed)
+            if ($cPParticipation->getUser() === $this) {
+                $cPParticipation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CPClassement>
+     */
+    public function getCPClassements(): Collection
+    {
+        return $this->cPClassements;
+    }
+
+    public function addCPClassement(CPClassement $cPClassement): self
+    {
+        if (!$this->cPClassements->contains($cPClassement)) {
+            $this->cPClassements[] = $cPClassement;
+            $cPClassement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCPClassement(CPClassement $cPClassement): self
+    {
+        if ($this->cPClassements->removeElement($cPClassement)) {
+            // set the owning side to null (unless already changed)
+            if ($cPClassement->getUser() === $this) {
+                $cPClassement->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
 

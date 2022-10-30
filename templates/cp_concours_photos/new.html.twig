@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CPConcoursPhotos{% endblock %}
+
+{% block body %}
+    <h1>Create new CPConcoursPhotos</h1>
+
+    {{ include('cp_concours_photos/_form.html.twig') }}
+
+    <a href="{{ path('app_c_p_concours_photos_index') }}">back to list</a>
+{% endblock %}

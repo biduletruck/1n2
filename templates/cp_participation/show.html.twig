@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CPParticipation{% endblock %}
+
+{% block body %}
+    <h1>CPParticipation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ c_p_participation.id }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ c_p_participation.CreatedAt ? c_p_participation.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_c_p_participation_index') }}">back to list</a>
+
+    <a href="{{ path('app_c_p_participation_edit', {'id': c_p_participation.id}) }}">edit</a>
+
+    {{ include('cp_participation/_delete_form.html.twig') }}
+{% endblock %}

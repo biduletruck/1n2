@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CPImages index{% endblock %}
+
+{% block body %}
+    <h1>CPImages index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NonParticipant</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for c_p_image in c_p_images %}
+            <tr>
+                <td>{{ c_p_image.id }}</td>
+                <td>{{ c_p_image.NonParticipant }}</td>
+                <td>{{ c_p_image.image }}</td>
+                <td>
+                    <a href="{{ path('app_c_p_images_show', {'id': c_p_image.id}) }}">show</a>
+                    <a href="{{ path('app_c_p_images_edit', {'id': c_p_image.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_c_p_images_new') }}">Create new</a>
+{% endblock %}

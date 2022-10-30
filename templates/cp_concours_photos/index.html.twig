@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CPConcoursPhotos index{% endblock %}
+
+{% block body %}
+    <h1>CPConcoursPhotos index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Identifiant</th>
+                <th>OpenAt</th>
+                <th>ClosedAt</th>
+                <th>Defaut</th>
+                <th>Classement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for c_p_concours_photo in c_p_concours_photos %}
+            <tr>
+                <td>{{ c_p_concours_photo.id }}</td>
+                <td>{{ c_p_concours_photo.Titre }}</td>
+                <td>{{ c_p_concours_photo.Identifiant }}</td>
+                <td>{{ c_p_concours_photo.OpenAt ? c_p_concours_photo.OpenAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ c_p_concours_photo.ClosedAt ? c_p_concours_photo.ClosedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ c_p_concours_photo.defaut ? 'Yes' : 'No' }}</td>
+                <td>{{ c_p_concours_photo.Classement }}</td>
+                <td>
+                    <a href="{{ path('app_c_p_concours_photos_show', {'id': c_p_concours_photo.id}) }}">show</a>
+                    <a href="{{ path('app_c_p_concours_photos_edit', {'id': c_p_concours_photo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_c_p_concours_photos_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CPClassement{% endblock %}
+
+{% block body %}
+    <h1>Create new CPClassement</h1>
+
+    {{ include('cp_classement/_form.html.twig') }}
+
+    <a href="{{ path('app_c_p_classement_index') }}">back to list</a>
+{% endblock %}

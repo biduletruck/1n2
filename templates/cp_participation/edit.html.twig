@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CPParticipation{% endblock %}
+
+{% block body %}
+    <h1>Edit CPParticipation</h1>
+
+    {{ include('cp_participation/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_c_p_participation_index') }}">back to list</a>
+
+    {{ include('cp_participation/_delete_form.html.twig') }}
+{% endblock %}
