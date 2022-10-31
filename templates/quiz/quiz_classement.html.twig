@@ -18,7 +18,7 @@
             <th>Date de passage</th>
             {% if is_granted("ROLE_ADMIN") %}
                 <th>Date de fin</th>
-                <th>Durée du quiz</th>
+{#                <th>Durée du quiz</th>#}
 {#                {% if is_granted("ROLE_SUPERADMIN") %}#}
 {#                    <th>actions</th>#}
 {#                {% endif %}#}
@@ -31,10 +31,10 @@
             <tr>
                 <td>{{ participation.user.nom }}</td>
                 <td>{{ participation.score }}</td>
-                <td>{{ participation.createdAt ? participation.createdAt|format_datetime('full', 'medium', locale='fr') : '' }}</td>
+                <td>{{ participation.createdAt ? participation.createdAt|format_datetime('none', 'medium', locale='fr') : '' }}</td>
                 {% if is_granted("ROLE_ADMIN") %}
-                    <td>{{ participation.dateValidation ? participation.dateValidation|format_datetime('full', 'medium', locale='fr') : '' }}</td>
-                    <td>{{ participation.delta ~ "sec" }}</td>
+                    <td>{{ participation.dateValidation ? participation.dateValidation|format_datetime('none', 'medium', locale='fr') : '' }}</td>
+{#                    <td>{{ participation.dateValidation ~ "sec" }}</td>#}
 
 {#                    <td>#}
 {#                        {% if is_granted("ROLE_SUPERADMIN") %}#}
