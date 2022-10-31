@@ -96,6 +96,20 @@ class HomeController extends AbstractController
     }
 
     /**
+     * @Route("/quiz_classement", name="quiz_classement")
+     */
+    public function quiz_classement(ParticipationsRepository $participationsRepository, PollsRepository $pollsRepository)
+    {
+        $lastquiz = $participationsRepository->findBy([],['id' =>'DESC']);
+
+        return $this->render('quiz/quiz_classement.html.twig', [
+            'participations' => $participationsRepository->findBy([],['id' =>'DESC']),
+
+        ]);
+
+    }
+
+    /**
      * @Route("/quiz_play", name="quiz_play")
      */
     public function quiz_play(UsersRepository $usersRepository,

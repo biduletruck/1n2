@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz CSE{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12 Summer_002 summer-text">
+            <h1>Classement des participants </h1>
+        </div>
+    </div>
+{#    {{ dump(participations) }}#}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Participant</th>
+            <th>score</th>
+            <th>Date de passage</th>
+            {% if is_granted("ROLE_ADMIN") %}
+                <th>Date de fin</th>
+                <th>Durée du quiz</th>
+{#                {% if is_granted("ROLE_SUPERADMIN") %}#}
+{#                    <th>actions</th>#}
+{#                {% endif %}#}
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for participation in participations %}
+            {#            {{ dump(participation) }}#}
+            <tr>
+                <td>{{ participation.user.nom }}</td>
+                <td>{{ participation.score }}</td>
+                <td>{{ participation.createdAt ? participation.createdAt|format_datetime('full', 'medium', locale='fr') : '' }}</td>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <td>{{ participation.dateValidation ? participation.dateValidation|format_datetime('full', 'medium', locale='fr') : '' }}</td>
+                    <td>{{ participation.delta ~ "sec" }}</td>
+
+{#                    <td>#}
+{#                        {% if is_granted("ROLE_SUPERADMIN") %}#}
+{#                            <a href="{{ path('participations_show', {'id': participation.id}) }}">show</a>#}
+
+{#                            <a href="{{ path('participations_edit', {'id': participation.id}) }}">edit</a>#}
+{#                        {% endif %}#}
+{#                    </td>#}
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
