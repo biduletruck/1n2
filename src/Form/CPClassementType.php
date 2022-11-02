@@ -18,7 +18,7 @@ class CPClassementType extends AbstractType
             ->add('ConcoursPhotos')
             ->add('Image')
             ->add('User')
-            ->add('Classement')
+
         ;
     }
 

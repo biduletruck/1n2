@@ -4,17 +4,34 @@
 
 {% block body %}
 
-    <h1>CPConcoursPhotos index</h1>
+    <h1>Concours photos Halloween 2022</h1>
 
-    {{ concours_photos }}
-    <ul id="sortable">
-        {% for image in images %}
-            {#        {{ image }}#}
-           <li>
-               <img class="img-fluid" src="{{ asset('images/concours_photos/' ~ image) }}">
-           </li>
-        {% endfor %}
-    </ul>
+{#    {{ concours_photos }}#}
+    <section>
+        <div class="row rounded justify-content-center align-self-center ">
+            <div class="col-12 col-md-10 col-lg-8 ">
+                <form action="{{ path('classement_concours_photos_new') }}" method="post" id="concours_photos" name="concours_photos">
+                    <div class="row rounded justify-content-center align-self-center ">
+                        <div class="col-12 text-center" >
+                            <ul id="sortable">
+                                {% for image in images %}
+                                    <li>
+                                        <img class="img-fluid" src="{{ asset('images/concours_photos/' ~ image) }}">
+                                        <input type="hidden" id="{{ image.id }}" name="{{ image.id }}" value="{{ image.nonParticipant }}">
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="col-12 text-center">
+                            <input type="hidden" id="{{ concours_photos.id }}" name="concours" value="{{ concours_photos.id }}">
+                            <button class="btn btn-lg btn-success scary" type="submit" id="concours" name="{{ concours_photos.id }}">Valider</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 
 
 

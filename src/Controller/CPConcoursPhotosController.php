@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/photos')]
+#[Route('/Photos')]
 class CPConcoursPhotosController extends AbstractController
 {
     #[Route('/', name: 'app_c_p_concours_photos_index', methods: ['GET'])]

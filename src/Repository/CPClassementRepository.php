@@ -54,13 +54,43 @@ class CPClassementRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?CPClassement
+    public function findAllResults($concours): array
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin("c.Image", "i")
+            ->Select("i.NonParticipant, sum(c.NombrePoints) as TotalPoint, i.id")
+            ->andWhere('c.ConcoursPhotos = :concours')
+//            ->from('c', 'rzpp')
+            ->setParameter('concours', $concours)
+            ->groupBy("i.NonParticipant, i.id")
+            ->orderBy("TotalPoint", "DESC")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+//$query = $em->createQueryBuilder('r')
+//->select('rzpp')
+//->where('rzpp.id = :id')
+//->from('totoFrontBundle:User', 'rzpp')
+//->leftJoin("rzpp.country", "p")
+//->setParameter('id', '1')
+//->getQuery();
+
+//    public function findAllResults($concours): ?CPClassement
 //    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
+//        $query = $this->getEntityManager()->createQuery("select c.Image as participant, sum(c.NombrePoints) as TotalPoint FROM c");
+////        $query->setParameter('id', $concours);
+//        return $query->getResult();
+
 //    }
+//$query = $em->createQuery('SELECT c AS financement, SUM(p.participation) AS participation FROM Financement c JOIN c.participants p WHERE p.utilisateur = :id GROUP BY c.id');
+//$query->setParameter('id', $id);
+//
+//return $query->getResult();
+//$q = Doctrine_Query::create()
+//->select('p.id, p.idparticipant, p.idevenement, p.montantparticipation, SUM(pa.montant) as somme')
+//->from('Participation p')
+//->leftJoin('p.Paiement pa ON p.id = pa.idparticipation')
+//->groupby('p.id');
 }

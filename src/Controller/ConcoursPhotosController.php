@@ -6,6 +6,7 @@ use App\Entity\CPConcoursPhotos;
 use App\Form\CPConcoursPhotosType;
 use App\Repository\CPConcoursPhotosRepository;
 use App\Repository\CPImagesRepository;
+use App\Repository\CPParticipationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,19 +16,29 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConcoursPhotosController extends AbstractController
 {
     #[Route('/', name: 'concours_photos_index', methods: ['GET'])]
-    public function index(CPConcoursPhotosRepository $cPConcoursPhotosRepository, CPImagesRepository $imagesRepository): Response
+    public function index(CPConcoursPhotosRepository $cPConcoursPhotosRepository, CPImagesRepository $imagesRepository, CPParticipationRepository $CPParticipationRepository): Response
     {
         $myDate = new \DateTimeImmutable();
         $concours = $cPConcoursPhotosRepository->findOneBy(['Identifiant' => "Conc2022"]);
+        $hasParticipation = $CPParticipationRepository->findOneBy(['ConcoursPhotos' => $concours, 'User' => $this->getUser()]);
 
-        if ( $concours->getOpenAt() <= $myDate && $concours->getClosedAt() >= $myDate)
+        if (empty($hasParticipation))
         {
-            $images = $imagesRepository->findBy( ['ConcoursPhotos' => $concours]);
-            return $this->render('concours2022/index.html.twig', [
-                'concours_photos' => $concours,
-                'images' => $images
-            ]);
-        }else{
+            if ( $concours->getOpenAt() <= $myDate && $concours->getClosedAt() >= $myDate)
+            {
+                $images = $imagesRepository->findBy( ['ConcoursPhotos' => $concours]);
+                shuffle($images);
+
+                return $this->render('concours2022/index.html.twig', [
+                    'concours_photos' => $concours,
+                    'images' => $images
+                ]);
+            }else{
+                $this->addFlash('danger', "Il n'y aucun concours en cours !");
+                return $this->redirectToRoute('home');
+            }
+        }
+        else {
             $this->addFlash('danger', 'Vous avez déjà participé au concours !!!');
             return $this->redirectToRoute('home');
         }

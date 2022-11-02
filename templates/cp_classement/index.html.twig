@@ -3,29 +3,22 @@
 {% block title %}CPClassement index{% endblock %}
 
 {% block body %}
-    <h1>CPClassement index</h1>
-
+    <h1>Classement concours photos Halloween 2022</h1>
+{#{{ dump(c_p_classements) }}#}
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+
                 <th>ClassementPhoto</th>
                 <th>NombrePoints</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for c_p_classement in c_p_classements %}
             <tr>
-                <td>{{ c_p_classement.id }}</td>
-                <td>{{ c_p_classement.ClassementPhoto }}</td>
-                <td>{{ c_p_classement.NombrePoints }}</td>
-                <td>{{ c_p_classement.UpdatedAt ? c_p_classement.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_c_p_classement_show', {'id': c_p_classement.id}) }}">show</a>
-                    <a href="{{ path('app_c_p_classement_edit', {'id': c_p_classement.id}) }}">edit</a>
-                </td>
+
+                <td>{{ c_p_classement.NonParticipant }}</td>
+                <td>{{ c_p_classement.TotalPoint }}</td>
             </tr>
         {% else %}
             <tr>
@@ -35,5 +28,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_c_p_classement_new') }}">Create new</a>
+{#    <a href="{{ path('app_c_p_classement_new') }}">Create new</a>#}
 {% endblock %}

@@ -49,19 +49,13 @@ class CPClassement
      */
     private $User;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=CPClassement::class, inversedBy="cPClassements")
-     */
-    private $Classement;
 
-    /**
-     * @ORM\OneToMany(targetEntity=CPClassement::class, mappedBy="Classement")
-     */
-    private $cPClassements;
+
+
 
     public function __construct()
     {
-        $this->cPClassements = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -153,33 +147,4 @@ class CPClassement
         return $this;
     }
 
-    /**
-     * @return Collection<int, self>
-     */
-    public function getCPClassements(): Collection
-    {
-        return $this->cPClassements;
-    }
-
-    public function addCPClassement(self $cPClassement): self
-    {
-        if (!$this->cPClassements->contains($cPClassement)) {
-            $this->cPClassements[] = $cPClassement;
-            $cPClassement->setClassement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCPClassement(self $cPClassement): self
-    {
-        if ($this->cPClassements->removeElement($cPClassement)) {
-            // set the owning side to null (unless already changed)
-            if ($cPClassement->getClassement() === $this) {
-                $cPClassement->setClassement(null);
-            }
-        }
-
-        return $this;
-    }
 }
