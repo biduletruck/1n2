@@ -4,7 +4,18 @@
 
 {% block body %}
 
-    <h1>Concours photos Halloween 2022</h1>
+
+
+    <div>
+        <h1>Concours photos Halloween 2022</h1>
+        <h4>
+            Déplacez les images pour les classer dans l'ordre de préférence.
+        </h4>
+        <h6>
+            Nota: la photo en haut à gauche représente votre photo préférée.
+        </h6>
+
+    </div>
 
 {#    {{ concours_photos }}#}
     <section>
@@ -22,7 +33,8 @@
                                 {% endfor %}
                             </ul>
                         </div>
-
+                        </div>
+                        <div class="row rounded justify-content-center align-self-center ">
                         <div class="col-12 text-center">
                             <input type="hidden" id="{{ concours_photos.id }}" name="concours" value="{{ concours_photos.id }}">
                             <button class="btn btn-lg btn-success scary" type="submit" id="concours" name="{{ concours_photos.id }}">Valider</button>
