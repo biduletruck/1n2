@@ -35,6 +35,11 @@
                     </ul>
 
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="{{ path('concours_photos_index') }}" class="nav-link text-uppercase font-weight-bold">Concours photos</a></li>
+                        <li class="nav-item"><a href="{{ path('resultat_classement_concours_photos_new') }}" class="nav-link text-uppercase font-weight-bold">Classement</a></li>
+                    </ul>
+
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a href="{{ path('noel_new') }}" class="nav-link text-uppercase font-weight-bold">Colis de Noël</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item"><a href="{{ path('noel_index') }}" class="nav-link text-uppercase font-weight-bold">Listing des colis</a></li>

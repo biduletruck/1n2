@@ -20,6 +20,11 @@ class ConcoursPhotosController extends AbstractController
     {
         $myDate = new \DateTimeImmutable();
         $concours = $cPConcoursPhotosRepository->findOneBy(['Identifiant' => "Conc2022"]);
+        if (empty($concours))
+        {
+            $this->addFlash('danger', "Il n'y aucun concours en cours !");
+            return $this->redirectToRoute('home');
+        }
         $hasParticipation = $CPParticipationRepository->findOneBy(['ConcoursPhotos' => $concours, 'User' => $this->getUser()]);
 
         if (empty($hasParticipation))
