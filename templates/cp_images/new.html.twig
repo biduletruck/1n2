@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CPImages{% endblock %}
+
+{% block body %}
+    <h1>Create new CPImages</h1>
+
+    {{ include('cp_images/_form.html.twig') }}
+
+    <a href="{{ path('app_c_p_images_index') }}">back to list</a>
+{% endblock %}

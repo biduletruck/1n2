@@ -12,6 +12,10 @@ use App\Entity\Cheques;
 use App\Entity\Choices;
 use App\Entity\Colis;
 use App\Entity\Commande21;
+use App\Entity\CPClassement;
+use App\Entity\CPConcoursPhotos;
+use App\Entity\CPImages;
+use App\Entity\CPParticipation;
 use App\Entity\Halloween;
 use App\Entity\HalloweenCheck;
 use App\Entity\Matches;
@@ -87,6 +91,12 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Ancv 2022');
         yield MenuItem::linkToCrud('Cheque vacances 2022', null, Ancv2022::class);
         yield MenuItem::linkToCrud('Commande ANCV 2022', null, Ancv2022commande::class);
+
+        yield MenuItem::section('Concours photos');
+        yield MenuItem::linkToCrud('Concours photos', null, CPConcoursPhotos::class);
+        yield MenuItem::linkToCrud('Gestion photos', null, CPImages::class);
+        yield MenuItem::linkToCrud('Participation', null, CPParticipation::class);
+        yield MenuItem::linkToCrud('Classement', null, CPClassement::class);
 
     }
 }

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CPConcoursPhotos{% endblock %}
+
+{% block body %}
+    <h1>CPConcoursPhotos</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ c_p_concours_photo.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ c_p_concours_photo.Titre }}</td>
+            </tr>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ c_p_concours_photo.Identifiant }}</td>
+            </tr>
+            <tr>
+                <th>OpenAt</th>
+                <td>{{ c_p_concours_photo.OpenAt ? c_p_concours_photo.OpenAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ClosedAt</th>
+                <td>{{ c_p_concours_photo.ClosedAt ? c_p_concours_photo.ClosedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Defaut</th>
+                <td>{{ c_p_concours_photo.defaut ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Classement</th>
+                <td>{{ c_p_concours_photo.Classement }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_c_p_concours_photos_index') }}">back to list</a>
+
+    <a href="{{ path('app_c_p_concours_photos_edit', {'id': c_p_concours_photo.id}) }}">edit</a>
+
+    {{ include('cp_concours_photos/_delete_form.html.twig') }}
+{% endblock %}

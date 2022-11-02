@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CPClassement index{% endblock %}
+
+{% block body %}
+    <h1>Classement concours photos Halloween 2022</h1>
+{#{{ dump(c_p_classements) }}#}
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>ClassementPhoto</th>
+                <th>NombrePoints</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for c_p_classement in c_p_classements %}
+            <tr>
+
+                <td>{{ c_p_classement.NonParticipant }}</td>
+                <td>{{ c_p_classement.TotalPoint }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{#    <a href="{{ path('app_c_p_classement_new') }}">Create new</a>#}
+{% endblock %}
