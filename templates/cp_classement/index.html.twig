@@ -12,6 +12,7 @@
             <tr>
 
                 <th>ClassementPhoto</th>
+                <th>Photo</th>
                 <th>NombrePoints</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
             <tr>
 
                 <td>{{ c_p_classement.NonParticipant }}</td>
+                <td><img src="{{ asset('images/concours_photos/' ~ image)}}" alt="" width="200px"></td>
                 <td>{{ c_p_classement.TotalPoint }}</td>
             </tr>
         {% else %}
